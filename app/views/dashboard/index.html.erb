@@ -28,15 +28,10 @@
   <div class="mosaic_container">
      <h2>Mappings Mosaic</h2>
       <% @mappings.each do |x| %>
-        <div>
-           <%= x.score %> 
-        </div>
+        <span>
+          <%= x.score %> 
+        </span>
       <% end %>
-     <% @closed_tags.each do |tag| %> 
-       <span class="closed_tag">
-
-       </span>
-     <% end %>
   </div>
 </div>
 <div class="right_col">
@@ -113,3 +108,6 @@
     
   </div>
 </div>
+<script type="text/javascript">
+
+</script>
