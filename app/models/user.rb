@@ -7,9 +7,8 @@ class User
   field :email, :type => String
   field :score, :type => Integer
   field :name, :type => String
-  field :secret, :type => String
-
   field :authentication_token,  :type => String
+
   field :current_sign_in_at,    :type => DateTime
   field :last_sign_in_at,       :type => DateTime
   field :current_sign_in_ip,    :type => String
@@ -17,9 +16,8 @@ class User
   field :sign_in_count,         :type => Integer
   field :remember_created_at,   :type => DateTime
 
-  validates_presence_of :email, :message => "can't be blank"
-  validates_uniqueness_of :email, :message => "Must be unique" 
-  validates_presence_of :name, :message => "can't be blank"
+  validates :name, :email, :presence => true
+  validates :email, :uniqueness => { :case_sensitive => true }
 
   before_save :ensure_authentication_token
 
