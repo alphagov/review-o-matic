@@ -1,5 +1,5 @@
 require 'migratorator_api'
-class HomeController < ApplicationController
+class DashboardController < ApplicationController
   def index
     @users = User.all
     @open_tags = ::MigratoratorApi::Mapping.all_by_tag('status:open') 
