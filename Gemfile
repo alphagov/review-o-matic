@@ -15,6 +15,8 @@ end
 gem 'jquery-rails'
 gem 'null_logger'
 
+gem 'devise'
+
 group :test do
   gem 'turn', '0.8.2', :require => false
 end
