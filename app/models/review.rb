@@ -1,6 +1,6 @@
 class Review
   include Mongoid::Document
-  field :user_id, :type => Integer
+  field :user_id, :type => String
   field :mapping_id, :type => String
   field :result, :type => String
   

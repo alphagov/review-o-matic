@@ -27,6 +27,11 @@
   </div>
   <div class="mosaic_container">
      <h2>Mappings Mosaic</h2>
+      <% @mappings.each do |x| %>
+        <div>
+           <%= x %> 
+        </div>
+      <% end %>
      <% @open_tags.each do |tag| %> 
        <span class="open_tag">
 
