@@ -7,9 +7,8 @@ class User
   field :email, :type => String
   field :score, :type => Integer
   field :name, :type => String
-  field :secret, :type => String
-
   field :authentication_token,  :type => String
+
   field :current_sign_in_at,    :type => DateTime
   field :last_sign_in_at,       :type => DateTime
   field :current_sign_in_ip,    :type => String
