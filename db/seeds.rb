@@ -8,6 +8,7 @@
 
 User.find_or_create_by(:name => "Ian", :email => "ian.wood@digital.cabinet-office.gov.uk", :authentication_token => 'password')
 User.find_or_create_by(:name => "Jordan", :email => "jordan.hatch@digital.cabinet-office.gov.uk", :authentication_token => 'password')
+User.find_or_create(:name => "Winston", :email => "winston@alphagov.co.uk", :authentication_token => 'winston')
 
 @closed_tags = ::MigratoratorApi::Mapping.all_by_tag('status:closed') 
 @user_1 = User.first(conditions: {name: "Ian"})

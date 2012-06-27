@@ -1,0 +1,9 @@
+<section class="section_list">
+  <h1>Sections</h1>
+
+  <ul>
+    <% @sections.each do |tag| %>
+      <li><%= link_to format_tag(tag.name), "" %></li>
+    <% end %>
+  </ul>
+</section>

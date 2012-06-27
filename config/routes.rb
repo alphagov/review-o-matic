@@ -6,6 +6,9 @@ Reviewomatic::Application.routes.draw do
     get 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
 
-  root :to => 'dashboard#index'
+  resources :reviews, :only => :update
+
+  get 'dashboard' => 'dashboard#index'
+  root :to => 'root#index'
 
 end
