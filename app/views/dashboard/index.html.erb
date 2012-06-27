@@ -2,9 +2,9 @@
   <div class="main_progress_container">
     <h2>Total Links</h2>
     <div class="well">
-      <h3>31.4% status:closed - 5763 of 18339 items</h3>
+      <h3> <%= percent_of(@closed_tags.count, @all_tags_count)%>% <%= @closed_tags.count %> of <%= @all_tags_count %> items</h3>
       <div class="progress progress-success">
-        <div class="bar" style="width: 31.4%;"></div>
+      <div class="bar" style="width: <%= percent_of(@closed_tags.count, @all_tags_count)%>%;"></div>
       </div>
     </div>
   </div>
