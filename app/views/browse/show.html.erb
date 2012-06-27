@@ -13,10 +13,10 @@
   </div>
 
   <div class="buttons right">
-    <%= form_tag do %>
-      <%= submit_tag "OK" %>
-      <%= submit_tag "Unsure" %>
-      <%= submit_tag "Needs Review" %>
+    <%= form_tag review_path(@mapping._id) do %>
+      <%= submit_tag "OK", :name => "positive" %>
+      <%= submit_tag "Unsure", :name => "neutral" %>
+      <%= submit_tag "Needs Review", :name => "negative" %>
     <% end %>
   </div>
   <div class="clear"></div>

@@ -30,7 +30,13 @@ body.browser {
       background: #ddd; border: 1px solid #bbb;
       padding: 0.6em;
       font-size: 1.2em;
+      height: 2em;
       margin: 1em 0;
+
+      input { border: 1px solid #aaa; background: #eee; height: 2em; padding: 0 0.5em; }
+      input:hover { background: #e6e6e6; }
+      input.loading { background: #fff; }
+      input.selected { background: #b0e2e7; }
     }
   }
 
