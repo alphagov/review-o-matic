@@ -1,0 +1,26 @@
+<section class="mapping_info">
+  <div class="left">
+    <h1><%= @mapping.title %></h1>
+    <div class="result">
+      <% if @mapping.status == 301 %>
+        &rarr; <%= @mapping.new_url %>
+      <% elsif @mapping.status == 410 %>
+        &rarr; Gone
+      <% else %>
+        No decision
+      <% end %>
+    </div>
+  </div>
+
+  <div class="buttons right">
+    <%= form_tag review_path(@mapping._id) do %>
+      <%= submit_tag "OK", :name => "positive" %>
+      <%= submit_tag "Unsure", :name => "neutral" %>
+      <%= submit_tag "Needs Review", :name => "negative" %>
+    <% end %>
+  </div>
+  <div class="clear"></div>
+</section>
+
+<iframe style="float: left;" class="left" src="<%= @mapping.old_url %>"></iframe>
+<iframe style="float: right;" class="right" src="<%= @mapping.new_url %>"></iframe>

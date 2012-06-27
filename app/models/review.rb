@@ -6,9 +6,9 @@ class Review
   field :result, :type => String
 
   RESULTS = [
-    :positive,
-    :neutral,
-    :negative
+    'positive',
+    'neutral',
+    'negative'
   ]
 
   validates :user_id, :mapping_id, :result, :presence => true
