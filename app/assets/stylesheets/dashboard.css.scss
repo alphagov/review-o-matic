@@ -53,6 +53,23 @@ h2 {
       }
     }
   }
+  .mosaic_container {
+    margin: 20px 0;
+    background: #e1e1e1;
+    > span {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      margin: 0;
+      padding: 0;
+      &.open_tag {
+        background: green;
+      }
+      &.closed_tag {
+        background: red;
+      }
+    }
+  }
 }
 
 .right_col {
