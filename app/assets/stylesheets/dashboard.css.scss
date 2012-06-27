@@ -8,6 +8,13 @@ h1 {
   font-size: 40px;
 }
 
+h2 {
+  > span {
+    font-size: 0.7em;
+    color: #999999;
+  }
+}
+
 .container {
   width: 960px;
   margin: 0 auto;
