@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reviewomatic</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="browser">
+
+  <header>
+    <h1 class="left">Review-O-Matic</h1>
+    <div class="right">Welcome, <%= current_user.name %></div>
+    <div class="clear"></div>
+  </header>
+<!--
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p> -->
+  <%= yield %>
+</body>
+</html>

@@ -8,7 +8,10 @@ Reviewomatic::Application.routes.draw do
 
   resources :reviews, :only => :update
 
-  get 'dashboard' => 'dashboard#index'
+  get 'browse/:id' => 'browse#show', :as => :browse_mapping
+  get 'browse' => 'browse#index', :as => :browse
+
+  get 'dashboard' => 'dashboard#index', :as => :dashboard
   root :to => 'root#index'
 
 end
