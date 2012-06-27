@@ -2,9 +2,9 @@
   <div class="main_progress_container">
     <h2>Total Mappings Closed</h2>
     <div class="well">
-      <h2> <%= percent_of(@closed_tags.count, @all_tags_count)%>% <span><%= @closed_tags.count %> of <%= @all_tags_count %></span></h2>
+      <h2> <%= @closed_tags.count.percent_of(@all_tags_count)%>% <span><%= @closed_tags.count %> of <%= @all_tags_count %></span></h2>
       <div class="progress progress-success">
-      <div class="bar" style="width: <%= percent_of(@closed_tags.count, @all_tags_count)%>%;"></div>
+      <div class="bar" style="width: <%= @closed_tags.count.percent_of(@all_tags_count)%>%;"></div>
       </div>
     </div>
   </div>
@@ -29,14 +29,9 @@
      <h2>Mappings Mosaic</h2>
       <% @mappings.each do |x| %>
         <div>
-           <%= x %> 
+           <%= x.score %> 
         </div>
       <% end %>
-     <% @open_tags.each do |tag| %> 
-       <span class="open_tag">
-
-       </span>
-     <% end %>
      <% @closed_tags.each do |tag| %> 
        <span class="closed_tag">
 
