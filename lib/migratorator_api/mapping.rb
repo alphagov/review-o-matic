@@ -11,9 +11,7 @@ class MigratoratorApi
     end
 
     def self.find_random_mapping(tags = '')
-      response = MigratoratorApi.client.get("/mappings/random.json?tags=#{tags}")
-      return false if response.code != "200"
-      OpenStruct.new( JSON.parse(response.body) )
+      parse_mapping_from_response MigratoratorApi.client.get("/mappings/random.json?tags=#{tags}")
     end
 
     def self.find_by_id(id)
