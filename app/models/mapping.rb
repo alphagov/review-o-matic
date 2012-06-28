@@ -3,11 +3,11 @@ class Mapping
   include Mongoid::Document
 
   before_create :set_score, :set_section
-  before_update :set_score, :set_section
-  before_save :set_score, :set_section
+  before_update :set_score
+  before_save :set_score
 
   field :mapping_id, :type => String
-  field :score, :type => String, :default => '0.0'
+  field :score, :type => Float, :default => 0.0
   field :section, :type => String
 
   has_many :reviews, dependent: :delete

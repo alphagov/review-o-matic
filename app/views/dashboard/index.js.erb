@@ -22,6 +22,6 @@ $(function (){
 
 // Update the traffic lights
 
-$('.green_light span.percentage').text(' <%= @green_mappings.count.percent_of(@mappings.count) %>%');
-$('.amber_light span.percentage').text(' <%= @amber_mappings.count.percent_of(@mappings.count) %>%');
-$('.red_light span.percentage').text(' <%= @red_mappings.count.percent_of(@mappings.count) %>%');
+$('.green_light span.percentage').text(' <%= @green_mappings.count.percent_of(@mappings.count).round(2) %>%');
+$('.amber_light span.percentage').text(' <%= @amber_mappings.count.percent_of(@mappings.count).round(2) %>%');
+$('.red_light span.percentage').text(' <%= @red_mappings.count.percent_of(@mappings.count).round(2) %>%');
