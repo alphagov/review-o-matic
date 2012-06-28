@@ -1,7 +1,7 @@
 <section class="mapping_info">
   <div class="left">
-    <h1><%= @mapping.title %></h1>
-    <div class="result">
+    <h1 id="mapping_title"><%= @mapping.title %></h1>
+    <div id="mapping_result" class="result">
       <% if @mapping.status == 301 %>
         &rarr; <%= @mapping.new_url %>
       <% elsif @mapping.status == 410 %>
@@ -12,15 +12,21 @@
     </div>
   </div>
 
-  <div class="buttons right">
-    <%= form_tag review_path(@mapping._id) do %>
-      <%= submit_tag "OK", :name => "positive" %>
-      <%= submit_tag "Unsure", :name => "neutral" %>
-      <%= submit_tag "Needs Review", :name => "negative" %>
-    <% end %>
+  <div class="right">
+    <div class="buttons">
+      <%= form_tag review_path(@mapping.id) do %>
+        <%= submit_tag "OK", button_attributes_for(@review, "positive") %>
+        <%= submit_tag "Unsure", button_attributes_for(@review, "neutral") %>
+        <%= submit_tag "Needs Review", button_attributes_for(@review, "negative") %>
+      <% end %>
+    </div>
+<!--     <div class="comment">
+      <a href="#">+</a>
+    </div> -->
   </div>
   <div class="clear"></div>
 </section>
 
-<iframe style="float: left;" class="left" src="<%= @mapping.old_url %>"></iframe>
-<iframe style="float: right;" class="right" src="<%= @mapping.new_url %>"></iframe>
+<div id="overlay"></div>
+<iframe id="mapping_old_page" class="left" src="<%= @mapping.old_url %>"></iframe>
+<iframe id="mapping_new_page" class="right" src="<%= @mapping.new_url %>"></iframe>
