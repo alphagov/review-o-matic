@@ -32,7 +32,29 @@ h2 {
   width: 620px;
   margin: 0 0 0 20px;
   float: left;
+  background-color: white;
+  &:after {
+    content: ' ';
+    display: block;
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+  }
   .traffic_lights_container {
+    width: 300px;
+    //display: inline-block;
+    float: left;
+    min-height: 480px;
+    background: white;
+    &:after {
+      content: ' ';
+      display: block;
+      height: 0;
+      clear: both;
+      overflow: hidden;
+      visibility: hidden;
+    }
     > div {
       margin: 20px 0;
       padding: 20px;
@@ -52,10 +74,37 @@ h2 {
       }
     }
   }
+  .total_mappings_container {
+    background: white;
+    min-height: 480px;
+    width: 300px;
+    margin: 0 0 0 20px;
+    float: left;
+    &:after {
+      content: ' ';
+      display: block;
+      height: 0;
+      clear: both;
+      overflow: hidden;
+      visibility: hidden;
+    }
+    > div {
+      border-radius: 15px;
+      background: #e1e1e1;
+      padding: 20px;
+      h2.total_mappings {
+        font-size: 60px;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
   .mosaic_container {
     margin: 20px 0;
-    background: #e1e1e1;
+    background: white;
     .results_container {
+      background: #e1e1e1;
       margin: 0 0 20px;
       &:after {
         content: ' ';

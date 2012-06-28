@@ -1,8 +1,8 @@
 // Empty the mosaic results container
 $('.mosaic_container .results_container').empty();
 
-// Update the mosaic heading counter
-$('.mosaic_container h2').text('Mappings Mosaic:  <%= @mappings.count %> mappings');
+// Update the total mappings count
+$('h2.total_mappings').text('<%= @mappings.count %>');
 
 // Create the mosaic
 <% @mappings.each do |mapping| %>
@@ -22,5 +22,6 @@ $(function (){
 
 // Update the traffic lights
 
-$('.green_light span.percentage').text('hello');
-$('.green_light span.value strong').text('world');
+$('.green_light span.percentage').text(' <%= @green_mappings.count.percent_of(@mappings.count) %>%');
+$('.amber_light span.percentage').text(' <%= @amber_mappings.count.percent_of(@mappings.count) %>%');
+$('.red_light span.percentage').text(' <%= @red_mappings.count.percent_of(@mappings.count) %>%');
