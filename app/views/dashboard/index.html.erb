@@ -4,25 +4,25 @@
     <div class="well">
       <h2> <%= @closed_tags.count.percent_of(@all_tags_count)%>% <span><%= @closed_tags.count %> of <%= @all_tags_count %></span></h2>
       <div class="progress progress-success">
-      <div class="bar" style="width: <%= @closed_tags.count.percent_of(@all_tags_count)%>%;"></div>
+        <div class="bar" style="width: <%= @closed_tags.count.percent_of(@all_tags_count)%>%;"></div>
       </div>
     </div>
   </div>
   <div class="traffic_lights_container">
     <div class="green_light">
       <%= image_tag 'green_light.png' %> 
-      <span>50%</span>
-      <span>500 of 1000</span>
+      <span class="percentage"></span>
+      <span class="value"></span>
     </div>
     <div class="amber_light">
       <%= image_tag 'amber_light.png' %> 
-       <span>25%</span>
-       <span>250 of 1000</span>
+      <span class="percentage"></span>
+      <span class="value"></span>
     </div>
     <div class="red_light">
       <%= image_tag 'red_light.png' %> 
-       <span>25%</span>
-       <span>250 of 1000</span>
+      <span class="percentage"></span>
+      <span class="value"></span>
     </div>
   </div>
   <div class="mosaic_container">

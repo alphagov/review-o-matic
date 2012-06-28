@@ -41,15 +41,14 @@ h2 {
       img {
         margin: 0 20px 0 0;
       }
-      span {
+      span.percentage {
         font-size: 30px;
         font-weight: bold;
         margin: 0 10px 0 0;
-        display: inline-block;
-        &:last-child {
-          font-size: 20px;
-          font-weight: normal;
-        }
+      }
+      span.value {
+        font-size: 20px;
+        font-weight: normal;
       }
     }
   }
@@ -57,8 +56,17 @@ h2 {
     margin: 20px 0;
     background: #e1e1e1;
     .results_container {
+      margin: 0 0 20px;
+      &:after {
+        content: ' ';
+        display: block;
+        height: 0;
+        clear: both;
+        overflow: hidden;
+        visibility: hidden;
+      }
       > span {
-        display: inline-block;
+        float: left;
         width: 4px;
         height: 4px;
         margin: 0;
