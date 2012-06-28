@@ -6,16 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.find_or_create_by(:name => "Ian", :email => "ian.wood@digital.cabinet-office.gov.uk", :authentication_token => 'password')
-User.find_or_create_by(:name => "Jordan", :email => "jordan.hatch@digital.cabinet-office.gov.uk", :authentication_token => 'password')
-User.find_or_create(:name => "Winston", :email => "winston@alphagov.co.uk", :authentication_token => 'winston')
+@user_1 = User.find_or_create_by(:name => "Ian", :email => "ian.wood@digital.cabinet-office.gov.uk", :authentication_token => 'password')
+@user_2 = User.find_or_create_by(:name => "Winston", :email => "winston@alphagov.co.uk", :authentication_token => 'winston')
 
-@closed_tags = ::MigratoratorApi::Mapping.all_by_tag('status:closed') 
-@user_1 = User.first(conditions: {name: "Ian"})
-@user_2 = User.first(conditions: {name: "Jordan"})
+@closed_tags = MigratoratorApi::Mapping.all_by_tag('status:closed')
 
-@closed_tags.each do |tag|
-  mapping = Mapping.find_or_create_by(:mapping_id => tag["mapping"]["id"])
-  mapping.reviews.create(:user_id => @user_1.id, :mapping_id => mapping.mapping_id, :result => "yes")
-  mapping.reviews.create(:user_id => @user_2.id, :mapping_id => mapping.mapping_id, :result => "no")
+@closed_tags.each do |mapping_from_api|
+  mapping = Mapping.create!(:mapping_id => mapping_from_api.id)
+  mapping.reviews.create!(:user_id => @user_1.id, :mapping_id => mapping.mapping_id, :result => "positive")
+  mapping.reviews.create!(:user_id => @user_2.id, :mapping_id => mapping.mapping_id, :result => "negative")
 end
