@@ -16,14 +16,16 @@ namespace :db do
     @user_2 = User.find_or_create_by(:name => "Winston", :email => "winston@alphagov.co.uk", :authentication_token => 'winston')
     mappings = Mapping.all
     
-    rand(mappings.count).times do |x|
+    rand(mappings.count).times do 
       mapping = mappings[rand(mappings.count)]
-      mapping.reviews.create!(:user_id => @user_1.id, :mapping_id => mapping.mapping_id, :result => Mapping::RESULTS[rand(Mapping::RESULTS.count)])
+      mapping.reviews.create!(:user_id => @user_1.id, :mapping_id => mapping.mapping_id, :result => Review::RESULTS[rand(Review::RESULTS.count)])
+      mapping.save!
     end
 
-    rand(mappings.count).times do |x|
+    rand(mappings.count).times do 
       mapping = mappings[rand(mappings.count)]
-      mapping.reviews.create!(:user_id => @user_2.id, :mapping_id => mapping.mapping_id, :result => Mapping::RESULTS[rand(Mapping::RESULTS.count)])
+      mapping.reviews.create!(:user_id => @user_2.id, :mapping_id => mapping.mapping_id, :result => Review::RESULTS[rand(Review::RESULTS.count)])
+      mapping.save!
     end
 
   end
