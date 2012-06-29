@@ -18,7 +18,7 @@ class Review
   after_create :set_user_score
 
   def set_user_score
-    self.user.score += 1
+    self.user.set_score
     self.user.save
   end
 
