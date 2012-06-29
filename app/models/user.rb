@@ -22,5 +22,10 @@ class User
   validates :email, :uniqueness => { :case_sensitive => true }
 
   before_save :ensure_authentication_token
+  before_save :set_score
+
+  def set_score
+    self.score = self.reviews.count
+  end
 
 end
