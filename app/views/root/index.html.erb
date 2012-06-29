@@ -1,9 +1,9 @@
-<section class="section_list">
-  <h1>Sections</h1>
+<section class="my_profile">
+  <h1><%= current_user.name %></h1>
 
-  <ul>
-    <% @sections.each do |tag| %>
-      <li><%= link_to format_tag(tag.name), "" %></li>
-    <% end %>
-  </ul>
+  <div class="mappings_reviewed">You've reviewed <strong><%= current_user.reviews.count %></strong> <%= current_user.reviews.count != 1 ? "mappings" : "mapping" %> so far</div>
+
+  <p class="continue"><%= link_to "Continue &raquo;".html_safe, browse_path %></p>
+
+  <div class="clear"></div>
 </section>
