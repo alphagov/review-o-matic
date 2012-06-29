@@ -1,3 +1,6 @@
+<% content_for :custom_assets do %>
+  <%= javascript_include_tag "browser" %>
+<% end %>
 <section class="mapping_info">
   <div class="left">
     <h1 id="mapping_title"><%= @mapping.title %></h1>

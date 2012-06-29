@@ -1,5 +1,4 @@
 // Empty the containers
-$('.mosaic_container .results_container').empty();
 $('.top_players_table').empty();
 
 // Update the total mappings count
@@ -7,22 +6,6 @@ $('h2.total_mappings').text('<%= @mappings.count %>');
 
 // Update the total reviews count
 $('h2.total_reviews').text('<%= @reviews.count %>');
-
-// Create the mosaic
-<% @mappings.each do |mapping| %>
-  $('.mosaic_container .results_container').append('<span><%= mapping.score %></span>');
-<% end %>
-
-// Colour the mosaic using the score percentage which is then removed from the HTML
-$(function (){
-    var colors = new Hex(0xFF0000).range(new Hex(0x00FF00), 101, true);
-    $(".mosaic_container .results_container > span").each(function(index){
-        $(this).css({
-          'background-color' : '#'+colors[parseInt($(this).text())].toString()
-        });
-        $(this).html('');
-    });
-});
 
 // Update the traffic lights
 $('.green_light span.percentage').text(' <%= @green_mappings.count.percent_of(@mappings.count).round(2) %>%');

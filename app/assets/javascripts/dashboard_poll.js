@@ -4,8 +4,6 @@ function updateDashboard() {
 }  
 
 $(document).ready(function(){
-
     setTimeout(updateDashboard, 10000);
-
 });
 

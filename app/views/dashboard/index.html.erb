@@ -1,3 +1,6 @@
+<% content_for :custom_assets do %>
+  <%= javascript_include_tag "dashboard_poll" %>
+<% end %>
 <div class="left_col">
   <div class="traffic_lights_container">
     <h2>Mapping health:</h2>
@@ -33,12 +36,5 @@
 
       </tbody>
     </table>
-    
   </div>
-</div>
-<div class="mosaic_container">
-   <h2>Mappings Mosaic:</h2>
-   <div class="results_container">
-     
-   </div>
 </div>
