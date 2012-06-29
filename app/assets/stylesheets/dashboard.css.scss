@@ -2,12 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-h1 {
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
-}
-
 h2 {
   > span {
     font-size: 0.7em;
@@ -132,7 +126,6 @@ h2 {
   margin: 20px;
   background: white;
   .results_container {
-    background: #e1e1e1;
     margin: 0 0 20px;
     &:after {
       content: ' ';
@@ -142,10 +135,21 @@ h2 {
       overflow: hidden;
       visibility: hidden;
     }
-    > span {
+    > h3 {
+      background: #e1e1e1;
+      margin: 0;
       float: left;
-      width: 4px;
-      height: 4px;
+      padding: 0 5px;
+      margin: 0 5px 0 0;
+      height: 30px;
+    }
+    > div {
+
+    }
+    span {
+      float: left;
+      width: 10px;
+      height: 10px;
       margin: 0;
       padding: 0;
       &.open_tag {

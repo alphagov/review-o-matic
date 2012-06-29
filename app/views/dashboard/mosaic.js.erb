@@ -2,14 +2,18 @@
 $('.mosaic_container .results_container').empty();
 
 // Create the mosaic
-<% @mappings.each do |mapping| %>
-  $('.mosaic_container .results_container').append('<span><%= mapping.score %></span>');
+//<% @mappings.each do |mapping| %>
+//  $('.mosaic_container .results_container').append('<span><%= mapping.score %></span>');
+//<% end %>
+
+<% @sections.each do |section_name, mappings| %>
+  $('.mosaic_container .results_container').append('<h3><%= section_name %></h3><div class="<%= section_name %>"><% mappings.each do |mapping| %><span><%= mapping.score %></span><% end %></div>');
 <% end %>
 
 // Colour the mosaic using the score percentage which is then removed from the HTML
 $(function (){
     var colors = new Hex(0xFF0000).range(new Hex(0x00FF00), 101, true);
-    $(".mosaic_container .results_container > span").each(function(index){
+    $(".mosaic_container .results_container span").each(function(index){
         $(this).css({
           'background-color' : '#'+colors[parseInt($(this).text())].toString()
         });

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Reviewomatic</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= yield :custom_assets %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div class="container">
-    <h1>Review-O-Matic</h1>
+  <head>
+    <title>Reviewomatic</title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= yield :custom_assets %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <h1 class="left">Review-O-Matic</h1>
+    </header>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
-  </div>
-</body>
+  </body>
 </html>
