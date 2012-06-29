@@ -12,20 +12,13 @@ namespace :db do
 
   desc "Create dummy reviews"
   task :create_dummy_reviews => :environment do
-    @user_1 = User.find_or_create_by(:name => "Ian", :email => "ian.wood@digital.cabinet-office.gov.uk", :authentication_token => 'password')
-    @user_2 = User.find_or_create_by(:name => "Winston", :email => "winston@alphagov.co.uk", :authentication_token => 'winston')
 
+    users = User.all
     mappings = Mapping.all
     
     rand(mappings.count).times do 
       mapping = mappings[rand(mappings.count)]
-      mapping.reviews.create!(:user_id => @user_1.id, :mapping_id => mapping.mapping_id, :result => Review::RESULTS[rand(Review::RESULTS.count)])
-      mapping.save!
-    end
-
-    rand(mappings.count).times do 
-      mapping = mappings[rand(mappings.count)]
-      mapping.reviews.create!(:user_id => @user_2.id, :mapping_id => mapping.mapping_id, :result => Review::RESULTS[rand(Review::RESULTS.count)])
+      mapping.reviews.create!(:user_id => users[rand(users.count)].id, :mapping_id => mapping.mapping_id, :result => Review::RESULTS[rand(Review::RESULTS.count)])
       mapping.save!
     end
 
