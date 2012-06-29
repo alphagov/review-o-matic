@@ -20,4 +20,15 @@ class DashboardController < ApplicationController
 
   end
 
+  def mosaic
+    respond_to do |format|
+      format.html do |x|
+
+      end
+      format.js do |x|
+        @mappings = Mapping.all
+      end
+    end
+  end
+
 end
