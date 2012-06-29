@@ -2,10 +2,12 @@ class User
 
   include Mongoid::Document
 
+  has_many :reviews
+
   devise :token_authenticatable, :rememberable, :trackable
 
   field :email, :type => String
-  field :score, :type => Integer
+  field :score, :type => Integer, :default => 0
   field :name, :type => String
   field :authentication_token,  :type => String
 
