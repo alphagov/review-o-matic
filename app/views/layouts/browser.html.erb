@@ -10,7 +10,8 @@
 <body class="browser">
 
   <header>
-    <h1 class="left">Review-O-Matic</h1>
+    <h1 class="left"><%= link_to "Review-O-Matic", root_path %></h1>
+    <h2 class="center"><% if !@section.blank? %>Section &mdash; <%= format_tag @section %><% end %></h2>
     <div class="right">Welcome, <%= current_user.name %></div>
     <div class="clear"></div>
   </header>
