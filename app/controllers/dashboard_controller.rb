@@ -26,7 +26,12 @@ class DashboardController < ApplicationController
 
       end
       format.js do |x|
+        @sections = {}
         @mappings = Mapping.all
+        @s = MigratoratorApi::Tag.all_by_group("section")
+        @s.each do |section|
+          @sections[section.name] = @mappings.where(:section => section.name)
+        end
       end
     end
   end
