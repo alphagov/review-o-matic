@@ -14,6 +14,7 @@ namespace :db do
   task :create_dummy_reviews => :environment do
     @user_1 = User.find_or_create_by(:name => "Ian", :email => "ian.wood@digital.cabinet-office.gov.uk", :authentication_token => 'password')
     @user_2 = User.find_or_create_by(:name => "Winston", :email => "winston@alphagov.co.uk", :authentication_token => 'winston')
+
     mappings = Mapping.all
     
     rand(mappings.count).times do 
@@ -28,6 +29,22 @@ namespace :db do
       mapping.save!
     end
 
+  end
+
+  desc "Create dummy users"
+  task :create_dummy_users => :environment do
+    @user_1 = User.find_or_create_by(:name => "Ian", :email => "ian.wood@digital.cabinet-office.gov.uk", :authentication_token => 'password')
+    @user_2 = User.find_or_create_by(:name => "Winston", :email => "winston@alphagov.co.uk", :authentication_token => 'winston')
+    @user_3 = User.find_or_create_by(:name => "John", :email => "john@thebeatles.com", :authentication_token => 'password')
+    @user_4 = User.find_or_create_by(:name => "Paul", :email => "paul@thebeatles.com", :authentication_token => 'password')
+    @user_5 = User.find_or_create_by(:name => "George", :email => "george@thebeatles.com", :authentication_token => 'password')
+    @user_6 = User.find_or_create_by(:name => "Ringo", :email => "ringo@thebeatles.com", :authentication_token => 'password')
+    @user_7 = User.find_or_create_by(:name => "Kurt", :email => "kurt@nirvana.com", :authentication_token => 'password')
+    @user_8 = User.find_or_create_by(:name => "Dave", :email => "dave@foofighters.com", :authentication_token => 'password')
+    @user_9 = User.find_or_create_by(:name => "Mick", :email => "mick@rollingstones.com", :authentication_token => 'password')
+    @user_10 = User.find_or_create_by(:name => "Keith", :email => "keith@rollingstones.com", :authentication_token => 'password')
+    @user_11 = User.find_or_create_by(:name => "Ziggy", :email => "dave@bowie.com", :authentication_token => 'password')
+    @user_12 = User.find_or_create_by(:name => "PJ", :email => "pj@harvey.com", :authentication_token => 'password')
   end
   
 end
