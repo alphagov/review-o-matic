@@ -2,7 +2,7 @@
 $('.mosaic_container .results_container').empty();
 
 <% @sections.each do |section_name, mappings| %>
-  $('.mosaic_container .results_container').append('<h3><%= section_name %></h3><div class="<%= section_name %>"><% mappings.each do |mapping| %><span><%= mapping.score %></span><% end %></div>');
+  $('.mosaic_container .results_container').append('<div class="<%= section_name %>"><h3><%= section_name %></h3><% mappings.each do |mapping| %><span><%= mapping.score %></span><% end %></div>');
 <% end %>
 
 // Colour the mosaic using the score percentage which is then removed from the HTML
