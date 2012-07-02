@@ -6,7 +6,7 @@ Reviewomatic::Application.routes.draw do
     get 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
 
-  resources :reviews, :only => :update
+  resources :reviews, :only => [:update, :index]
 
   get 'browse/:id' => 'browse#show', :as => :browse_mapping
   get 'browse' => 'browse#index', :as => :browse

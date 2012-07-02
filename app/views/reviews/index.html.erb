@@ -1,0 +1,6 @@
+<% @mappings.each do |mapping| %>
+  <div>
+    <%= link_to "#{mapping.score} / 100 in section #{mapping.section}", "http://migratorator.dev.gov.uk/mappings/#{mapping.mapping_id}/edit",  :target => '_blank'%>
+    <a href="http://migratorator.dev.gov.uk/mappings/<%= mapping.mapping_id %>/edit" target="_blank"><%= mapping.score %>/ 100 in section  <%= mapping.section %></a>
+  </div>
+<% end %>
