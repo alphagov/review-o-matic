@@ -135,21 +135,23 @@ h2 {
       overflow: hidden;
       visibility: hidden;
     }
-    > h3 {
-      background: #e1e1e1;
-      margin: 0;
-      float: left;
-      padding: 0 5px;
-      margin: 0 5px 0 0;
-      height: 30px;
-    }
     > div {
-
+      float: left;
+      margin: 0;
+      > h3 {
+        background: #e1e1e1;
+        margin: 0;
+        float: left;
+        padding: 0 5px;
+        margin: 0;
+        height: 30px;
+      }
     }
     span {
       float: left;
       width: 10px;
       height: 10px;
+      line-height: 10px;
       margin: 0;
       padding: 0;
       &.open_tag {
