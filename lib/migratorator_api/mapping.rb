@@ -23,6 +23,11 @@ class MigratoratorApi
       parse_multiple_mappings_from_response MigratoratorApi.client.get("/mappings.json?tags=#{tags}&page=#{page}")
     end
 
+    def self.count_all_mappings
+      mappings = JSON.parse(MigratoratorApi.client.get("/mappings.json").body)
+      mappings.first.last["total_entries"]
+    end
+
     def self.parse_multiple_mappings_from_response(response)
       return false if response.code != "200"
       (JSON.parse(response.body)["mappings"] || []).map {|m| format_mapping(m) }
