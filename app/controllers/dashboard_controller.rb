@@ -30,7 +30,11 @@ class DashboardController < ApplicationController
         @mappings = Mapping.all
         @s = MigratoratorApi::Tag.all_by_group("section")
         @s.each do |section|
-          @sections[section.name] = @mappings.where(:section => section.name)
+          @sections[section.name] = []
+          reviews = @mappings.where(:section => section.name)
+          unreviewed_count = (section.count - reviews.count)
+          @sections[section.name] << unreviewed_count
+          @sections[section.name] << reviews
         end
       end
     end
