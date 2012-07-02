@@ -19,6 +19,9 @@ gem 'devise'
 
 group :test do
   gem 'turn', '0.8.2', :require => false
+  gem 'shoulda'
+  gem 'shoulda-matchers'
+  gem 'mocha'
 end
 
 gem 'plek', '~> 0'

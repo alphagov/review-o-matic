@@ -1,7 +1,25 @@
 require 'test_helper'
 
 class MappingTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  
+  setup do
+    @user_1 = User.find_or_create_by(:name => "Ian", :email => "ian.wood@digital.cabinet-office.gov.uk", :authentication_token => 'password')
+    @user_2 = User.find_or_create_by(:name => "Winston", :email => "winston@alphagov.co.uk", :authentication_token => 'winston')
+  end
+
+  teardown do
+    @user_1.delete
+    @user_2.delete
+  end
+
+  should_not allow_value(nil).for(:mapping_id)
+
+  should "set the score based on the number of reviews" do
+    mapping = Mapping.create!(:mapping_id => "testo")
+    mapping.reviews.create!(:user_id => @user_1.id, :mapping_id => mapping.mapping_id, :result => "positive")
+    mapping.reviews.create!(:user_id => @user_2.id, :mapping_id => mapping.mapping_id, :result => "negative")
+    mapping.save
+    assert_equal 50.0, mapping.score
+  end
+
 end
