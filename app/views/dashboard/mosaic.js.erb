@@ -1,11 +1,6 @@
 // Empty the containers
 $('.mosaic_container .results_container').empty();
 
-// Create the mosaic
-//<% @mappings.each do |mapping| %>
-//  $('.mosaic_container .results_container').append('<span><%= mapping.score %></span>');
-//<% end %>
-
 <% @sections.each do |section_name, mappings| %>
   $('.mosaic_container .results_container').append('<h3><%= section_name %></h3><div class="<%= section_name %>"><% mappings.each do |mapping| %><span><%= mapping.score %></span><% end %></div>');
 <% end %>
