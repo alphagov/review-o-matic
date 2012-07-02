@@ -50,5 +50,8 @@ module Reviewomatic
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Precompile assets that are not in the manifest
+    config.assets.precompile += ['browse.js', 'colorJizz.0.2.js', 'dashboard_poll.js', 'mosaic_poll.js']
   end
 end

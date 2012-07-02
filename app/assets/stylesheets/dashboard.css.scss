@@ -135,26 +135,23 @@ h2 {
       overflow: hidden;
       visibility: hidden;
     }
-    > div {
-      float: left;
+    > h3 {
+      background: #333333; 
+      color: #ffffff;
       margin: 0;
-      > h3 {
-        background: #e1e1e1;
-        margin: 0;
-        float: left;
-        padding: 0 5px;
-        margin: 0;
-        height: 30px;
-      }
+      float: left;
+      padding: 0 5px;
+      margin: 0;
+      height: 30px;
     }
-    span {
+    > span {
       float: left;
       width: 2px;
       height: 30px;
       margin: 0;
       padding: 0;
       &.no-review {
-        background: #666666;
+        background: #e1e1e1;
       }
     }
   }
