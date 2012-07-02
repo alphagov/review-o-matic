@@ -149,16 +149,12 @@ h2 {
     }
     span {
       float: left;
-      width: 10px;
-      height: 10px;
-      line-height: 10px;
+      width: 2px;
+      height: 30px;
       margin: 0;
       padding: 0;
-      &.open_tag {
-        background: green;
-      }
-      &.closed_tag {
-        background: red;
+      &.no-review {
+        background: #666666;
       }
     }
   }
