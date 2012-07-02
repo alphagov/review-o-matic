@@ -11,8 +11,11 @@
     <header>
       <h1 class="left"><%= link_to "Review-O-Matic", root_path %></h1>
     </header>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
+    <% flash.each do |name, message| %>
+      <p class="flash flash_<%= name %>"><%= message %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
