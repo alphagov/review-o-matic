@@ -91,6 +91,9 @@ h2 {
         text-align: center;
         margin: 0;
         padding: 0;
+        &.total_mappings {
+          font-size: 40px;
+        }
       }
     }
   }
