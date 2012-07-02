@@ -20,7 +20,7 @@ class MigratoratorApi
       request.form_data = params
 
       @logger.debug "#{method::METHOD}: #{uri} #{params.inspect}"
-      response = Net::HTTP.new(uri.host, uri.port).start do |http|
+      response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https' ) do |http|
         http.request(request)
       end
     end
