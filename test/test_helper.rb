@@ -14,6 +14,6 @@ end
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
-  MigratoratorApi::Mapping.expects(:find_by_id).returns(MockMigratorator.new)
+  MigratoratorApi::Mapping.stubs(:find_by_id).returns(MockMigratorator.new)
 
 end
