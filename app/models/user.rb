@@ -4,7 +4,7 @@ class User
 
   has_many :reviews
 
-  devise :token_authenticatable, :rememberable, :trackable
+  devise :token_authenticatable, :rememberable, :recoverable, :trackable
 
   field :email, :type => String
   field :score, :type => Integer, :default => 0
@@ -17,6 +17,9 @@ class User
   field :last_sign_in_ip,       :type => String
   field :sign_in_count,         :type => Integer
   field :remember_created_at,   :type => DateTime
+
+  field :reset_password_token,  :type => String
+  field :reset_password_sent_at,:type => DateTime
 
   validates :name, :email, :presence => true
   validates :email, :uniqueness => { :case_sensitive => true }
