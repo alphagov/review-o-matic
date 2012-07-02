@@ -25,7 +25,7 @@ class MigratoratorApi
 
     def self.count_all_mappings
       mappings = JSON.parse(MigratoratorApi.client.get("/mappings.json").body)
-      mappings.first.last["total_entries"]
+      mappings["pages"]["total_entries"]
     end
 
     def self.parse_multiple_mappings_from_response(response)
