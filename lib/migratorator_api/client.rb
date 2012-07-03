@@ -16,7 +16,7 @@ class MigratoratorApi
 
     def do_request(method, partial_uri, params = {})
       uri = URI.parse(@base_uri + '/api' + partial_uri)
-      request = method.new(uri.path + '?' + (uri.query || ""))
+      request = method.new(uri.path + ( uri.query.blank? ? '' : "?#{uri.query}") )
       request.form_data = params
 
       @logger.debug "#{method::METHOD}: #{uri} #{params.inspect}"

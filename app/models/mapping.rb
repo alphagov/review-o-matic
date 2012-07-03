@@ -16,12 +16,16 @@ class Mapping
     reviews_count = self.reviews.count
     positive_reviews_count = self.reviews.where(:result => "positive").count
     score = positive_reviews_count.percent_of(reviews_count)
-    self.score = score 
+    self.score = score
+  end
+
+  def set_score!
+    set_score and save!
   end
 
   def set_section
     section = []
-    mapping = MigratoratorApi::Mapping.find_by_id(self.mapping_id)  
+    mapping = MigratoratorApi::Mapping.find_by_id(self.mapping_id)
     mapping.tags.each do |tag|
       section << tag.scan(/section:\w+/)
     end

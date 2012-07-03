@@ -18,14 +18,16 @@ class Review
   after_save :set_user_score
   after_save :set_mapping_score
 
+  def mapping
+    @mapping ||= Mapping.find_or_create_by(:mapping_id => mapping_id)
+  end
+
   def set_user_score
-    self.user.set_score
-    self.user.save
+    self.user.set_score!
   end
 
   def set_mapping_score
-    self.mapping.set_score
-    self.mapping.save
+    mapping.set_score!
   end
 
 
