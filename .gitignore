@@ -21,5 +21,6 @@ db/*.sqlite3
 public/system/photos/*
 public/stylesheets/*
 public/javascripts/all.js
+public/assets/
 mkmf.log
 *.swp
