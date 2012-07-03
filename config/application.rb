@@ -52,6 +52,6 @@ module Reviewomatic
     config.assets.version = '1.0'
 
     # Precompile assets that are not in the manifest
-    config.assets.precompile += ['browse.js', 'colorJizz.0.2.js', 'dashboard_poll.js', 'mosaic_poll.js']
+    config.assets.precompile += ['browse.js', 'colorJizz.js', 'dashboard_poll.js', 'mosaic_poll.js']
   end
 end
