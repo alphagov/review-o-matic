@@ -46,7 +46,7 @@
            <%= mapping.section %>
         </td>
         <td>
-          <%= link_to "Edit", "https://migratorator.production.alphagov.co.uk/mappings/#{mapping.mapping_id}/edit",  :target => '_blank'%>
+          <%= link_to "Edit", edit_migratorator_mapping_url(mapping.mapping_id),  :target => '_blank'%>
         </td>
         <td>
            <%= link_to "Review", browse_mapping_path(mapping.mapping_id) %>
