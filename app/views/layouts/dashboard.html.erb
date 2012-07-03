@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Review-O-Matic</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :custom_assets %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="browser">
+
+  <header>
+    <h1 class="left"><%= link_to "Review-O-Matic", root_path %></h1>
+    <div class="clear"></div>
+  </header>
+  <%= yield %>
+</body>
+</html>
+

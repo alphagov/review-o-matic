@@ -1,6 +1,7 @@
 require 'migratorator_api'
 class DashboardController < ApplicationController
 
+  layout 'dashboard'
   skip_before_filter :authenticate_user!
 
   def index
