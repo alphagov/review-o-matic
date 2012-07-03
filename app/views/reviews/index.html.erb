@@ -1,40 +1,54 @@
-<table border="0" cellpadding="0" cellspacing="0">
-  <thead>
-    <tr>
-      <td>
-        Section 
-      </td>
-      <td>
-        Rating 
-      </td>
-      <td>
-        Edit in Migratorator 
-      </td>
-      <td>
-        View in Migratorator 
-      </td>
-    </tr>
-  </thead>
-  <tbody>
+<div class="container">
+  <h2>Worst Ranked Mappings:</h2>
+  <table class="review_table" border="0">
+    <thead>
+      <tr>
+        <td>
+         Position 
+        </td>
+        <td>
+          Rating 
+        </td>
+        <td>
+          Section 
+        </td>
+        <td>
+          Edit in Migratorator 
+        </td>
+        <td>
+          Review in Review-O-Matic
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+    <% 
+      if params[:page] == nil
+        count = 0
+      else
+        count = 0 + ((params[:page].to_i - 1 )) * Kaminari.config.default_per_page
+      end
+    %>
+    <% @mappings.each do |mapping| %>
+      <tr>
+        <td>
+          <%= count += 1 %> 
+        </td>
+        <td>
+           <%= mapping.score %> / 100 
+        </td>
+        <td>
+           <%= mapping.section %>
+        </td>
+        <td>
+          <%= link_to "Edit", "https://migratorator.production.alphagov.co.uk/mappings/#{mapping.mapping_id}/edit",  :target => '_blank'%>
+        </td>
+        <td>
+           <%= link_to "Review", browse_mapping_path(mapping.mapping_id) %> 
+        </td>
+      </tr>
+    <% end %>
 
-  <% @mappings.each do |mapping| %>
-    <tr>
-      <td>
-         <%= mapping.section %>
-      </td>
-      <td>
-         <%= mapping.score %> / 100 
-      </td>
-      <td>
-        <%= link_to "Edit", "https://migratorator.production.alphagov.co.uk/mappings/#{mapping.mapping_id}/edit",  :target => '_blank'%>
-      </td>
-      <td>
-         <%= link_to "View", browse_mapping_path(mapping.mapping_id) %> 
-      </td>
-    </tr>
-  <% end %>
-
-  </tbody>
-</table>
-
-
+    </tbody>
+  </table>
+  <%= paginate @mappings %>
+</div>

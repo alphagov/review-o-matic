@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   respond_to :json
 
   def index
-    @mappings = Mapping.asc(:score).limit(40)
+    @mappings = Mapping.asc(:score).page params[:page]
   end
 
   def update
