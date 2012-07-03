@@ -18,9 +18,9 @@
   <div class="right">
     <div class="buttons">
       <%= form_tag review_path(@mapping.id) do %>
-        <%= submit_tag "OK", button_attributes_for(@review, "positive") %>
-        <%= submit_tag "Unsure", button_attributes_for(@review, "neutral") %>
-        <%= submit_tag "Needs Review", button_attributes_for(@review, "negative") %>
+        <%= submit_tag "✔", button_attributes_for(@review, "positive") %>
+        <%= submit_tag "?", button_attributes_for(@review, "neutral") %>
+        <%= submit_tag "✘", button_attributes_for(@review, "negative") %>
       <% end %>
     </div>
 <!--     <div class="comment">
