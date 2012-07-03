@@ -20,16 +20,16 @@
   <% @mappings.each do |mapping| %>
     <tr>
       <td>
-
+         <%= mapping.section %>
       </td>
       <td>
-        
+         <%= mapping.score %> / 100 
       </td>
       <td>
-        <%= link_to "#{mapping.score} / 100 in section #{mapping.section}", "http://migratorator.dev.gov.uk/mappings/#{mapping.mapping_id}/edit",  :target => '_blank'%>
+        <%= link_to "Edit", "https://migratorator.production.alphagov.co.uk/mappings/#{mapping.mapping_id}/edit",  :target => '_blank'%>
       </td>
       <td>
-        
+         <%= link_to "View", browse_mapping_path(mapping.mapping_id) %> 
       </td>
     </tr>
   <% end %>

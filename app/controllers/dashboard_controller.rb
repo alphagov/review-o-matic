@@ -1,4 +1,5 @@
 require 'migratorator_api'
+skip_before_filter :authenticate_user!
 
 class DashboardController < ApplicationController
 
