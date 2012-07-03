@@ -16,6 +16,7 @@ gem 'jquery-rails'
 gem 'null_logger'
 
 gem 'devise'
+gem 'kaminari'
 
 group :test do
   gem 'shoulda'
