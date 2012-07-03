@@ -35,7 +35,7 @@ class Mapping
       self.section = section[0].sub(/^section:/, '')
     end
   end
-  
+
   def set_reviews_count
     self.reviews_count = self.reviews.count
   end
