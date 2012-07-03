@@ -32,7 +32,7 @@ class Review
   end
 
   def set_mapping_reviews_count
-    mapping.set_reviews_count! 
+    mapping.set_reviews_count!
   end
 
 end
