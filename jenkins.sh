@@ -5,4 +5,5 @@ export DISPLAY=":99"
 bundle install --path "${HOME}/bundles/${JOB_NAME}" --deployment
 bundle exec rake db:mongoid:drop
 bundle exec rake db:schema:load
+bundle exec rake assets:precompile
 bundle exec rake
