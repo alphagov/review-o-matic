@@ -1,7 +1,4 @@
 class BrowseController < ApplicationController
-
-  layout "browser"
-
   respond_to :html, :json
 
   def index
