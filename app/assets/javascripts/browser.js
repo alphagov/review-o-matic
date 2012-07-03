@@ -76,6 +76,8 @@ $(document).ready( function() {
 
       history.pushState( { mapping_id: data.id }, '', '/browse/' + data.id );
 
+      $('.user_score').text( parseInt( $('.user_score').text() ) + 1 );
+
       can_load_new_mapping = true;
       $('.buttons form').attr('action', '/reviews/' + data.id);
       $('.buttons input').removeAttr('disabled');
