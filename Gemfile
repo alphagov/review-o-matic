@@ -18,10 +18,11 @@ gem 'null_logger'
 gem 'devise'
 
 group :test do
-  gem 'turn', '0.8.2', :require => false
   gem 'shoulda'
   gem 'shoulda-matchers'
   gem 'mocha'
+  gem 'webmock', require: false
+  gem 'database_cleaner'
 end
 
 gem 'plek', '~> 0'
