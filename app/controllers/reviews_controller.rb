@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   respond_to :json
 
   def index
-    @mappings = Mapping.asc(:score).page params[:page]
+    @mappings = Mapping.order_by(:score.asc, :reviews_count.desc).page params[:page]
   end
 
   def update

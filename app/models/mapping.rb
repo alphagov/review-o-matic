@@ -6,6 +6,7 @@ class Mapping
 
   field :mapping_id, :type => String
   field :score, :type => Float, :default => 0.0
+  field :reviews_count, :type => Integer, :default => 0
   field :section, :type => String
 
   has_many :reviews, dependent: :delete
@@ -33,6 +34,14 @@ class Mapping
     if section[0] != nil
       self.section = section[0].sub(/^section:/, '')
     end
+  end
+  
+  def set_reviews_count
+    self.reviews_count = self.reviews.count
+  end
+
+  def set_reviews_count!
+    set_reviews_count and save!
   end
 
 end
