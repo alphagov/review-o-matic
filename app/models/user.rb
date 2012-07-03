@@ -31,4 +31,8 @@ class User
     self.score = self.reviews.count
   end
 
+  def set_score!
+    set_score and save!
+  end
+
 end
