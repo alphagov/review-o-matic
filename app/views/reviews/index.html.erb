@@ -1,6 +1,40 @@
-<% @mappings.each do |mapping| %>
-  <div>
-    <%= link_to "#{mapping.score} / 100 in section #{mapping.section}", "http://migratorator.dev.gov.uk/mappings/#{mapping.mapping_id}/edit",  :target => '_blank'%>
-    <a href="http://migratorator.dev.gov.uk/mappings/<%= mapping.mapping_id %>/edit" target="_blank"><%= mapping.score %>/ 100 in section  <%= mapping.section %></a>
-  </div>
-<% end %>
+<table border="0" cellpadding="0" cellspacing="0">
+  <thead>
+    <tr>
+      <td>
+        Section 
+      </td>
+      <td>
+        Rating 
+      </td>
+      <td>
+        Edit in Migratorator 
+      </td>
+      <td>
+        View in Migratorator 
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+
+  <% @mappings.each do |mapping| %>
+    <tr>
+      <td>
+
+      </td>
+      <td>
+        
+      </td>
+      <td>
+        <%= link_to "#{mapping.score} / 100 in section #{mapping.section}", "http://migratorator.dev.gov.uk/mappings/#{mapping.mapping_id}/edit",  :target => '_blank'%>
+      </td>
+      <td>
+        
+      </td>
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+
