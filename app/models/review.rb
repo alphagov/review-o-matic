@@ -17,6 +17,7 @@ class Review
 
   after_save :set_user_score
   after_save :set_mapping_score
+  after_save :set_mapping_reviews_count
 
   def mapping
     @mapping ||= Mapping.find_or_create_by(:mapping_id => mapping_id)
@@ -30,5 +31,8 @@ class Review
     mapping.set_score!
   end
 
+  def set_mapping_reviews_count
+    mapping.set_reviews_count! 
+  end
 
 end
