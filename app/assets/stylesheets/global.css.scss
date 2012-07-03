@@ -53,3 +53,16 @@ section.unauthenticated {
   margin: 0 auto;
   width: 960px;
 }
+
+.container {
+  width: 960px;
+  margin: 0 auto;
+  &:after {
+    content: ' ';
+    display: block;
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}
