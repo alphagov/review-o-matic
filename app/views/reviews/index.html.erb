@@ -28,7 +28,7 @@
       if params[:page] == nil
         count = 0
       else
-        count = 0 + ((params[:page].to_i - 1 )) * Kaminari.config.default_per_page
+        count = 0 + (params[:page].to_i - 1 ) * Kaminari.config.default_per_page
       end
     %>
     <% @mappings.each do |mapping| %>
