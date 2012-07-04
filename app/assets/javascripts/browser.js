@@ -1,5 +1,5 @@
 $(document).ready( function() {
-  $('#overlay').hide();
+  $('#overlay').fadeTo('fast', 0);
 
   var can_load_new_mapping = true;
 
@@ -48,12 +48,12 @@ $(document).ready( function() {
   }
 
   function load_mapping(id) {
-    $('#overlay').fadeIn('fast');
+    $('#overlay').fadeTo('fast', 0.9);
 
     $.getJSON('/browse/'+ id +'.json', function(data) {
       switch (data.status) {
         case 301:
-          mapping_result = "→ " + data.new_url;
+          mapping_result = "→ <a href='" + data.new_url + "' target='blank'>" + data.new_url + "</a>";
           new_page_src = data.new_url;
           break;
         case 410:
@@ -69,8 +69,8 @@ $(document).ready( function() {
         $('.buttons input[name="'+ data.result +'"]').addClass('selected');
       }
 
-      $('#mapping_title').text(data.title);
-      $('#mapping_result').text(mapping_result);
+      $('#mapping_title a').text(data.title).attr('href', data.old_url);
+      $('#mapping_result').html(mapping_result);
       $('#mapping_old_page').attr('src', data.old_url);
       $('#mapping_new_page').attr('src', new_page_src);
 
@@ -85,7 +85,7 @@ $(document).ready( function() {
 
     $('#mapping_old_page').load( function(){
       $('.buttons').removeClass('disabled');
-      $('#overlay').fadeOut('fast');
+      $('#overlay').fadeTo('fast', 0);
     });
   }
 });
