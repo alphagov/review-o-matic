@@ -2,11 +2,15 @@
   <h2>Request sign in instructions</h2>
 
   <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-    <%= devise_error_messages! %>
+    <% if resource.errors.any? %>
+      <% resource.errors.full_messages.each do |error| %>
+        <p class="flash flash_alert"><%= error %></p>
+      <% end %>
+    <% end %>
 
-    <div><%= f.label :email %><br />
-    <%= f.email_field :email %></div>
+    <p><%= f.label :email %>
+    <%= f.email_field :email %></p>
 
-    <div><%= f.submit "Send me sign in instructions" %></div>
+    <p><%= f.submit "Send me sign in instructions" %></p>
   <% end %>
 </section>
