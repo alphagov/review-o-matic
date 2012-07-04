@@ -53,7 +53,7 @@ $(document).ready( function() {
     $.getJSON('/browse/'+ id +'.json', function(data) {
       switch (data.status) {
         case 301:
-          mapping_result = "→ <a href='" + data.new_url + "'>" + data.new_url + "</a>";
+          mapping_result = "→ <a href='" + data.new_url + "' target='blank'>" + data.new_url + "</a>";
           new_page_src = data.new_url;
           break;
         case 410:
