@@ -48,7 +48,7 @@ $(document).ready( function() {
   }
 
   function load_mapping(id) {
-    $('#overlay').fadeTo('fast', 0.8);
+    $('#overlay').fadeTo('fast', 0.9);
 
     $.getJSON('/browse/'+ id +'.json', function(data) {
       switch (data.status) {
