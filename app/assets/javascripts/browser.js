@@ -1,5 +1,5 @@
 $(document).ready( function() {
-  $('#overlay').hide();
+  $('#overlay').fadeTo('fast', 0);
 
   var can_load_new_mapping = true;
 
@@ -48,7 +48,7 @@ $(document).ready( function() {
   }
 
   function load_mapping(id) {
-    $('#overlay').fadeIn('fast');
+    $('#overlay').fadeTo('fast', 0.8);
 
     $.getJSON('/browse/'+ id +'.json', function(data) {
       switch (data.status) {
@@ -85,7 +85,7 @@ $(document).ready( function() {
 
     $('#mapping_old_page').load( function(){
       $('.buttons').removeClass('disabled');
-      $('#overlay').fadeOut('fast');
+      $('#overlay').fadeTo('fast', 0);
     });
   }
 });
