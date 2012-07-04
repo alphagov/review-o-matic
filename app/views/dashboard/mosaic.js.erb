@@ -1,17 +1,34 @@
 // Empty the containers
-$('.mosaic_container .results_container').empty();
+$('.mosaic_container .results_container').remove();
+$('<div class="results_container"></div>').appendTo('.mosaic_container');
 
-<% @sections.each do |section_name, mappings| %>
-  $('.mosaic_container .results_container').append('<h3><%= section_name %></h3><% mappings.last.each do |mapping| %><span class="review"><%= mapping.score %></span><% end %><% mappings.first.times do %><span class="no-review"></span><% end %>');
+var sections = [];
+<% @sections.each do |section| %>
+  sections.push( { name : "<%=j section[:name] %>", unreviewed : <%= section[:unreviewed].to_i %>, reviewed : <%= section[:reviewed].to_i %> });
 <% end %>
 
-// Colour the mosaic using the score percentage which is then removed from the HTML
-$(function (){
-    var colors = new Hex(0xFF0000).range(new Hex(0x00FF00), 101, true);
-    $(".mosaic_container .results_container span.review").each(function(index){
-        $(this).css({
-          'background-color' : '#'+colors[parseInt($(this).text())].toString()
-        });
-        $(this).html('');
-    });
+$(sections).each( function(i,section){
+  var sectionContainer =  $('<div class="section"><h3>'+ section.name +'</h3></div>');
+
+  for ( i = 0; i < section.unreviewed; i++ ) {
+    $('<span class="no-review"></span>').insertAfter(sectionContainer.find('h3'));
+  }
+  for ( i = 0; i < section.reviewed; i++ ) {
+    $('<span class="review"></span>').insertAfter(sectionContainer.find('h3'));
+  }
+
+  sectionContainer.appendTo('.results_container');
 });
+
+$('.results_container').masonry();
+
+// // Colour the mosaic using the score percentage which is then removed from the HTML
+// $(function (){
+//     var colors = new Hex(0xFF0000).range(new Hex(0x00FF00), 101, true);
+//     $(".mosaic_container .results_container span.review").each(function(index){
+//         $(this).css({
+//           'background-color' : '#'+colors[parseInt($(this).text())].toString()
+//         });
+//         $(this).html('');
+//     });
+// });
