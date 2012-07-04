@@ -6,4 +6,8 @@ module BrowserHelper
     end
     atts
   end
+
+  def format_title(title)
+    title.sub(/ : Directgov.*/, '')
+  end
 end

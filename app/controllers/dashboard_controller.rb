@@ -17,7 +17,7 @@ class DashboardController < ApplicationController
         @red_mappings = @mappings.where(:score.lt => "20")
         @users = User.desc(:score).limit(10)
         @reviews = Review.all
-        @total_mappings_count = MigratoratorApi::Mapping.count_all_mappings 
+        @total_mappings_count = MigratoratorApi::Mapping.count_all_mappings
       end
     end
 
@@ -29,16 +29,11 @@ class DashboardController < ApplicationController
 
       end
       format.js do |x|
-        @sections = {}
-        @mappings = Mapping.all
-        @s = MigratoratorApi::Tag.all_by_group("section")
-        @s.each do |section|
-          @sections[section.name] = []
-          reviews = @mappings.where(:section => section.name)
-          unreviewed_count = (section.count - reviews.count)
-          @sections[section.name] << unreviewed_count
-          @sections[section.name] << reviews
-        end
+        @sections = MigratoratorApi::Tag.all_by_group("section").map {|section|
+          reviewed_mappings_for_section = Mapping.where(:section => section.name, :reviews_count.gt => 0).count
+          unreviewed_mappings_for_section = section.count.to_i
+          { :name => section.name, :reviewed => reviewed_mappings_for_section, :unreviewed => unreviewed_mappings_for_section }
+        }
       end
     end
   end

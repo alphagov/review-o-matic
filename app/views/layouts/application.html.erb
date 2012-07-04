@@ -19,6 +19,11 @@
 
     <div class="clear"></div>
   </header>
+
+  <% flash.each do |name, message| %>
+    <p class="flash flash_<%= name %>"><%= message %></p>
+  <% end %>
+
   <%= yield %>
 </body>
 </html>

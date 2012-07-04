@@ -3,10 +3,10 @@
 <% end %>
 <section class="mapping_info">
   <div class="left">
-    <h1 id="mapping_title"><%= @mapping.title %></h1>
+    <h1 id="mapping_title"><%= link_to format_title(@mapping.title), @mapping.old_url, :target => 'blank' %></h1>
     <div id="mapping_result" class="result">
       <% if @mapping.status == 301 %>
-        &rarr; <%= @mapping.new_url %>
+        &rarr; <%= link_to @mapping.new_url, @mapping.new_url, :target => 'blank' %>
       <% elsif @mapping.status == 410 %>
         &rarr; Gone
       <% else %>
@@ -18,9 +18,9 @@
   <div class="right">
     <div class="buttons">
       <%= form_tag review_path(@mapping.id) do %>
-        <%= submit_tag "OK", button_attributes_for(@review, "positive") %>
-        <%= submit_tag "Unsure", button_attributes_for(@review, "neutral") %>
-        <%= submit_tag "Needs Review", button_attributes_for(@review, "negative") %>
+        <%= submit_tag "✔", button_attributes_for(@review, "positive") %>
+        <%= submit_tag "?", button_attributes_for(@review, "neutral") %>
+        <%= submit_tag "✘", button_attributes_for(@review, "negative") %>
       <% end %>
     </div>
 <!--     <div class="comment">

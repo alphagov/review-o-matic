@@ -1,9 +1,9 @@
-function updateMosaic() {  
-    $.getScript('/dashboard/mosaic.js');  
-    setTimeout(updateMosaic, 10000);  
-}  
+function updateMosaic() {
+    $.getScript('/dashboard/mosaic.js');
+    setTimeout(updateMosaic, 30000);
+}
 
 $(document).ready(function(){
-    setTimeout(updateMosaic, 10000);
+    updateMosaic();
 });
 
