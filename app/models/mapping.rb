@@ -28,7 +28,7 @@ class Mapping
     mapping = MigratoratorApi::Mapping.find_by_id(self.mapping_id)
 
     if mapping
-      self.section = mapping.tags.select {|t| t.match(/^section:/) }.first.sub(/^section:/, '')
+      self.section = (mapping.tags.select {|t| t.match(/^section:/) }.first || "").sub(/^section:/, '')
     end
   end
 
