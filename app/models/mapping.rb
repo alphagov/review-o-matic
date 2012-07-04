@@ -25,14 +25,10 @@ class Mapping
   end
 
   def set_section
-    section = []
     mapping = MigratoratorApi::Mapping.find_by_id(self.mapping_id)
-    mapping.tags.each do |tag|
-      section << tag.scan(/section:\w+/)
-    end
-    section.flatten!
-    if section[0] != nil
-      self.section = section[0].sub(/^section:/, '')
+
+    if mapping
+      self.section = (mapping.tags.select {|t| t.match(/^section:/) }.first || "").sub(/^section:/, '')
     end
   end
 
