@@ -2,7 +2,7 @@
   <%= javascript_include_tag "browser" %>
 <% end %>
 <section class="mapping_info">
-  <div class="left">
+  <!--<div class="left">
     <h1 id="mapping_title"><%= link_to format_title(@mapping.title), @mapping.old_url, :target => 'blank' %></h1>
     <div id="mapping_result" class="result">
       <% if @mapping.status == 301 %>
@@ -13,9 +13,9 @@
         No decision
       <% end %>
     </div>
-  </div>
+  </div>-->
 
-  <div class="right">
+  <!--<div class="right">-->
     <div class="buttons">
       <%= form_tag review_path(@mapping.id) do %>
         <%= submit_tag "✔", button_attributes_for(@review, "positive") %>
@@ -26,8 +26,8 @@
 <!--     <div class="comment">
       <a href="#">+</a>
     </div> -->
-  </div>
-  <div class="clear"></div>
+  <!--</div>
+  <div class="clear"></div>-->
 </section>
 
 <div id="overlay"></div>
