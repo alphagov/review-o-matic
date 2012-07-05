@@ -12,6 +12,7 @@ class DashboardController < ApplicationController
       end
       format.js do |x|
         @mappings = Mapping.all
+        @reviewed_mappings_count = Mapping.where(:reviews_count.gt => 0).count
         @green_mappings = @mappings.where(:score.gt => "80")
         @amber_mappings = @mappings.where(:score.lt => "80", :score.gt => "20")
         @red_mappings = @mappings.where(:score.lt => "20")

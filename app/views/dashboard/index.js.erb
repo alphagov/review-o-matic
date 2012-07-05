@@ -2,7 +2,7 @@
 $('.top_players_table').empty();
 
 // Update the total mappings count
-$('h2.total_mappings').text('<%= @mappings.count %>/<%= @total_mappings_count %>');
+$('h2.total_mappings').text('<%= @reviewed_mappings_count %>');
 
 // Update the total reviews count
 $('h2.total_reviews').text('<%= @reviews.count %>');
