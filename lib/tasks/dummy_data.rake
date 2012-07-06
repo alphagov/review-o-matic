@@ -38,6 +38,15 @@ namespace :db do
     @user_10 = User.find_or_create_by(:name => "Keith", :email => "keith@rollingstones.com", :authentication_token => 'password')
     @user_11 = User.find_or_create_by(:name => "Ziggy", :email => "dave@bowie.com", :authentication_token => 'password')
     @user_12 = User.find_or_create_by(:name => "PJ", :email => "pj@harvey.com", :authentication_token => 'password')
+    @user_13 = User.find_or_create_by(:name => "Bob", :email => "bob@marley.com", :authentication_token => 'password')
+    @user_14 = User.find_or_create_by(:name => "Liam", :email => "liam@prodigy.com", :authentication_token => 'password')
+    @user_15 = User.find_or_create_by(:name => "Damon", :email => "damon@blur.com", :authentication_token => 'password')
+    @user_16 = User.find_or_create_by(:name => "Frank", :email => "frank@sinatra.com", :authentication_token => 'password')
+    @user_17 = User.find_or_create_by(:name => "Amon", :email => "amon@tobin.com", :authentication_token => 'password')
+    @user_18 = User.find_or_create_by(:name => "Kieran", :email => "kieran@fourtet.com", :authentication_token => 'password')
+    @user_19 = User.find_or_create_by(:name => "Eddie", :email => "eddie@pearljam.com", :authentication_token => 'password')
+    @user_20 = User.find_or_create_by(:name => "Chris", :email => "chris@soundgarden.com", :authentication_token => 'password')
+    @user_21 = User.find_or_create_by(:name => "JayZ", :email => "jayz@rockafella.com", :authentication_token => 'password')
   end
   
 end
