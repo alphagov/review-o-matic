@@ -63,33 +63,52 @@ body.browser {
       background: #ddd; border: 1px solid #bbb;
       padding: 0.6em;
       font-size: 1.2em;
-      height: 3em;
-      display: block;
-      margin: 0 6em 0 0;
+      display: inline-block;
+      margin: 0 0 0 17em;
       text-align: center;
 
-      input { -webkit-box-shadow: #bbb 2px 2px 2px; border: none; color: #fff; font-weight: bold; height: 2em; font-size: 1.5em; padding: 0 0.8em; }
-      input.loading { background: #2a83e7; }
-      input.selected { background: #2a83e7; }
+      button { 
+        -webkit-box-shadow: #bbb 2px 2px 2px; 
+        border: none; color: #fff; 
+        font-weight: bold; 
+        padding: 0 0.8em;
+        span {
+          display: inline-block;
+          &:first-child {
+            font-size: 1.5em;
+            padding: 0.3em 0;
+          }
+          &:last-child {
+            font-size: 1em;
+            vertical-align: top;
+            margin: 0.75em 0 0;
+          }
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      button.loading { background: #2a83e7; }
+      button.selected { background: #2a83e7; }
 
-      input[name='positive'] {
+      button[name='positive'] {
         background: #6fa32e;
         text-shadow: #5b8515 1px 1px 1px;
         &:hover { background: #648e15; }
       }
-      input[name='neutral'] {
+      button[name='neutral'] {
         background: #fea120;
         text-shadow: #9d5a10 1px 1px 1px;
         &:hover { background: #f28b19; }
       }
-      input[name='negative'] {
+      button[name='negative'] {
         background: #c9281f;
         text-shadow: #6a1510 1px 1px 1px;
         &:hover { background: #aa221a; }
       }
     }
     .buttons.disabled {
-      input { opacity: 0.5; }
+      button { opacity: 0.5; }
     }
   }
 
