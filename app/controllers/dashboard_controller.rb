@@ -16,7 +16,7 @@ class DashboardController < ApplicationController
         @green_mappings = @mappings.where(:score.gt => "80")
         @amber_mappings = @mappings.where(:score.lt => "80", :score.gt => "20")
         @red_mappings = @mappings.where(:score.lt => "20")
-        @users = User.desc(:score).limit(10)
+        @users = User.desc(:score).limit(20)
         @reviews = Review.all
         @total_mappings_count = MigratoratorApi::Mapping.count_all_mappings
       end
