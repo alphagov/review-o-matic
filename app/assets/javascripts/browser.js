@@ -3,11 +3,11 @@ $(document).ready( function() {
 
   var can_load_new_mapping = true;
 
-  $('.browser .buttons input').click(function(e) {
+  $('.browser .buttons button').click(function(e) {
     e.preventDefault();
 
     var form_path = $(this).parent('form').attr('action');
-    var all_buttons = $(this).parent('form').find('input');
+    var all_buttons = $(this).parent('form').find('button');
     var button = $(this);
 
     $.ajax({
@@ -66,7 +66,7 @@ $(document).ready( function() {
       }
 
       if (data.result !== null) {
-        $('.buttons input[name="'+ data.result +'"]').addClass('selected');
+        $('.buttons button[name="'+ data.result +'"]').addClass('selected');
       }
 
       $('#mapping_title a').text(data.title).attr('href', data.old_url);
@@ -80,7 +80,7 @@ $(document).ready( function() {
 
       can_load_new_mapping = true;
       $('.buttons form').attr('action', '/reviews/' + data.id);
-      $('.buttons input').removeAttr('disabled');
+      $('.buttons button').removeAttr('disabled');
     });
 
     $('#mapping_old_page').load( function(){
