@@ -3,6 +3,10 @@ $(document).ready( function() {
 
   var can_load_new_mapping = true;
 
+  // Begin work on function to set the overlay here.
+  // Need to be able to scroll the page below the overlay without giving the user access to the links.
+  $('#overlay').height($('#mapping_old_page').height());
+
   $('.browser .buttons button').click(function(e) {
     e.preventDefault();
 
