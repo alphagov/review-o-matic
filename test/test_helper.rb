@@ -13,10 +13,14 @@ DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean
 
 class MockMigratorator
-  attr_accessor :tags, :id
+  attr_accessor :tags, :id, :title, :old_url, :new_url, :status
   def initialize
     self.tags = %w[ a b c d section:directories e f ]
     self.id ="testo"
+    self.title = "testo"
+    self.old_url = "old_url"
+    self.new_url = "new_url"
+    self.status = "positive"
   end
 end
 
@@ -44,7 +48,7 @@ class ActiveSupport::TestCase
 
   def login_as_stub_user
     @user = User.find_or_create_by(:name => 'Stub User', :email => "test@testing.com")
-    request.env['warden'] = stub(:authenticate! => true, :authenticated? => true, :user => @user)
+    request.env['warden'] = stub(:authenticate => @user, :authenticate! => true, :authenticated? => true, :user => @user)
   end
 
   teardown do

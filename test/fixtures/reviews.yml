@@ -2,10 +2,10 @@
 
 one:
   user_id: 1
-  mapping_id: MyString
-  result: MyString
+  mapping_id: testo
+  result: positive
 
 two:
   user_id: 1
-  mapping_id: MyString
-  result: MyString
+  mapping_id: testo_2
+  result: negative
