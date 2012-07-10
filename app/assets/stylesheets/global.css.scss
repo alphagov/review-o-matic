@@ -8,14 +8,30 @@ header {
   color: #fff;
   text-shadow: #111 0px 1px 1px;
 
-  h1 { font-weight: bold; font-size: 1em; margin: 0; width: 30%; text-align: left;
+  h1 { 
+    margin: 0; 
+    width: 30%; 
+    text-align: left;
+    font-size: 1em; 
+    font-weight: bold; 
     a {
       color: #fff;
       text-decoration: none;
       border-bottom: 1px solid #444;
-
-      &:visited { color: #fff; }
-      &:hover { text-decoration: none; border-bottom-color: #ccc; }
+      font-size: 0.9em;
+      margin: 0 0 0 0.3em;
+      &:first-child {
+        font-weight: bold; 
+        font-size: 1em; 
+        margin: 0 0.6em 0 0;
+      }
+      &:visited { 
+        color: #fff; 
+      }
+      &:hover {
+        text-decoration: none; 
+        border-bottom-color: #ccc; 
+      }
     }
   }
   h2 {
@@ -24,6 +40,10 @@ header {
     font-size: 1em;
     text-align: center;
     width: 40%;
+  }
+  h3 {
+    margin: 0;
+
   }
   .right {
     width: 25%;

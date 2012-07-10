@@ -10,7 +10,11 @@
 <body class="dashboard">
 
   <header>
-    <h1 class="left"><%= link_to "Review-O-Matic", root_path %></h1>
+    <h1 class="left">
+      <%= link_to "Review-O-Matic", root_path %>
+      <%= link_to "Leaderboard", dashboard_path %>
+      <%= link_to "Coverage", mosaic_path %>
+    </h1>
     <div class="clear"></div>
   </header>
   <%= yield %>
