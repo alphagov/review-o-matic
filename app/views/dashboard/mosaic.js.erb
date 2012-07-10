@@ -8,13 +8,21 @@ var sections = [];
 <% end %>
 
 var sectionContainer =  "";
+
 $(sections).each( function(i,section){
   sectionContainer =  $('<div class="section"><h3>'+ section.name +'</h3></div>');
 
-  for ( i = 0; i < section.unreviewed; i++ ) {
+  var i;
+  var unreviewedCount = section.unreviewed;
+
+  for ( i = 0; i < unreviewedCount; i++ ) {
     $('<span class="no-review"></span>').insertAfter(sectionContainer.find('h3'));
   }
-  for ( i = 0; i < section.reviewed; i++ ) {
+
+  var j;
+  var reviewedCount = section.reviewed;
+
+  for ( j = 0; j < reviewedCount; j++ ) {
     $('<span class="review"></span>').insertAfter(sectionContainer.find('h3'));
   }
 
