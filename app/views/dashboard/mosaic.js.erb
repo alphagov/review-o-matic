@@ -7,8 +7,9 @@ var sections = [];
   sections.push( { name : "<%=j section[:name] %>", unreviewed : <%= section[:unreviewed].to_i %>, reviewed : <%= section[:reviewed].to_i %> });
 <% end %>
 
+var sectionContainer =  "";
 $(sections).each( function(i,section){
-  var sectionContainer =  $('<div class="section"><h3>'+ section.name +'</h3></div>');
+  sectionContainer =  $('<div class="section"><h3>'+ section.name +'</h3></div>');
 
   for ( i = 0; i < section.unreviewed; i++ ) {
     $('<span class="no-review"></span>').insertAfter(sectionContainer.find('h3'));
