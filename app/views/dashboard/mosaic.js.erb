@@ -1,32 +1,29 @@
-// Empty the containers
-$('.mosaic_container .results_container').remove();
-$('<div class="results_container"></div>').appendTo('.mosaic_container');
+sections = [];
 
-var sections = [];
+// Empty the containers
+$('.mosaic_container .results_container').empty();
+
 <% @sections.each do |section| %>
   sections.push( { name : "<%=j section[:name] %>", unreviewed : <%= section[:unreviewed].to_i %>, reviewed : <%= section[:reviewed].to_i %> });
 <% end %>
 
-var sectionContainer =  "";
-
 $(sections).each( function(i,section){
   sectionContainer =  $('<div class="section"><h3>'+ section.name +'</h3></div>');
 
-  var i;
-  var unreviewedCount = section.unreviewed;
+  unreviewedCount = section.unreviewed;
 
   for ( i = 0; i < unreviewedCount; i++ ) {
     $('<span class="no-review"></span>').insertAfter(sectionContainer.find('h3'));
   }
 
-  var j;
-  var reviewedCount = section.reviewed;
+  reviewedCount = section.reviewed;
 
-  for ( j = 0; j < reviewedCount; j++ ) {
+  for ( i = 0; i < reviewedCount; i++ ) {
     $('<span class="review"></span>').insertAfter(sectionContainer.find('h3'));
   }
 
   sectionContainer.appendTo('.results_container');
+
 });
 
-$('.results_container').masonry();
+$('.mosaic_container .results_container').masonry();
