@@ -64,7 +64,6 @@ body.browser {
       padding: 0.6em;
       font-size: 1.2em;
       display: inline-block;
-      margin: 0 0 0 17em;
       text-align: center;
 
       button { 
@@ -109,6 +108,21 @@ body.browser {
     }
     .buttons.disabled {
       button { opacity: 0.5; }
+    }
+  }
+
+  .mapping_links_container {
+    > div {
+      width: 49%;
+      display: inline-block;
+      float: none;
+      vertical-align: top;
+      &.right {
+        text-align: right;
+      }
+      > a {
+        word-wrap: break-word;
+      }
     }
   }
 

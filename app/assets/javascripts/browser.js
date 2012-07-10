@@ -1,11 +1,18 @@
+function positionButtons() {
+    $('.buttons').css('margin-left', (($('.mapping_info').width() - $('.buttons').width()) / 2 ) );
+}
+
 $(document).ready( function() {
+
+    // Set position of buttons based on screen width
+    positionButtons();
+    $(window).resize(function() {
+        positionButtons();
+    });
+
   $('#overlay').fadeTo('fast', 0);
 
   var can_load_new_mapping = true;
-
-  // Begin work on function to set the overlay here.
-  // Need to be able to scroll the page below the overlay without giving the user access to the links.
-  $('#overlay').height($('#mapping_old_page').height());
 
   $('.browser .buttons button').click(function(e) {
     e.preventDefault();
@@ -76,7 +83,9 @@ $(document).ready( function() {
       $('#mapping_title a').text(data.title).attr('href', data.old_url);
       $('#mapping_result').html(mapping_result);
       $('#mapping_old_page').attr('src', data.old_url);
+      $('.mapping_links_container .left').empty().append('<a href="' + data.old_url +'">' + data.old_url + '</a>');
       $('#mapping_new_page').attr('src', new_page_src);
+      $('.mapping_links_container .right').empty().append('<a href="' + new_page_src +'">' + new_page_src + '</a>');
 
       history.pushState( { mapping_id: data.id }, '', '/browse/' + data.id );
 
