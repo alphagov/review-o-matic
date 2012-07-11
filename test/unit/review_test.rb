@@ -9,7 +9,6 @@ class ReviewTest < ActiveSupport::TestCase
 
   should_not allow_value(nil).for(:mapping_id)
   should_not allow_value(nil).for(:user_id)
-  should_not allow_value(nil).for(:result)
 
   should allow_value('positive').for(:result)
   should allow_value('neutral').for(:result)
