@@ -35,4 +35,12 @@ class User
     set_score and save!
   end
 
+  def gds_user?
+     if self.email.match(/@digital.cabinet-office.gov.uk/)
+       return true
+     else
+       return false
+     end
+  end
+
 end
