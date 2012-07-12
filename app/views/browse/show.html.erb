@@ -2,20 +2,6 @@
   <%= javascript_include_tag "browser" %>
 <% end %>
 <section class="mapping_info">
-  <!--<div class="left">
-    <h1 id="mapping_title"><%= link_to format_title(@mapping.title), @mapping.old_url, :target => 'blank' %></h1>
-    <div id="mapping_result" class="result">
-      <% if @mapping.status == 301 %>
-        &rarr; <%= link_to @mapping.new_url, @mapping.new_url, :target => 'blank' %>
-      <% elsif @mapping.status == 410 %>
-        &rarr; Gone
-      <% else %>
-        No decision
-      <% end %>
-    </div>
-  </div>-->
-
-  <!--<div class="right">-->
     <div class="buttons">
       <%= form_tag review_path(@mapping.id) do %>
         <%= button_tag(button_attributes_for(@review, "positive")) do %>
@@ -32,11 +18,6 @@
         <% end %>
       <% end %>
     </div>
-<!--     <div class="comment">
-      <a href="#">+</a>
-    </div> -->
-  <!--</div>
-  <div class="clear"></div>-->
 </section>
 <div class="mapping_links_container">
   <div class="left">
