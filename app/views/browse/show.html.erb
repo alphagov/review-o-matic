@@ -2,22 +2,22 @@
   <%= javascript_include_tag "browser" %>
 <% end %>
 <section class="mapping_info">
-    <div class="buttons">
-      <%= form_tag review_path(@mapping.id) do %>
-        <%= button_tag(button_attributes_for(@review, "positive")) do %>
-          <span>✔</span>
-          <span>Looks good</span>
-        <% end %>
-        <%= button_tag(button_attributes_for(@review, "neutral")) do %>
-          <span>?</span>
-          <span>I'm not sure</span>
-        <% end %>
-        <%= button_tag(button_attributes_for(@review, "negative")) do %>
-          <span>✘</span>
-          <span>Seems wrong</span>
-        <% end %>
+  <div class="buttons">
+    <%= form_tag review_path(@mapping.id) do %>
+      <%= button_tag(button_attributes_for(@review, "positive")) do %>
+        <span>✔</span>
+        <span>Looks good</span>
       <% end %>
-    </div>
+      <%= button_tag(button_attributes_for(@review, "neutral")) do %>
+        <span>?</span>
+        <span>I'm not sure</span>
+      <% end %>
+      <%= button_tag(button_attributes_for(@review, "negative")) do %>
+        <span>✘</span>
+        <span>Seems wrong</span>
+      <% end %>
+    <% end %>
+  </div>
 </section>
 <div class="mapping_links_container">
   <div class="left">
