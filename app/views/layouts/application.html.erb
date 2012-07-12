@@ -12,13 +12,21 @@
   <header>
     <h1 class="left">
       <%= link_to "Review-O-Matic", root_path %>
-      <%= link_to "Leaderboard", dashboard_path %>
-      <%= link_to "Coverage", mosaic_path %>
+      <% if current_user && current_user.gds_user? %>
+        <%= link_to "Leaderboard", dashboard_path %>
+        <%= link_to "Coverage", mosaic_path %>
+      <% end %>
     </h1>
 
     <%- if current_user -%>
-    <h2 class="center"><% if !@section.blank? %>Section &mdash; <%= format_tag @section %><% end %></h2>
-    <div class="right">Welcome, <%= current_user.name %> <span class="user_score"><%= current_user.score %></span></div>
+
+      <h2 class="center"><% if !@section.blank? %>Section &mdash; <%= format_tag @section %><% end %></h2>
+
+      <div class="right">Welcome, <%= current_user.name %>
+        <% if current_user.gds_user? %>
+           <span class="user_score"><%= current_user.score %></span>
+        <% end %>
+      </div>
     <%- end -%>
 
     <div class="clear"></div>
