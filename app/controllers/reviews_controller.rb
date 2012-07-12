@@ -10,7 +10,7 @@ class ReviewsController < ApplicationController
     @review = Review.find_or_create_by(mapping_id: params[:id], user_id: current_user.id)
     @review.mapping = Mapping.find_or_create_by(:mapping_id => params[:id]) if @review.mapping.blank?
     @review.result = params[:result]
-
+    @review.comment = params[:comment]
     @review.save
     respond_with(@review)
   end

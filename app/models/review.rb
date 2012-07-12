@@ -10,12 +10,13 @@ class Review
   field :comment_actioned, :type => Boolean, :default => false
 
   RESULTS = [
+    nil,
     'positive',
     'neutral',
     'negative'
   ]
 
-  validates :user_id, :mapping_id, :result, :presence => true
+  validates :user_id, :mapping_id, :presence => true
   validates :result, :inclusion => { :in => RESULTS }
 
   before_create :ensure_mapping_exists, :if => proc { self.mapping.blank? }
