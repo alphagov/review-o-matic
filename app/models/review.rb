@@ -10,6 +10,7 @@ class Review
 
   RESULTS = [
     'positive',
+    'neutral',
     'negative'
   ]
 

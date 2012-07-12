@@ -39,7 +39,7 @@ $(document).ready( function() {
         window.location = window.location;
       },
       beforeSend: function(data) {
-        $('.buttons').addClass('disabled');
+        $('.buttons, .mapping_links_container a').addClass('disabled');
         all_buttons.attr('disabled',true).removeClass('selected');
         button.addClass('selected');
       }

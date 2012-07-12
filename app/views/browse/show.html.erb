@@ -38,7 +38,6 @@
   <!--</div>
   <div class="clear"></div>-->
 </section>
-<div id="overlay"></div>
 <div class="mapping_links_container">
   <div class="left">
     <%= link_to "#{@mapping.old_url}", @mapping.old_url %>
@@ -47,6 +46,7 @@
     <%= link_to "#{@mapping.new_url}", @mapping.new_url %>
   </div>
 </div>
+<div id="overlay"></div>
 <iframe id="mapping_old_page" class="left" src="<%= @mapping.old_url %>"></iframe>
 <iframe id="mapping_new_page" class="right" src="<%= @mapping.new_url %>"></iframe>
 
