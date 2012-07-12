@@ -46,6 +46,44 @@ $(document).ready( function() {
     });
   });
 
+  // Submit Comment using PUT
+  $('.browser .comments input').click(function(event) {
+    event.preventDefault();
+    var form_path = $(this).parent('form').attr('action');
+    var $commentTextarea = $(this).parent().find('textarea');
+    console.log($commentTextarea.val());
+    $.ajax({
+      type: "PUT",
+      url: form_path,
+      data: { comment: $commentTextarea.val() }, 
+      error: function(data) {
+        alert("An error occurred whilst trying to save your review. Please reload the page and try again.");
+        window.location = window.location;
+      },
+      beforeSend: function(data) {
+
+      }
+    });
+  });
+
+  // Hide comment textarea and submit button
+  $('.browser .comments > div').hide();
+
+  // Display comment form
+  $('.browser .comments .question').click(function(event) {
+    event.preventDefault();
+    $('.browser .comments > div').fadeIn();
+  });
+
+  // Load next mapping
+  $('.browser .comments .next').click(function(event) {
+    event.preventDefault();
+    if (can_load_new_mapping == true) {
+      load_new_mapping();
+    }
+  });
+
+
   window.onpopstate = function(event) {
     if (event.state && event.state.mapping_id !== undefined) {
       load_mapping(event.state.mapping_id);
