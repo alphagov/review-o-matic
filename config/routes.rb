@@ -7,6 +7,7 @@ Reviewomatic::Application.routes.draw do
   end
 
   resources :reviews, :only => [:update, :index]
+  get 'reviews/section' => 'reviews#section', :as => :reviews_section
 
   get 'browse/:id' => 'browse#show', :as => :browse_mapping
   get 'browse' => 'browse#index', :as => :browse

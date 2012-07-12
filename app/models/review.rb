@@ -7,6 +7,7 @@ class Review
   field :mapping_id, :type => String
   field :result, :type => String
   field :comment, :type => String
+  field :comment_actioned, :type => Boolean, :default => false
 
   RESULTS = [
     'positive',
