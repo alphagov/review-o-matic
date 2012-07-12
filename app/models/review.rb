@@ -7,15 +7,14 @@ class Review
   field :mapping_id, :type => String
   field :result, :type => String
   field :comment, :type => String
-  field :comment_score, :type => Integer, :default => 0
 
   RESULTS = [
     'positive',
-    'neutral',
     'negative'
   ]
 
-  validates :user_id, :mapping_id, :presence => true
+  validates :user_id, :mapping_id, :result, :presence => true
+  validates :result, :inclusion => { :in => RESULTS }
 
   before_create :ensure_mapping_exists, :if => proc { self.mapping.blank? }
 
