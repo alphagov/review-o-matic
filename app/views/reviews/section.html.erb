@@ -1,0 +1,60 @@
+<div class="container">
+  <h2>reviews in need of attention</h2>
+  <table class="review_table" border="0">
+    <thead>
+      <tr>
+        <td>
+         Position
+        </td>
+        <td>
+          Section
+        </td>
+        <td>
+          Commment 
+        </td>
+        <td>
+          Comment Actioned? 
+        </td>
+        <td>
+          Edit in Migratorator
+        </td>
+        <td>
+          Review in Review-O-Matic
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+    <%
+      if params[:page] == nil
+        count = 0
+      else
+        count = 0 + (params[:page].to_i - 1 ) * Kaminari.config.default_per_page
+      end
+    %>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td>
+          <%= count += 1 %>
+        </td>
+        <td>
+          <%= review.mapping.section %>
+        </td>
+        <td>
+          <%= review.comment %> 
+        </td>
+        <td>
+          <%= review.comment_actioned %> 
+        </td>
+        <td>
+          <%= link_to "Edit", edit_migratorator_mapping_url(review.mapping_id),  :target => '_blank'%>
+        </td>
+        <td>
+           <%= link_to "Review", browse_mapping_path(review.mapping_id) %>
+        </td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+  <%= paginate @reviews %>
+</div>

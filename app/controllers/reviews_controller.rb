@@ -15,4 +15,8 @@ class ReviewsController < ApplicationController
     respond_with(@review)
   end
 
+  def section
+    @reviews = Review.order_by(:mapping_id.desc).page params[:page]
+  end
+
 end
