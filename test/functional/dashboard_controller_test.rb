@@ -3,7 +3,7 @@ require 'test_helper'
 class DashboardControllerTest < ActionController::TestCase
 
   setup do
-
+     
   end
 
   should "get the index page of the dashboard controller" do
