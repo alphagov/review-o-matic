@@ -7,6 +7,11 @@
     <p class="continue"><%= link_to "Continue &raquo;".html_safe, browse_path %></p>
   <% else %>
     <p>Message for department user goes here</p>
+    <% @sections.each do |section| %>
+      <div>
+        <%= link_to "#{section.name}", browse_path %>
+      </div>
+    <% end %>
   <% end %>
 
   <div class="clear"></div>
