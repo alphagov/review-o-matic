@@ -14,6 +14,7 @@ Reviewomatic::Application.routes.draw do
 
   get 'dashboard' => 'dashboard#index', :as => :dashboard
   get 'dashboard/mosaic' => 'dashboard#mosaic', :as => :mosaic
+  get '__' => 'explore#index', :as => :explore
 
   root :to => 'root#index'
 
