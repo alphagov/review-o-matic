@@ -14,6 +14,8 @@ Reviewomatic::Application.routes.draw do
     get 'browse/:id' => 'browse#show', :as => :browse_mapping
     get 'browse' => 'browse#index', :as => :browse
 
+    get 'explore' => 'explore#show', :as => :explore_mapping
+
     get 'dashboard' => 'dashboard#index', :as => :dashboard
     get 'dashboard/mosaic' => 'dashboard#mosaic', :as => :mosaic
 

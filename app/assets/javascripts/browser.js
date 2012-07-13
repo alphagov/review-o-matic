@@ -96,103 +96,47 @@ $(document).ready( function() {
     });
   }
 
-  //function load_mapping(id) {
-  //  $('#overlay').fadeTo('fast', 0.9);
+  function load_mapping(id) {
+    $('#overlay').fadeTo('fast', 0.9);
 
-  //  $.getJSON('/browse/'+ id +'.json', function(data) {
-  //    switch (data.status) {
-  //      case 301:
-  //        mapping_result = "→ <a href='" + data.new_url + "' target='blank'>" + data.new_url + "</a>";
-  //        new_page_src = data.new_url;
-  //        break;
-  //      case 410:
-  //        mapping_result = "→ Gone";
-  //        new_page_src = '/browser/410.html';
-  //        break;
-  //      default:
-  //        mapping_result = "None";
-  //        new_page_src = '/browser/no_status.html';
-  //    }
-
-  //    if (data.result !== null) {
-  //      $('.buttons button[name="'+ data.result +'"]').addClass('selected');
-  //    }
-
-  //    $('#mapping_title a').text(data.title).attr('href', data.old_url);
-  //    $('#mapping_result').html(mapping_result);
-  //    $('#mapping_old_page').attr('src', data.old_url);
-  //    $('.mapping_links_container .left').empty().append('<a href="' + data.old_url +'">' + data.old_url + '</a>');
-  //    $('#mapping_new_page').attr('src', new_page_src);
-  //    $('.mapping_links_container .right').empty().append('<a href="' + new_page_src +'">' + new_page_src + '</a>');
-
-  //    history.pushState( { mapping_id: data.id }, '', '/browse/' + data.id );
-
-  //    $('.user_score').text( parseInt( $('.user_score').text() ) + 1 );
-
-  //    can_load_new_mapping = true;
-  //    $('.buttons form').attr('action', '/reviews/' + data.id);
-  //    $('.buttons button').removeAttr('disabled');
-  //  });
-
-  //  $('#mapping_old_page').load( function(){
-  //    $('.buttons').removeClass('disabled');
-  //    $('#overlay').fadeTo('fast', 0);
-  //  });
-  //}
-});
-
-
-
-(function ($) {
-var NULL_MAPPING_URL = 'http://4.bp.blogspot.com/_CBk-5X4QQvQ/TH-kNuQ8GpI/AAAAAAAAB7U/BzXdt6teQe8/s1600/Cat-fixes-your-computer.jpg';
-var NO_MAPPINGS_URL = 'http://4.bp.blogspot.com/_CBk-5X4QQvQ/TH-kNuQ8GpI/AAAAAAAAB7U/BzXdt6teQe8/s1600/Cat-fixes-your-computer.jpg';
-
-var curUrl;
-var offDomainWarning = "You've now navigated off the chosen domain. No updates will occur to the right-hand panel.";
-var shownOffDomainWarning = false;
-
-function updateFrame(url) {
-  $.getJSON('/__api/api/mappings.json', {old_url: url})
-    .then(function (data) {
-      var m;
-      if (typeof data.mappings !== 'undefined' && data.mappings.length > 0) {
-        m = data.mappings[0].mapping.new_url;
-      } else {
-        m = NO_MAPPINGS_URL;
+    $.getJSON('/browse/'+ id +'.json', function(data) {
+      switch (data.status) {
+        case 301:
+          mapping_result = "→ <a href='" + data.new_url + "' target='blank'>" + data.new_url + "</a>";
+          new_page_src = data.new_url;
+          break;
+        case 410:
+          mapping_result = "→ Gone";
+          new_page_src = '/browser/410.html';
+          break;
+        default:
+          mapping_result = "None";
+          new_page_src = '/browser/no_status.html';
       }
-      if (m == null) {
-        m = NULL_MAPPING_URL;
+
+      if (data.result !== null) {
+        $('.buttons button[name="'+ data.result +'"]').addClass('selected');
       }
-      $('#new').attr('src', m);
+
+      $('#mapping_title a').text(data.title).attr('href', data.old_url);
+      $('#mapping_result').html(mapping_result);
+      $('#mapping_old_page').attr('src', data.old_url);
+      $('.mapping_links_container .left').empty().append('<a href="' + data.old_url +'">' + data.old_url + '</a>');
+      $('#mapping_new_page').attr('src', new_page_src);
+      $('.mapping_links_container .right').empty().append('<a href="' + new_page_src +'">' + new_page_src + '</a>');
+
+      history.pushState( { mapping_id: data.id }, '', '/browse/' + data.id );
+
+      $('.user_score').text( parseInt( $('.user_score').text() ) + 1 );
+
+      can_load_new_mapping = true;
+      $('.buttons form').attr('action', '/reviews/' + data.id);
+      $('.buttons button').removeAttr('disabled');
     });
-}
 
-function updateUrl() {
-  url = $('#old')[0].contentWindow.location.pathname;
-  
-  if (url === 'blank') { return; }
-  if (url === curUrl) { return; }
-  curUrl = url;
-
-  if (typeof url === 'undefined') {
-    if (shownOffDomainWarning) { return; }
-
-    if (confirm(offDomainWarning)) {
-      location.href = '/__';
-    } else {
-      shownOffDomainWarning = true;
-    }
-  } else {
-    updateFrame(url);
-    console.log(url);
-    history.pushState({}, "", '/__' + url);      
+    $('#mapping_old_page').load( function(){
+      $('.buttons').removeClass('disabled');
+      $('#overlay').fadeTo('fast', 0);
+    });
   }
-}
-
-function init() {
-  $('#old').attr('src', window.location.pathname.replace(/^\/__/, "") || '/');
-  updateTimer = setInterval(updateUrl, 500);
-}
-
-$(init);
-}(jQuery));
+});
