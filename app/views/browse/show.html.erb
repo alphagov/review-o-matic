@@ -2,35 +2,22 @@
   <%= javascript_include_tag "browser" %>
 <% end %>
 <section class="mapping_info">
-  <% if current_user.gds_user? %>
-    <div class="buttons">
-      <%= form_tag review_path(@mapping.id) do %>
-        <%= button_tag(button_attributes_for(@review, "positive" )) do %>
-          <span>✔</span>
-          <span>Looks good</span>
-        <% end %>
-        <%= button_tag(button_attributes_for(@review, "neutral" )) do %>
-          <span>?</span>
-          <span>I'm not sure</span>
-        <% end %>
-        <%= button_tag(button_attributes_for(@review, "negative" )) do %>
-          <span>✘</span>
-          <span>Seems wrong</span>
-        <% end %>
+  <div class="buttons">
+    <%= form_tag review_path(@mapping.id) do %>
+      <%= button_tag(button_attributes_for(@review, "positive" )) do %>
+        <span>✔</span>
+        <span>Looks good</span>
       <% end %>
-    </div>
-  <% else %>
-    <div class="comments">
-      <a class="question" href="#">I have a question on this mapping</a>
-      <div>
-        <%= form_tag review_path(@mapping.id) do %>
-          <%= text_area_tag :comment %>
-          <%= submit_tag 'submit' %>
-        <% end %>
-        <a class="next" href="#">Next Mapping</a>
-      </div>
-    </div>
-  <% end %>
+      <%= button_tag(button_attributes_for(@review, "neutral" )) do %>
+        <span>?</span>
+        <span>I'm not sure</span>
+      <% end %>
+      <%= button_tag(button_attributes_for(@review, "negative" )) do %>
+        <span>✘</span>
+        <span>Seems wrong</span>
+      <% end %>
+    <% end %>
+  </div>
 </section>
 <div class="mapping_links_container">
   <div class="left">
@@ -40,14 +27,6 @@
     <%= link_to "#{@mapping.new_url}", @mapping.new_url %>
   </div>
 </div>
-<% if current_user.gds_user? %>
-  <div id="overlay"></div>
-<% end %>
+<div id="overlay"></div>
 <iframe id="mapping_old_page" class="left" src="<%= @mapping.old_url %>"></iframe>
 <iframe id="mapping_new_page" class="right" src="<%= @mapping.new_url %>"></iframe>
-
-<script type="text/javascript">
-<!--
-var browse_section = "<%= @section %>";
--->
-</script>
