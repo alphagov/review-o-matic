@@ -2,22 +2,19 @@
   <%= javascript_include_tag "explorer" %>
 <% end %>
 <section class="mapping_info">
-  <% if current_user.gds_user? %>
-
-  <% else %>
-    <div class="comments">
-      <a class="question" href="#">I have a question on this mapping</a>
-      <div class="form_container">
-        <%= form_tag review_path(@mapping.id) do %>
-          <%= text_area_tag :comment %>
-          <%= submit_tag 'submit' %>
-        <% end %>
-      </div>
-      <div class="comment_messages">
-
-      </div>
+  <div class="comments">
+    <a class="question" href="#">I have a question on this mapping</a>
+    <div class="form_container">
+      <span>Submit a comment regarding this mapping:</span>
+      <%= form_tag review_path(@mapping.id) do %>
+        <%= text_area_tag :comment %>
+        <%= submit_tag 'submit' %>
+      <% end %>
     </div>
-  <% end %>
+    <div class="comment_messages">
+
+    </div>
+  </div>
 </section>
 <div class="mapping_links_container">
   <div class="left">
@@ -27,8 +24,5 @@
 
   </div>
 </div>
-<% if current_user.gds_user? %>
-  <div id="overlay"></div>
-<% end %>
 <iframe id="old" class="left" src=""></iframe>
 <iframe id="new" class="right" src=""></iframe>
