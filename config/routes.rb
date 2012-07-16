@@ -12,7 +12,7 @@ Reviewomatic::Application.routes.draw do
     post 'reviews/:id' => 'reviews#create'
     get 'reviews/section' => 'reviews#section', :as => :reviews_section
 
-    get 'explore' => 'explore#show', :as => :explore_mapping
+    get 'explore' => 'explore#show', :as => :explore
 
     root :to => 'root#index'
 
