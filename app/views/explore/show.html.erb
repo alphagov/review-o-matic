@@ -7,14 +7,14 @@
   <% else %>
     <div class="comments">
       <a class="question" href="#">I have a question on this mapping</a>
-      <div>
+      <div class="form_container">
         <%= form_tag review_path(@mapping.id) do %>
           <%= text_area_tag :comment %>
           <%= submit_tag 'submit' %>
         <% end %>
       </div>
       <div class="comment_messages">
-        
+
       </div>
     </div>
   <% end %>

@@ -56,13 +56,13 @@
 $(document).ready(function(){
 
   // Hide comment textarea and submit button
-  //$('.browser .comments > div').hide();
+  $('.browser .comments > div').hide();
 
   // Display comment form
-  //$('.browser .comments .question').click(function(event) {
-  //  event.preventDefault();
-  //  $('.browser .comments > div').fadeIn();
-  //});
+  $('.comments .question').click(function(event) {
+    event.preventDefault();
+    $('.comments > .form_container').fadeIn();
+  });
 
   // Submit Comment using POST
   $('.browser .comments input').click(function(event) {
