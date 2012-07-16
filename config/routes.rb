@@ -23,7 +23,8 @@ Reviewomatic::Application.routes.draw do
   get 'browse/:id' => 'browse#show', :as => :browse_mapping
   get 'browse' => 'browse#index', :as => :browse
 
+  match '/sign_in' => redirect('/__/sign_in')
+  match '/sign_out' => redirect('/__/sign_out')
   root :to => 'root#index'
-
 
 end
