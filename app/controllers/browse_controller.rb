@@ -1,5 +1,6 @@
 class BrowseController < ApplicationController
   respond_to :html, :json
+  before_filter :gds_user?
 
   def index
     @tags = ["status:closed","destination:content"]
