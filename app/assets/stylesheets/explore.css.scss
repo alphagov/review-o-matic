@@ -2,9 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body.browser .mapping_info {
+  height: auto;
+}
+
 .comments {
   position: relative;
+  &:after {
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+  }
   a.question {
+    font-size: 1.2em;
     padding: 1em !important;
     background: #999999;
     background: -moz-linear-gradient(top,  #e1e1e1 0%, #999999 100%); 
@@ -14,19 +25,19 @@
     background: linear-gradient(top,  #e1e1e1 0%,#999999 100%); 
     border: 1px solid #000000 !important;
     box-shadow: #666666 2px 2px 0.5em;
-    display: inline-block;
     border-radius: 0.5em;
     font-weight: bold;
+    float: right;
   }
   > .form_container {
     background: rgba(55,55,55,0.6);
-    position: absolute;
     border-radius: 0.5em;
     padding: 2em;
-    width: 40%;
-    left: 30%;
     z-index: 999;
-    > span {
+    float: left;
+    clear: left;
+    margin: 0 0 2em;
+    > p {
       display: block;
       margin: 0 0 1em;
       color: #ffffff;
@@ -55,14 +66,12 @@
     }
   }
   > .comment_messages {
-    position: absolute;
+    float: left;
+    clear: left;
     background: #cdffcd;
     border: 2px solid #00b200;
     border-radius: 0.5em;
-    padding: 2em;
-    width: 40%;
-    left: 30%;
-    //top: 10em;
+    padding: 1em 9em;
     > span.success {
       display: block;
       text-align: center;
