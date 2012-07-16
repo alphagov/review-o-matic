@@ -2,7 +2,6 @@ class BrowseController < ApplicationController
   respond_to :html, :json
 
   def index
-    @section = params[:section].blank? ? params[:section].to_s : nil
     @tags = ["status:closed","destination:content"]
     @mapping = MigratoratorApi::Mapping.find_random_mapping(@tags.join(','))
     @reviews = Review.where(:user_id => current_user.id, :mapping_id => @mapping.id) 

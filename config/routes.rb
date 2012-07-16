@@ -9,20 +9,21 @@ Reviewomatic::Application.routes.draw do
     end
 
     resources :reviews, :only => [:update, :index]
+    post 'reviews/:id' => 'reviews#create'
     get 'reviews/section' => 'reviews#section', :as => :reviews_section
 
-    get 'browse/:id' => 'browse#show', :as => :browse_mapping
-    get 'browse' => 'browse#index', :as => :browse
-
     get 'explore' => 'explore#show', :as => :explore_mapping
-
-    get 'dashboard' => 'dashboard#index', :as => :dashboard
-    get 'dashboard/mosaic' => 'dashboard#mosaic', :as => :mosaic
 
     root :to => 'root#index'
 
   end
 
+  get 'dashboard' => 'dashboard#index', :as => :dashboard
+  get 'dashboard/mosaic' => 'dashboard#mosaic', :as => :mosaic
+  get 'browse/:id' => 'browse#show', :as => :browse_mapping
+  get 'browse' => 'browse#index', :as => :browse
+
   root :to => 'root#index'
+
 
 end

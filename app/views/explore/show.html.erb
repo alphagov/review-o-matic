@@ -2,24 +2,29 @@
   <%= javascript_include_tag "explorer" %>
 <% end %>
 <section class="mapping_info">
-  <%= @old_url %>
   <% if current_user.gds_user? %>
 
   <% else %>
     <div class="comments">
       <a class="question" href="#">I have a question on this mapping</a>
       <div>
-
+        <%= form_tag review_path(@mapping.id) do %>
+          <%= text_area_tag :comment %>
+          <%= submit_tag 'submit' %>
+        <% end %>
+      </div>
+      <div class="comment_messages">
+        
       </div>
     </div>
   <% end %>
 </section>
 <div class="mapping_links_container">
   <div class="left">
-    <%= @mapping.old_url %>
+
   </div>
   <div class="right">
-    <%= @mapping.new_url %>
+
   </div>
 </div>
 <% if current_user.gds_user? %>
