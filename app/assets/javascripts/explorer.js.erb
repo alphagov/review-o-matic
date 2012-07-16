@@ -55,6 +55,15 @@
 
 $(document).ready(function(){
 
+
+  // If the explore path is accessed from Reviewomatic instead of the explorer, redirect to the explorer.
+  var plekExplore = '<%= Plek.current.find('explore') %>';
+  var plekExplorePath = '/__/explore';
+  if (window.location.origin != plekExplore) {
+    window.location.replace(plekExplore + plekExplorePath);
+    window.location =  plekExplore + plekExplorePath;
+  }
+
   // Hide comment textarea and submit button
   $('.browser .comments > div').hide();
 
