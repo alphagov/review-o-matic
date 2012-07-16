@@ -9,7 +9,6 @@
       $.getJSON('/__/explore.json?', {old_url: url})
         .then(function (data) {
           var m;
-          console.log(data);
           if (data.new_url !== 'undefined') {
             m = data.new_url;
           } else {
@@ -19,6 +18,8 @@
             m = NO_MAPPING_URL;
           }
           $('#new').attr('src', m);
+          $('.mapping_links_container .left').text(data.old_url);
+          $('.mapping_links_container .right').text(m);
         });
     }
 
@@ -39,17 +40,59 @@
         }
       } else {
         updateFrame(url);
-        console.log(url);
         history.pushState({}, "", '/__/explore?old_url=http://www.direct.gov.uk' + url);      
       }
     }
 
     function init() {
-        path = window.location.search.replace('?old_url=http://www.direct.gov.uk', "");
-        console.log(path);
-        $('#old').attr('src', window.location.origin + path);
+        var path = window.location.origin + window.location.search.replace('?old_url=http://www.direct.gov.uk', ""); 
+        $('#old').attr('src', path);
         updateTimer = setInterval(updateUrl, 500);
     }
 
     $(init);
 }(jQuery));
+
+$(document).ready(function(){
+
+  // Hide comment textarea and submit button
+  //$('.browser .comments > div').hide();
+
+  // Display comment form
+  //$('.browser .comments .question').click(function(event) {
+  //  event.preventDefault();
+  //  $('.browser .comments > div').fadeIn();
+  //});
+
+  // Submit Comment using POST
+  $('.browser .comments input').click(function(event) {
+    event.preventDefault();
+    var form_path = $(this).parent('form').attr('action');
+    var $commentTextarea = $(this).parent().find('textarea');
+    $.ajax({
+      type: "POST",
+      url: form_path,
+      data: { comment: $commentTextarea.val() }, 
+      success: function(data) {
+        $commentTextarea.val('');
+        var $commentMessage = $('<span class="success">Comment submitted</span>').hide();
+        $('.comment_messages').append($commentMessage);
+        $commentMessage.fadeIn('normal', function() {
+          setTimeout(function() {
+            $commentMessage.fadeOut('normal', function() {
+              $('.comment_messages').empty(); 
+            }); 
+          }, 1000);          
+        });
+      },
+      error: function(data) {
+        alert("An error occurred whilst trying to save your review. Please reload the page and try again.");
+        window.location = window.location;
+      },
+      beforeSend: function(data) {
+
+      }
+    });
+  });
+      
+});
