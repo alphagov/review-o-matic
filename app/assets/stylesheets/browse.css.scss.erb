@@ -18,19 +18,24 @@ body.browser {
     .mappings_reviewed { background: #eee; border: 1px solid #ccc; padding: 0.8em 0; float: left; width: 245px; margin-bottom: 1em; text-align: center; font-size: 1em;
       strong { font-weight: bold; font-size: 4.5em; text-shadow: #fff 0px 1px 1px; line-height: 1.1em; display: block; }
     }
-    .continue { float: right; width: 245px; text-align: center;
-      a {
-        -webkit-box-shadow: #ddd 2px 2px 2px;
-        display: inline-block;
-        background: #446ec0;
-        color: #fff;
-        font-size: 1.5em;
-        font-weight: bold;
-        padding: 0.4em 0.95em;
-        text-shadow: #2f4d8a 0px 1px 1px;
-        text-decoration: none;
+    a.continue {
+      &:hover, &:active { 
+        background: #4c7cdc;
       }
-      a:hover, a:active { background: #4c7cdc; }
+      -webkit-box-shadow: #ddd 2px 2px 2px;
+      display: inline-block;
+      background: #446ec0;
+      color: #fff;
+      font-size: 1.5em;
+      font-weight: bold;
+      padding: 0.4em 0.95em;
+      text-shadow: #2f4d8a 0px 1px 1px;
+      text-decoration: none;
+    }
+    p.continue { 
+      float: right; 
+      width: 245px; 
+      text-align: center;
     }
   }
 
