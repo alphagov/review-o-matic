@@ -75,14 +75,16 @@ $(document).ready(function(){
       data: { comment: $commentTextarea.val() }, 
       success: function(data) {
         $commentTextarea.val('');
-        var $commentMessage = $('<span class="success">Comment submitted</span>').hide();
+        var $commentMessage = $('<span class="success">Comment submitted</span>');
         $('.comment_messages').append($commentMessage);
-        $commentMessage.fadeIn('normal', function() {
-          setTimeout(function() {
-            $commentMessage.fadeOut('normal', function() {
-              $('.comment_messages').empty(); 
-            }); 
-          }, 1000);          
+        $('.form_container').fadeOut('normal', function() {
+          $('.comment_messages').fadeIn('normal', function() {
+            setTimeout(function() {
+              $('.comment_messages').fadeOut('normal', function() {
+                $('.comment_messages').empty(); 
+              }); 
+            }, 1000);          
+          });
         });
       },
       error: function(data) {
