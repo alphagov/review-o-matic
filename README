@@ -1,8 +1,11 @@
 == Review-O-Matic notes:
 
 To create a user for development run: 
-bundle exec rake db:seed
+
+	$ bundle exec rake db:setup
+	$ bundle exec rake db:seed
 
 To login to Review-O-Matic with this user, go to the path:
-[RAILS DEV SERVER NAME]/__/sign_in?access_token=password
+
+http://reviewomatic.dev.gov.uk/__/sign_in?access_token=password
 
