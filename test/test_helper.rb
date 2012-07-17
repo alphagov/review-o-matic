@@ -46,8 +46,13 @@ class ActiveSupport::TestCase
     stub_request(:get, url).to_return(:status => 200, :body => { "tags" => tags }.to_json, :headers => {})
   end
 
-  def login_as_stub_user
+  def login_as_nongds_stub_user
     @user = User.find_or_create_by(:name => 'Stub User', :email => "test@testing.com")
+    request.env['warden'] = stub(:authenticate => @user, :authenticate! => true, :authenticated? => true, :user => @user)
+  end
+
+  def login_as_gds_stub_user
+    @user = User.find_or_create_by(:name => 'Stub User 2', :email => "stub2@digital.cabinet-office.gov.uk")
     request.env['warden'] = stub(:authenticate => @user, :authenticate! => true, :authenticated? => true, :user => @user)
   end
 
