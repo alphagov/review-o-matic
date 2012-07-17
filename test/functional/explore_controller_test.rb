@@ -3,7 +3,7 @@ require 'test_helper'
 class ExploreControllerTest < ActionController::TestCase
 
   setup do
-    login_as_stub_user
+    login_as_nongds_stub_user
     MigratoratorApi::Mapping.stubs(:find_by_old_url).returns(MockMigratorator.new)
   end
 
