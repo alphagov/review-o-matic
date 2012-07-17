@@ -25,6 +25,5 @@ Reviewomatic::Application.routes.draw do
 
   match '/sign_in' => redirect('/__/sign_in')
   match '/sign_out' => redirect('/__/sign_out')
-  root :to => 'root#index'
 
 end
