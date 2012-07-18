@@ -16,7 +16,7 @@ class ExploreController < ApplicationController
         render 'public/404.html', :status => 404
       end
       format.json do |x|
-        render :status => 404, :json => { :status => 404, :message => 'Mapping not found.' }
+        render :status => 200, :json => { :status => 404, :message => 'Mapping not found.' }
       end
     end
   end
