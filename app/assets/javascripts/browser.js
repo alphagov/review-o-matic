@@ -111,7 +111,7 @@ $(document).ready( function() {
           break;
         default:
           mapping_result = "None";
-          new_page_src = '/browser/no_status.html';
+          new_page_src = '/browser/no_mapping.html';
       }
 
       if (data.result !== null) {
