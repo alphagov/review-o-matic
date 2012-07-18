@@ -1,5 +1,7 @@
 (function ($) {
-    var NO_MAPPING_URL = "<%= Plek.current.find('migratorator') %>/browser_resources/410.html";
+    var NO_MAPPING_URL = "<%= Plek.current.find('migratorator') %>/browser_resources/no_mapping.html";
+    var GONE_URL = "<%= Plek.current.find('migratorator') %>/browser_resources/410.html";
+    var AWAITING_CONTENT_URL = "<%= Plek.current.find('migratorator') %>/browser_resources/awaiting_content.html";
 
     var curUrl;
     var offDomainWarning = "You've now navigated off the chosen domain. No updates will occur to the right-hand panel.";
@@ -8,18 +10,23 @@
     function updateFrame(url) {
       $.getJSON('/__/explore.json?', {old_url: url})
         .then(function (data) {
-          var m;
-          if (data.new_url !== 'undefined') {
-            m = data.new_url;
-          } else {
-            m = NO_MAPPING_URL;
+          var new_url = data.new_url;
+
+          if ( !new_url ) {
+            if ( data.status == 410 ) {
+              new_url = GONE_URL;
+            }
+            else if ( data.awaiting_content ) {
+              new_url = AWAITING_CONTENT_URL;
+            }
+            else {
+              new_url = NO_MAPPING_URL;
+            }
           }
-          if (m == null) {
-            m = NO_MAPPING_URL;
-          }
-          $('#new').attr('src', m);
+
+          $('#new').attr('src', new_url);
           $('.mapping_links_container .left').text(data.old_url);
-          $('.mapping_links_container .right').text(m);
+          $('.mapping_links_container .right').text(new_url);
         });
     }
 
@@ -57,12 +64,13 @@ $(document).ready(function(){
 
 
   // If the explore path is accessed from Reviewomatic instead of the explorer, redirect to the explorer.
-  var plekExplore = '<%= Plek.current.find('explore') %>';
+  // commenting out as it redirects all to explore not explore.reviewomatic
+  /*var plekExplore = '<%= Plek.current.find('explore') %>';
   var plekExplorePath = '/__/explore';
   if (window.location.origin != plekExplore) {
     window.location.replace(plekExplore + plekExplorePath);
     window.location =  plekExplore + plekExplorePath;
-  }
+  } */
 
   // Hide comment textarea and submit button
   $('.browser .comments > div').hide();

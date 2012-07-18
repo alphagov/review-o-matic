@@ -6,6 +6,7 @@
   :old_url => @mapping.old_url,
   :new_url => @mapping.new_url,
   :status => @mapping.status,
+  :awaiting_content => @mapping.tags.include?("status:awaiting-content"),
   :result => @review.present? ? @review.result : nil
 }.to_json.html_safe
 
