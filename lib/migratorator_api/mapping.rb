@@ -1,8 +1,8 @@
 class MigratoratorApi
   class Mapping
+
     def self.find_by_old_url(old_url, options = {})
-      page = options[:page] || 1
-      parse_multiple_mappings_from_response MigratoratorApi.client.get("/mappings.json?old_url=#{old_url}&page=#{page}")
+      parse_mapping_from_response MigratoratorApi.client.get("/mapping.json?old_url=#{old_url}")
     end
 
     def self.find_by_new_url(new_url, options = {})
