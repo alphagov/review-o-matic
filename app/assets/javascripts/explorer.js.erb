@@ -8,7 +8,7 @@
     var shownOffDomainWarning = false;
 
     function updateFrame(url) {
-      $.getJSON('/__/explore.json?', {old_url: url})
+      $.getJSON(('/__/explore.json', url))
         .then(function (data) {
           var new_url = data.new_url;
 
@@ -31,8 +31,7 @@
     }
 
     function updateUrl() {
-      url = $('#old')[0].contentWindow.location.pathname;
-      
+      var url = $('#old')[0].contentWindow.location.pathname;
       if (url === 'blank') { return; }
       if (url === curUrl) { return; }
       curUrl = url;
@@ -46,7 +45,7 @@
           shownOffDomainWarning = true;
         }
       } else {
-        updateFrame(url);
+        updateFrame('?old_url=http://www.direct.gov.uk' + url);
         history.pushState({}, "", '/__/explore?old_url=http://www.direct.gov.uk' + url);      
       }
     }
