@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def explorer_path
-    Plek.current.find("explore") +  explore_path
+    Plek.current.find("explore.reviewomatic") +  explore_path
   end
 
 end
