@@ -19,6 +19,7 @@ class MigratoratorApi
       request = method.new(uri.path + ( uri.query.blank? ? '' : "?#{uri.query}") )
       request.form_data = params
 
+      @logger.debug "JSON call in MigratoratorApi::Client"
       @logger.debug "#{method::METHOD}: #{uri} #{params.inspect}"
       response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https' ) do |http|
         http.request(request)
