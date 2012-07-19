@@ -9,6 +9,8 @@ class MigratoratorApi
     end
 
     def get(partial_uri)
+      @logger.debug("partial_uri method in MigratoratorApi::Client.get")
+      @logger.debug(partial_uri)
       do_request Net::HTTP::Get, partial_uri
     end
 
