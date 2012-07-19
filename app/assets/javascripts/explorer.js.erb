@@ -8,8 +8,11 @@
     var shownOffDomainWarning = false;
 
     function updateFrame(url) {
+      var old_url = url.replace('?old_url=', '');
+      $('.mapping_links_container .left').text(old_url);
       $.getJSON(('/__/explore.json', url))
         .then(function (data) {
+          console.log(url);
           var new_url = data.new_url;
 
           if ( !new_url ) {
@@ -25,7 +28,6 @@
           }
 
           $('#new').attr('src', new_url);
-          $('.mapping_links_container .left').text(data.old_url);
           $('.mapping_links_container .right').text(new_url);
         });
     }
