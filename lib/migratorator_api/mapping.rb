@@ -2,6 +2,8 @@ class MigratoratorApi
   class Mapping
 
     def self.find_by_old_url(old_url, options = {})
+      Rails.logger.debug "Old URL in find_by_old_url method"
+      Rails.logger.debug(old_url)
       parse_mapping_from_response MigratoratorApi.client.get("/mapping.json?old_url=#{old_url}")
     end
 
@@ -34,6 +36,12 @@ class MigratoratorApi
     end
 
     def self.parse_mapping_from_response(response)
+      Rails.logger.debug("response code from parse_mapping_from_response method")
+      Rails.logger.debug(response.code)
+      Rails.logger.debug("response head from parse_mapping_from_response method")
+      Rails.logger.debug(response.header)
+      Rails.logger.debug("response body from parse_mapping_from_response method")
+      Rails.logger.debug(response.body)
       return false if response.code != "200"
       format_mapping JSON.parse(response.body)
     end
