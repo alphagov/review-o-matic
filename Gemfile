@@ -28,7 +28,7 @@ group :test do
   gem 'database_cleaner'
 end
 
-gem 'plek', '~> 0.1'
+gem 'plek', '~> 0.2'
 
 group :passenger_compatibility do
   gem 'rack', '1.3.5'
