@@ -6,6 +6,8 @@ class ExploreController < ApplicationController
 
   def show
     @mapping = MigratoratorApi::Mapping.find_by_old_url( params[:old_url] )
+    Rails.logger.debug "@mapping instance variable in Explore controller"
+    Rails.logger.debug @mapping
   end
 
   private
