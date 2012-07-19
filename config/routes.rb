@@ -23,6 +23,11 @@ Reviewomatic::Application.routes.draw do
   get 'browse/:id' => 'browse#show', :as => :browse_mapping
   get 'browse' => 'browse#index', :as => :browse
 
+  # TODO Fix route from explore-reviewomatic
+  #constraints :host => /explore-reviewomatic/ do
+  #  match "/browse" => redirect("reviewomatic")
+  #end
+
   match '/sign_in' => redirect('/__/sign_in')
   match '/sign_out' => redirect('/__/sign_out')
   match '/' => 'root#index'
