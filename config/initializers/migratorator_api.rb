@@ -1,1 +1,1 @@
-MigratoratorApi.client = MigratoratorApi::Client.new( Plek.current.find('migratorator') )
+MigratoratorApi.client = MigratoratorApi::Client.new( Plek.current.find('migratorator'), Rails.logger )
