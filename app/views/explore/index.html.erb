@@ -1,24 +1,17 @@
 <section class="my_profile">
   <h1><%= current_user.name %></h1>
-
-  <% if current_user && current_user.gds_user? %>
-    <div class="mappings_reviewed">You've reviewed <strong><%= current_user.reviews.count %></strong> <%= current_user.reviews.count != 1 ? "mappings" : "mapping" %> so far</div>
-
-    <p class="continue"><%= link_to "Continue &raquo;".html_safe, browse_path, :class => "continue" %></p>
-  <% else %>
-    <p>Hello, thanks for taking the time to look through how redirection will work when <a href="https://www.gov.uk/">GOV.UK</a> is live.</p>
-    <p>This tool provides a side by side browser that lets you explore Directgov pages on the left hand side of the page and see how users will be directed to new <a href="https://www.gov.uk/">GOV.UK</a> content on the right hand side.</p>
-    <p>The different outcomes that you can expect when exploring the redirections are:</p>
-    <ol>
-      <li>You see a <a href="https://www.gov.uk/">GOV.UK</a> page - as an existing page maps directly to new content on <a href="https://www.gov.uk/">GOV.UK</a></li>
-      <li>You see a <a href="https://www.gov.uk/">GOV.UK</a> awaiting content page - where we will be redirecting users to new content but that content's not created yet</li>
-      <li>You see a gone page - where old content does not map to an identified user need</li>
-      <li>You see a missing mapping page - there may be some occasions where a mapping doesn't exist, please flag these.</li>
-    </ol>
-    <p>If you want to flag a mapping for review at GDS then you can use the "flag this mapping" button in the top right hand corner and enter a reason why this should be flagged.</p>
-    <p>All comments will be collated by GDS and sent back to fact check coordinators on 10th August.</p>
-    <p>If you have any questions on the tool then please email your departments fact check coordinator</p>
-    <p><%= link_to "Continue &raquo;".html_safe, explorer_path, :class => "continue" %></p>
-  <% end %>
+  <p>Hello, thanks for taking the time to look through how redirection will work when <a href="https://www.gov.uk/">GOV.UK</a> is live.</p>
+  <p>This tool provides a side by side browser that lets you explore Directgov pages on the left hand side of the page and see how users will be directed to new <a href="https://www.gov.uk/">GOV.UK</a> content on the right hand side.</p>
+  <p>The different outcomes that you can expect when exploring the redirections are:</p>
+  <ol>
+    <li>You see a <a href="https://www.gov.uk/">GOV.UK</a> page - as an existing page maps directly to new content on <a href="https://www.gov.uk/">GOV.UK</a></li>
+    <li>You see a <a href="https://www.gov.uk/">GOV.UK</a> awaiting content page - where we will be redirecting users to new content but that content's not created yet</li>
+    <li>You see a gone page - where old content does not map to an identified user need</li>
+    <li>You see a missing mapping page - there may be some occasions where a mapping doesn't exist, please flag these.</li>
+  </ol>
+  <p>If you want to flag a mapping for review at GDS then you can use the "flag this mapping" button in the top right hand corner and enter a reason why this should be flagged.</p>
+  <p>All comments will be collated by GDS and sent back to fact check coordinators on 10th August.</p>
+  <p>If you have any questions on the tool then please email your departments fact check coordinator</p>
+  <p><%= link_to "Continue &raquo;".html_safe, explorer_path, :class => "continue" %></p>
   <div class="clear"></div>
 </section>
