@@ -13,7 +13,7 @@ class ExploreController < ApplicationController
   def mapping_not_found
     respond_to do |format|
       format.html do |x|
-        render 'public/404.html', :status => 404
+        redirect_to(explore_path + "?old_url=http://www.direct.gov.uk/en/index.htm")
       end
       format.json do |x|
         render :status => 200, :json => { :status => 404, :message => 'Mapping not found.' }
