@@ -14,7 +14,7 @@ Reviewomatic::Application.routes.draw do
 
     get 'explore' => 'explore#show', :as => :explore
 
-    root :to => 'root#index'
+    root :to => 'explore#index'
 
   end
 
