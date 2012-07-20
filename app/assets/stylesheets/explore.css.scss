@@ -38,6 +38,7 @@ body.browser .mapping_info {
     float: left;
     clear: left;
     margin: 0 0 2em;
+    position: relative;
     > p {
       display: block;
       margin: 0 0 1em;
@@ -64,6 +65,25 @@ body.browser .mapping_info {
       border-radius: 0.5em;
       font-weight: bold;
       padding: 0.5em;
+    }
+    a.close {
+      &:hover {
+        border: 1px solid #000000;
+      }
+      background: #999999;
+      background: -moz-linear-gradient(top,  #e1e1e1 0%, #999999 100%); 
+      background: -webkit-linear-gradient(top,  #e1e1e1 0%,#999999 100%); 
+      background: -o-linear-gradient(top,  #e1e1e1 0%,#999999 100%); 
+      background: -ms-linear-gradient(top,  #e1e1e1 0%,#999999 100%);
+      background: linear-gradient(top,  #e1e1e1 0%,#999999 100%); 
+      border: 1px solid #000000;
+      box-shadow: #666666 2px 2px 0.5em;
+      border-radius: 2em;
+      font-weight: bold;
+      padding: 0.6em 1em;
+      position: absolute;
+      top: -1em;
+      right: -1em;
     }
   }
   > .comment_messages {

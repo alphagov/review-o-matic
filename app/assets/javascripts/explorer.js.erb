@@ -32,7 +32,6 @@
           $('.mapping_links_container .right').text(new_url);
         },
         function(data) {
-          console.log('fail');
           $('.comments').hide();
         } 
         );
@@ -79,12 +78,18 @@ $(document).ready(function(){
   }
 
   // Hide comment textarea and submit button
-  $('.browser .comments > div').hide();
+  $('.comments > div').hide();
 
   // Display comment form
   $('.comments .question').click(function(event) {
     event.preventDefault();
     $('.comments > .form_container').fadeIn();
+  });
+
+  // Hide form on close button click
+  $('a.close').click(function(event){
+    event.preventDefault();
+    $('.comments > div').fadeOut();
   });
 
   // Submit Comment using POST
