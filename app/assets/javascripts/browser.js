@@ -51,7 +51,6 @@ $(document).ready( function() {
     event.preventDefault();
     var form_path = $(this).parent('form').attr('action');
     var $commentTextarea = $(this).parent().find('textarea');
-    console.log($commentTextarea.val());
     $.ajax({
       type: "PUT",
       url: form_path,
