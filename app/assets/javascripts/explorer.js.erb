@@ -12,24 +12,30 @@
       $('.mapping_links_container .left').text(old_url);
       $.getJSON(('/__/explore.json', url))
         .then(function (data) {
-          console.log(url);
           var new_url = data.new_url;
-
+          $('.comments').show();
           if ( !new_url ) {
             if ( data.status == 410 ) {
               new_url = GONE_URL;
+              $('.comments').hide();
             }
             else if ( data.awaiting_content ) {
               new_url = AWAITING_CONTENT_URL;
+              $('.comments').hide();
             }
             else {
               new_url = NO_MAPPING_URL;
+              $('.comments').hide();
             }
           }
-
           $('#new').attr('src', new_url);
           $('.mapping_links_container .right').text(new_url);
-        });
+        },
+        function(data) {
+          console.log('fail');
+          $('.comments').hide();
+        } 
+        );
     }
 
     function updateUrl() {
