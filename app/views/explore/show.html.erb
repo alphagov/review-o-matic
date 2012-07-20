@@ -2,21 +2,19 @@
   <%= javascript_include_tag "explorer" %>
 <% end %>
 <section class="mapping_info">
-  <% if @mapping %>
-    <div class="comments">
-      <a class="question" href="#">Flag this mapping</a>
-      <div class="form_container">
-        <p>Tell us if the mapping is inaccurate or inappropriate...or if there's something missing on the page. <br>We'll get your comms lead to sift all comments and we'll deal with them in priority order.<br> Thanks for helping us get the mappings right!</p>
-        <%= form_tag review_path(@mapping.id) do %>
-          <%= text_area_tag :comment %>
-          <%= submit_tag 'submit' %>
-        <% end %>
-      </div>
-      <div class="comment_messages">
-
-      </div>
+  <div class="comments">
+    <a class="question" href="#">Flag this mapping</a>
+    <div class="form_container">
+      <p>Tell us if the mapping is inaccurate or inappropriate...or if there's something missing on the page. <br>We'll get your comms lead to sift all comments and we'll deal with them in priority order.<br> Thanks for helping us get the mappings right!</p>
+      <%= form_tag review_path(@mapping.id) do %>
+        <%= text_area_tag :comment %>
+        <%= submit_tag 'submit' %>
+      <% end %>
     </div>
-  <% end %>
+    <div class="comment_messages">
+
+    </div>
+  </div>
 </section>
 <div class="mapping_links_container">
   <div class="left">
