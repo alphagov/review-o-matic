@@ -9,6 +9,7 @@
       <%= form_tag review_path(@mapping.id) do %>
         <%= text_area_tag :comment %>
         <%= submit_tag 'submit' %>
+        <a class="close" href="#">X</a>
       <% end %>
     </div>
     <div class="comment_messages">
