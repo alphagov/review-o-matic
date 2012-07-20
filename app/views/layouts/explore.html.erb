@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Review-O-Matic</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :custom_assets %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="browser">
+
+  <header>
+    <h1 class="left">
+      <%= link_to "Review-O-Matic", root_path %>
+      <% if current_user && current_user.gds_user? %>
+        <%= link_to "Leaderboard", dashboard_path %>
+        <%= link_to "Coverage", mosaic_path %>
+      <% end %>
+    </h1>
+
+    <%- if current_user -%>
+
+      <h2 class="center"><% if !@section.blank? %>Section &mdash; <%= format_tag @section %><% end %></h2>
+
+      <div class="right">Welcome, <%= current_user.name %>
+        <% if current_user.gds_user? %>
+           <span class="user_score"><%= current_user.score %></span>
+        <% end %>
+      </div>
+    <%- end -%>
+
+    <div class="clear"></div>
+  </header>
+
+  <% flash.each do |name, message| %>
+    <p class="flash flash_<%= name %>"><%= message %></p>
+  <% end %>
+
+  <%= yield %>
+</body>
+</html>
