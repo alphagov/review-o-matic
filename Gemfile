@@ -7,6 +7,9 @@ gem "bson_ext", "~> 1.5"
 
 gem 'aws-ses', require: 'aws/ses'
 
+gem 'aws-ses', :require => 'aws/ses' # Needed by exception_notification
+gem 'exception_notification'
+
 group :assets do
   gem 'sass-rails',   '3.1.4'
   gem 'coffee-rails', '~> 3.1.1'
