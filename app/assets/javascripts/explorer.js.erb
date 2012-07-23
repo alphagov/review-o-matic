@@ -99,6 +99,10 @@
 			 */
 			load_old_url(HOME);
 
+			$('a.home').click(function () {
+				load_old_url(HOME);
+			});
+
 			/*
 			 *  open/close comment box
 			 */
@@ -129,7 +133,7 @@
 				);
 			};
 		}
-		
+
 		/*
 		 *  POST comment
 		 */
