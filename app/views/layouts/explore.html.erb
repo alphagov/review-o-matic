@@ -124,11 +124,6 @@ iframe {
   <%= csrf_meta_tags %>
 </head>
 <body class="explorer">
-
-  <% flash.each do |name, message| %>
-    <p class="flash flash_<%= name %>"><%= message %></p>
-  <% end %>
-
   <%= yield %>
 </body>
 </html>
