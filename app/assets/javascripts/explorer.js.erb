@@ -1,128 +1,139 @@
 (function ($) {
-    var NO_MAPPING_URL = "<%= Plek.current.find('migratorator') %>/browser_resources/no_mapping.html";
-    var GONE_URL = "<%= Plek.current.find('migratorator') %>/browser_resources/410.html";
-    var AWAITING_CONTENT_URL = "<%= Plek.current.find('migratorator') %>/browser_resources/awaiting_content.html";
 
-    var curUrl;
-    var offDomainWarning = "You've now navigated off the chosen domain. No updates will occur to the right-hand panel.";
-    var shownOffDomainWarning = false;
+	var ROOT = "http://www.direct.gov.uk";
+	var HOME = "/en/index.htm";
+	var REVIEWOMATIC = "<%= Plek.current.find('reviewomatic') %>";
+	var MIGRATORATOR = "<%= Plek.current.find('migratorator') %>";
 
-    function updateFrame(url) {
-      var old_url = url.replace('?old_url=', '');
-      $('.mapping_links_container .left').text(old_url);
-      $.getJSON(('/__/explore.json', url))
-        .then(function (data) {
-          var new_url = data.new_url;
-          $('.comments').show();
-          if ( !new_url ) {
-            if ( data.status == 410 ) {
-              new_url = GONE_URL;
-              $('.comments').hide();
-            }
-            else if ( data.awaiting_content ) {
-              new_url = AWAITING_CONTENT_URL;
-              $('.comments').hide();
-            }
-            else {
-              new_url = NO_MAPPING_URL;
-              $('.comments').hide();
-            }
-          }
-          $('#new').attr('src', new_url);
-          $('.mapping_links_container .right').text(new_url);
-        },
-        function(data) {
-          $('.comments').hide();
-        } 
-        );
-    }
+	var poll_interval = 1000;
+	var poll_timer;
+	var warned = false;
 
-    function updateUrl() {
-      var url = $('#old')[0].contentWindow.location.pathname;
-      if (url === 'blank') { return; }
-      if (url === curUrl) { return; }
-      curUrl = url;
+	function parse_url(url) {
+		var a = document.createElement("a");
+		a.href = url;
+		return a;
+	};
 
-      if (typeof url === 'undefined') {
-        if (shownOffDomainWarning) { return; }
+	/*
+	 *  select new page for a mapping
+	 */
+	function select_new_url(mapping) {
+		if (mapping) {
+			if (mapping.new_url) {
+				return mapping.new_url;
+			}
+			if (mapping.status == 410) {
+				return MIGRATORATOR + "/browser_resources/410.html";
+			}
+			if (mapping.awaiting_content) {
+				return MIGRATORATOR + "/browser_resources/awaiting_content.html";
+			}
+		}
+		return MIGRATORATOR + "/browser_resources/no_mapping.html";
+	}
 
-        if (confirm(offDomainWarning)) {
-          location.href = '/__/explore';
-        } else {
-          shownOffDomainWarning = true;
-        }
-      } else {
-        updateFrame('?old_url=http://www.direct.gov.uk' + url);
-        history.pushState({}, "", '/__/explore?old_url=http://www.direct.gov.uk' + url);      
-      }
-    }
+	function load_new_url(old_url) {
+		$.getJSON('/__/explore.json?old_url=' + escape(old_url), function (mapping) {
+			var url = select_new_url(mapping);
+			$('#new_url').val(url);
+			$('#new iframe').attr('src', url);
+		});
+	}
 
-    function init() {
-        var path = window.location.origin + window.location.search.replace('?old_url=http://www.direct.gov.uk', ""); 
-        $('#old').attr('src', path);
-        updateTimer = setInterval(updateUrl, 500);
-    }
+	function load_old_url(url) {
+		var src = parse_url(url).pathname || url;
+		$('#old_url').val(url);
+		$('#old iframe').attr('src', src);
+		load_new_url(ROOT + url);
+	}
 
-    $(init);
+	/*
+	 *  check old url for change
+	 */
+	function check_old_url() {
+		var url = $('#old iframe')[0].contentWindow.location.pathname;
+		var current_url = $('#old_url').val();
+
+		if (typeof url === 'undefined') {
+			if (!warned) {
+				alert("You have navigated away from Directgov, so the right hand side cannot be updated.");
+			}
+			$('#old_url').val('');
+			$('#new_url').val('');
+			warned = true;
+			return;
+		}
+
+		if (url === '/blank') {
+			return;
+		}
+
+		if (url === current_url) {
+			return;
+		}
+
+		warned = false;
+
+		load_old_url(url);
+	}
+
+	$(document).ready(function() {
+
+		/*
+		 *  poll for old_url to change
+		 *  - onLoad of iframe slow and flaky
+		 */
+		poll_timer = setInterval(check_old_url, poll_interval);
+
+		/*
+		 *  load inital page
+		 */
+		load_old_url(HOME);
+
+		/*
+		 *  open/close comment box
+		 */
+		var question = $('a.question').text();
+		$('a.question').click(function(event) {
+			$('.comment').slideToggle('slow');
+			$(this).text($(this).text().match(/^Cancel/) ? question : 'Cancel');
+		});
+
+		/*
+		 *  POST comment
+		 */
+		$('.comment input').click(function(event) {
+			event.preventDefault();
+			var form_path = $(this).parent('form').attr('action');
+			var $commentTextarea = $(this).parent().find('textarea');
+			$.ajax({
+				type: "POST",
+				url: form_path,
+				data: {
+					comment: $commentTextarea.val()
+				}, 
+				success: function(data) {
+					$commentTextarea.val('');
+					var $commentMessage = $('<span class="success">Comment submitted</span>');
+					$('.comment_messages').append($commentMessage);
+					$('.form_container').fadeOut('normal', function() {
+						$('.comment_messages').fadeIn('normal', function() {
+						setTimeout(function() {
+							$('.comment_messages').fadeOut('normal', function() {
+								$('.comment_messages').empty(); 
+							}); 
+						}, 1000);
+					  });
+					});
+				},
+				error: function(data) {
+					alert("Unable to send the comments. Please try again later.");
+				},
+				beforeSend: function(data) {
+				}
+			});
+		});
+	});
+
 }(jQuery));
-
-$(document).ready(function(){
-
-
-  // If the explore path is accessed from Reviewomatic instead of the explorer, redirect to the explorer.
-  var plekExplore = '<%= Plek.current.find('explore-reviewomatic') %>';
-  var plekExplorePath = '/__/explore';
-  if (window.location.origin != plekExplore) {
-    window.location.replace(plekExplore + plekExplorePath);
-    window.location =  plekExplore + plekExplorePath;
-  }
-
-  // Hide comment textarea and submit button
-  $('.comments > div').hide();
-
-  // Display comment form
-  $('.comments .question').click(function(event) {
-    event.preventDefault();
-    $('.comments > .form_container').fadeIn();
-  });
-
-  // Hide form on close button click
-  $('a.close').click(function(event){
-    event.preventDefault();
-    $('.comments > div').fadeOut();
-  });
-
-  // Submit Comment using POST
-  $('.browser .comments input').click(function(event) {
-    event.preventDefault();
-    var form_path = $(this).parent('form').attr('action');
-    var $commentTextarea = $(this).parent().find('textarea');
-    $.ajax({
-      type: "POST",
-      url: form_path,
-      data: { comment: $commentTextarea.val() }, 
-      success: function(data) {
-        $commentTextarea.val('');
-        var $commentMessage = $('<span class="success">Comment submitted</span>');
-        $('.comment_messages').append($commentMessage);
-        $('.form_container').fadeOut('normal', function() {
-          $('.comment_messages').fadeIn('normal', function() {
-            setTimeout(function() {
-              $('.comment_messages').fadeOut('normal', function() {
-                $('.comment_messages').empty(); 
-              }); 
-            }, 1000);          
-          });
-        });
-      },
-      error: function(data) {
-        alert("An error occurred whilst trying to save your review. Please reload the page and try again.");
-        window.location = window.location;
-      },
-      beforeSend: function(data) {
-
-      }
-    });
-  });
-      
-});

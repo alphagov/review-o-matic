@@ -1,29 +1,26 @@
-<% content_for :custom_assets do %>
-  <%= javascript_include_tag "explorer" %>
-<% end %>
-<section class="mapping_info">
-  <div class="comments">
-    <a class="question" href="#">Flag this mapping</a>
-    <div class="form_container">
-      <p>Tell us if the mapping is inaccurate or inappropriate...or if there's something missing on the page. <br>We'll get your comms lead to sift all comments and we'll deal with them in priority order.<br> Thanks for helping us get the mappings right!</p>
-      <%= form_tag review_path(@mapping.id) do %>
-        <%= text_area_tag :comment %>
-        <%= submit_tag 'submit' %>
-        <a class="close" href="#">X</a>
-      <% end %>
-    </div>
-    <div class="comment_messages">
-
-    </div>
-  </div>
-</section>
-<div class="mapping_links_container">
-  <div class="left">
-
-  </div>
-  <div class="right">
-
-  </div>
+<div class='header'>
+	<a class="question" href="#">Flag this mapping</a>
+	<h1><%= link_to "Explore the Directgov to GOV.UK Mappings", root_path %></h1>
 </div>
-<iframe id="old" class="left" src=""></iframe>
-<iframe id="new" class="right" src=""></iframe>
+
+<div class="comment">
+	<p>Please tell us if this mapping is inaccurate or inappropriate, or if there's something missing on the page.
+	We'll get your comms lead to sift all comments and we'll deal with them in priority order.
+	Thanks for helping us get the mappings right!</p>
+
+	<%= form_tag review_path(@mapping.id) do %>
+	<%= text_area_tag :comment %>
+	<%= submit_tag 'Send comment' %>
+	<% end %>
+</div>
+
+<div class="panes">
+	<div id="old" class="pane">
+		<input id="old_url" type="text" readonly="readonly"></input>
+		<iframe src=""></iframe>
+	</div>
+	<div id="new" class="pane">
+		<input id="new_url" type="text" readonly="readonly"></input>
+		<iframe src=""></iframe>
+	</div>
+</div>
