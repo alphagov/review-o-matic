@@ -43,6 +43,7 @@
 		$.getJSON('/__/explore.json?old_url=' + escape(old_url), function (mapping) {
 			var url = select_new_url(mapping);
 			$('#new_url').val(url);
+			$('#new_url').data('mapping-id', mapping.id);
 			$('#new iframe').attr('src', url);
 			$('.comment form').attr('action', '/__/reviews/' + mapping.id);
 		});
@@ -189,6 +190,9 @@
 				url: form_path,
 				data: {
 					comment: $commentTextarea.val(),
+					mapping: {
+						mapping_id: $('#new_url').data('mapping-id')
+					},
 					authenticity_token: token
 				}, 
 				success: function(data) {
