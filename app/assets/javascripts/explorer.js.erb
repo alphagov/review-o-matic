@@ -125,8 +125,11 @@
 			 */
 			load_old_url(get_browser_location() || HOME);
 
-			$('a.home').click(function () {
+			$('a.home').click( function (ev) {
 				load_old_url(HOME);
+				ev.preventDefault();
+				ev.stopPropogation();
+				return false;
 			});
 
 			/*
