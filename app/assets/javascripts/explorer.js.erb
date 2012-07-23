@@ -95,12 +95,33 @@
 		/*
 		 *  open/close comment box
 		 */
-		var question = $('a.question').text();
-		$('a.question').click(function(event) {
+		var $question = $('a.question');
+		var question_text = $question.text();
+		var toggle_comment = function () {
 			$('.comment').slideToggle('slow');
-			$(this).text($(this).text().match(/^Cancel/) ? question : 'Cancel');
-		});
-
+			$question.text(
+			    $question.text().match(/^Cancel/) ? question_text : 'Cancel'
+			);
+		};
+		
+		$question.click(toggle_comment);
+		
+		var $result = $('#result');
+		$result.slideToggle(0);
+		
+		var show_result_briefly = function (text) {
+			$result
+				.text(text)
+				.slideToggle();
+			
+			setTimeout(
+				function() {
+					$result.slideToggle();
+				},
+				3000
+			);
+		};
+		
 		/*
 		 *  POST comment
 		 */
@@ -118,19 +139,9 @@
 					authenticity_token: token
 				}, 
 				success: function(data) {
-					$commentTextarea.val('');
-					var $commentMessage = $('<span class="success">Comment submitted</span>');
-					$('.comment_messages').append($commentMessage);
-					$('.form_container').fadeOut('normal', function() {
-						$('.comment_messages').fadeIn('normal', function() {
-						setTimeout(function() {
-							$('.comment_messages').fadeOut('normal', function() {
-								$('.comment_messages').empty(); 
-							}); 
-						}, 1000);
-					  });
-					});
-				},
+					toggle_comment();
+					show_result_briefly('Thank you for your help!');
+    			},
 				error: function(data) {
 					alert("Unable to send the comments. Please try again later.");
 				},
