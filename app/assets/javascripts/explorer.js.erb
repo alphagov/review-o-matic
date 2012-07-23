@@ -38,6 +38,7 @@
 			var url = select_new_url(mapping);
 			$('#new_url').val(url);
 			$('#new iframe').attr('src', url);
+			$('.comment form').attr('action', '/__/reviews/' + mapping.id);
 		});
 	}
 
@@ -105,13 +106,16 @@
 		 */
 		$('.comment input').click(function(event) {
 			event.preventDefault();
-			var form_path = $(this).parent('form').attr('action');
+			var $form = $(this).parent('form');
+			var form_path = $form.attr('action');
 			var $commentTextarea = $(this).parent().find('textarea');
+			var token = $('input[name=authenticity_token]', $form).attr('value');
 			$.ajax({
 				type: "POST",
 				url: form_path,
 				data: {
-					comment: $commentTextarea.val()
+					comment: $commentTextarea.val(),
+					authenticity_token: token
 				}, 
 				success: function(data) {
 					$commentTextarea.val('');
