@@ -7,10 +7,9 @@
 	<p>Please tell us if this mapping is inaccurate or inappropriate, or if there's something missing on the page.
 	We'll get your comms lead to sift all comments and we'll deal with them in priority order.
 	Thanks for helping us get the mappings right!</p>
-
-	<%= form_tag review_path(@mapping.id) do %>
-	<%= text_area_tag :comment %>
-	<%= submit_tag 'Send comment' %>
+	<%= form_tag do %>
+    <%= text_area_tag :comment %>
+    <%= submit_tag 'Send comment' %>
 	<% end %>
 </div>
 
