@@ -127,10 +127,10 @@
 	}
 
 	$(document).ready(function() {
-		set_iframe_heights();
-		$(window).resize(set_iframe_heights);
-		
 		if ($('#old').length) {
+			set_iframe_heights();
+			$(window).resize(set_iframe_heights);
+		
 			/*
 			 *  poll for old_url to change
 			 *  - onLoad of iframe slow and flaky
