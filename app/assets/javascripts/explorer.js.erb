@@ -73,13 +73,19 @@
 		var current_url = $('#old_url').val();
 
 		if (typeof url === 'undefined') {
+			var confirm_text = "You have navigated away from Directgov, so the right hand side cannot be updated.";
+			
 			if (!warned) {
-				alert("You have navigated away from Directgov, so the right hand side cannot be updated.");
-				$('#old_url').val('');
-				$('#new_url').val('');
-				$('#new iframe').attr('src', '');
-				set_browser_location('');
-				warned = true;
+				if (confirm(confirm_text)) {
+					$('#old_url').val('');
+					$('#new_url').val('');
+					$('#new iframe').attr('src', '');
+					set_browser_location('');
+					warned = true;
+				}
+				else {
+					load_old_url(HOME);
+				}
 			}
 			return;
 		}
