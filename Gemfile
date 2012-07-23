@@ -6,8 +6,6 @@ gem "mongoid", "~> 2.3"
 gem "bson_ext", "~> 1.5"
 
 gem 'aws-ses', require: 'aws/ses'
-
-gem 'aws-ses', :require => 'aws/ses' # Needed by exception_notification
 gem 'exception_notification'
 
 group :assets do
