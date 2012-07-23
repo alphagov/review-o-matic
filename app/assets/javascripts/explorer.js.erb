@@ -53,7 +53,13 @@
 	 *  check old url for change
 	 */
 	function check_old_url() {
-		var url = $('#old iframe')[0].contentWindow.location.pathname;
+		var url;
+		try {
+			url = $('#old iframe')[0].contentWindow.location.pathname;
+		} catch (e) {
+			url = undefined;
+			$('#new iframe').attr('src', '');
+		}
 		var current_url = $('#old_url').val();
 
 		if (typeof url === 'undefined') {
