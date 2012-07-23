@@ -113,6 +113,18 @@
 			});
 
 			/*
+			 *  open URL in input bar (in a new window for now)
+			 */
+			$('.bar button').click (function () {
+				var url = $(this).next('input').val()
+				if (url.substr(0, 4) != "http") {
+					url = ROOT + url;
+				}
+				window.open(url, '_top_');
+				return false;
+			});
+
+			/*
 			 *  open/close comment box
 			 */
 			var $question = $('a.question');
