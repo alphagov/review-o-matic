@@ -55,6 +55,7 @@
 		var src = parse_url(url).pathname || url;
 		$('#old_url').val(url);
 		$('#old iframe').attr('src', src);
+		set_browser_location(src);
 		load_new_url(ROOT + url);
 	}
 
@@ -77,6 +78,7 @@
 			}
 			$('#old_url').val('');
 			$('#new_url').val('');
+			set_browser_location('');
 			warned = true;
 			return;
 		}
@@ -94,6 +96,21 @@
 		load_old_url(url);
 	}
 
+	/*
+	 *  pushState would be preferable, but ie6 ..
+	 */
+	function get_browser_location() {
+		var hash = window.location.hash;
+		if (hash && hash.substr(0, 1) === '#') {
+			hash = hash.substr(1);
+		}
+		return hash;
+	}
+
+	function set_browser_location(old_url) {
+		window.location.hash = old_url;
+	}
+
 	$(document).ready(function() {
 
 		if ($('#old').length) {
@@ -106,7 +123,7 @@
 			/*
 			 *  load inital page
 			 */
-			load_old_url(HOME);
+			load_old_url(get_browser_location() || HOME);
 
 			$('a.home').click(function () {
 				load_old_url(HOME);
