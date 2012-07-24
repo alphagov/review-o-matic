@@ -68,18 +68,18 @@
 			url = $('#old iframe')[0].contentWindow.location.pathname;
 		} catch (e) {
 			url = undefined;
-			$('#new iframe').attr('src', '');
 		}
 		var current_url = $('#old_url').val();
 
 		if (typeof url === 'undefined') {
 			if (!warned) {
 				alert("You have navigated away from Directgov, so the right hand side cannot be updated.");
+				$('#old_url').val('');
+				$('#new_url').val('');
+				$('#new iframe').attr('src', '');
+				set_browser_location('');
+				warned = true;
 			}
-			$('#old_url').val('');
-			$('#new_url').val('');
-			set_browser_location('');
-			warned = true;
 			return;
 		}
 
