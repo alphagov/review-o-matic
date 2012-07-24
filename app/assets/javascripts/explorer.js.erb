@@ -6,6 +6,7 @@
 	var poll_interval = 1000;
 	var poll_timer;
 	var warned = false;
+	var last_url = '';
 
 	/*
 	 *  parse URL
@@ -56,6 +57,7 @@
 		$('#old iframe').attr('src', src);
 		set_browser_location(src);
 		load_new_url(ROOT + url);
+		last_url = url;
 	}
 
 	/*
@@ -82,7 +84,7 @@
 					warned = true;
 				}
 				else {
-					load_old_url(HOME);
+					load_old_url(last_url);
 				}
 			}
 			return;
