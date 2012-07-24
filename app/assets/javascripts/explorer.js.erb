@@ -117,9 +117,21 @@
 	function set_browser_location(old_url) {
 		window.location.hash = old_url;
 	}
+	
+	function set_iframe_heights() {
+		var old_iframe_offset = $('#old iframe').offset();
+		var window_height     = $(window).height();
+		
+		$('#old iframe, #new iframe').css(
+			'min-height',
+			window_height - old_iframe_offset['top']
+		);
+	}
 
 	$(document).ready(function() {
-
+		set_iframe_heights();
+		$(window).resize(set_iframe_heights);
+		
 		if ($('#old').length) {
 			/*
 			 *  poll for old_url to change
