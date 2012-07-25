@@ -24,8 +24,8 @@ Reviewomatic::Application.routes.draw do
   get 'browse' => 'browse#index', :as => :browse
 
   match 'reviews' => redirect('/__/reviews')
-  match '/sign_in' => redirect('/__/sign_in')
-  match '/sign_out' => redirect('/__/sign_out')
+  match '/sign_in' => redirect('/')
+  match '/sign_out' => redirect('/')
   match '/' => 'root#index'
 
 end
