@@ -15,4 +15,9 @@ class UserTest < ActiveSupport::TestCase
     assert_equal false, @user_1.gds_user?
   end
 
+  should "be invalid if the authentication token is already taken" do
+    @user_2 = User.new(:name => "Darth", :email => "darth@thedeathstar.com", :authentication_token => "password")
+    assert_equal false, @user_2.valid?
+  end
+
 end
