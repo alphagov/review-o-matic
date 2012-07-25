@@ -5,7 +5,7 @@ namespace :db do
     puts "Creating Users:"
     emails = IO.readlines(args[:file]).each {|x| x.strip!; puts x }
     emails.each do |x|
-      User.create!(:email => x, :name => x, :authentication_token => (Digest::SHA1.hexdigest Time.now.to_s) )
+      User.create!(:email => x, :name => x, :authentication_token => (Digest::SHA1.hexdigest([Time.now, rand].join)) )
     end
     puts "Users Created! Whoop!"
   end
