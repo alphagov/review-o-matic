@@ -16,6 +16,7 @@ class ExploreController < ApplicationController
   private
 
   def mapping_not_found
+    MissingMapping.find_or_create_by(:old_url => params[:old_url])
     respond_to do |format|
       format.html do |x|
         render 'public/404.html', :status => 404
