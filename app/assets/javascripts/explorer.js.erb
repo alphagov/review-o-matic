@@ -2,12 +2,11 @@
 
 	var ROOT = "http://www.direct.gov.uk";
 	var HOME = "/en/index.htm";
-	var REVIEWOMATIC = "<%= Plek.current.find('reviewomatic') %>";
-	var MIGRATORATOR = "<%= Plek.current.find('migratorator') %>";
 
 	var poll_interval = 1000;
 	var poll_timer;
 	var warned = false;
+	var last_url = '';
 
 	/*
 	 *  parse URL
@@ -27,13 +26,13 @@
 				return mapping.new_url;
 			}
 			if (mapping.status == 410) {
-				return MIGRATORATOR + "/browser_resources/410.html";
+				return "/__/410.html";
 			}
 			if (mapping.awaiting_content) {
-				return MIGRATORATOR + "/browser_resources/awaiting_content.html";
+				return "/__/awaiting_content.html";
 			}
 		}
-		return MIGRATORATOR + "/browser_resources/no_mapping.html";
+		return "/__/no_mapping.html";
 	}
 
 	/*
@@ -58,6 +57,7 @@
 		$('#old iframe').attr('src', src);
 		set_browser_location(src);
 		load_new_url(ROOT + url);
+		last_url = url;
 	}
 
 	/*
@@ -84,7 +84,7 @@
 					warned = true;
 				}
 				else {
-					load_old_url(HOME);
+					load_old_url(last_url);
 				}
 			}
 			return;
@@ -129,10 +129,10 @@
 	}
 
 	$(document).ready(function() {
-		set_iframe_heights();
-		$(window).resize(set_iframe_heights);
-		
 		if ($('#old').length) {
+			set_iframe_heights();
+			$(window).resize(set_iframe_heights);
+		
 			/*
 			 *  poll for old_url to change
 			 *  - onLoad of iframe slow and flaky
@@ -147,7 +147,7 @@
 			$('a.home').click( function (ev) {
 				load_old_url(HOME);
 				ev.preventDefault();
-				ev.stopPropogation();
+				ev.stopPropagation();
 				return false;
 			});
 
