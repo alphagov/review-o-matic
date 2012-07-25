@@ -23,6 +23,7 @@ class User
 
   validates :name, :email, :presence => true
   validates :email, :uniqueness => { :case_sensitive => true }
+  validates_uniqueness_of :authentication_token
 
   before_save :ensure_authentication_token
   before_save :set_score
