@@ -18,16 +18,10 @@ Reviewomatic::Application.routes.draw do
 
   end
 
-  get 'dashboard' => 'dashboard#index', :as => :dashboard
-  get 'dashboard/mosaic' => 'dashboard#mosaic', :as => :mosaic
-  get 'browse/:id' => 'browse#show', :as => :browse_mapping
-  get 'browse' => 'browse#index', :as => :browse
-  
-
-  # TODO Fix route from explore-reviewomatic
-  #constraints :host => /explore-reviewomatic/ do
-  #  match "/browse" => redirect("reviewomatic")
-  #end
+  #get 'dashboard' => 'dashboard#index', :as => :dashboard
+  #get 'dashboard/mosaic' => 'dashboard#mosaic', :as => :mosaic
+  #get 'browse/:id' => 'browse#show', :as => :browse_mapping
+  #get 'browse' => 'browse#index', :as => :browse
 
   match 'reviews' => redirect('/__/reviews')
   match '/sign_in' => redirect('/__/sign_in')
