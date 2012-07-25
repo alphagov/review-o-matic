@@ -9,15 +9,6 @@
 	var last_url = '';
 
 	/*
-	 *  parse URL
-	 */
-	function parse_url(url) {
-		var a = document.createElement("a");
-		a.href = url;
-		return a;
-	};
-
-	/*
 	 *  select new page for a mapping
 	 */
 	function select_new_url(mapping) {
@@ -52,10 +43,9 @@
 	 *  load old_url in LHS, triggers loading new_url
 	 */
 	function load_old_url(url) {
-		var src = parse_url(url).pathname || url;
 		$('#old_url').val(url);
-		$('#old iframe').attr('src', src);
-		set_browser_location(src);
+		$('#old iframe').attr('src', url);
+		set_browser_location(url);
 		load_new_url(ROOT + url);
 		last_url = url;
 	}
