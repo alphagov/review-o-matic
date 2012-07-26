@@ -52,6 +52,6 @@ en:
       confirmation_instructions:
         subject: 'Confirmation instructions'
       reset_password_instructions:
-        subject: 'Instructions to sign in to Review-O-Matic'
+        subject: 'Welcome to the Directgov mapping review tool'
       unlock_instructions:
         subject: 'Unlock Instructions'
