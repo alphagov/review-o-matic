@@ -4,7 +4,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "GDS Transition Team <govuk-transition@digital.cabinet-office.gov.uk>"
+  config.mailer_sender = "GDS Transition Team <winston@alphagov.co.uk>"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
