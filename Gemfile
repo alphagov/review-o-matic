@@ -19,6 +19,7 @@ gem 'null_logger'
 
 gem 'devise'
 gem 'kaminari'
+gem 'lograge'
 
 group :test do
   gem 'shoulda'
