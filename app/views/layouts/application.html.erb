@@ -15,10 +15,6 @@
   <header>
     <h1 class="left">
       <%= link_to "Review-O-Matic", root_path %>
-      <% if current_user && current_user.gds_user? %>
-        <%= link_to "Leaderboard", dashboard_path %>
-        <%= link_to "Coverage", mosaic_path %>
-      <% end %>
     </h1>
 
     <%- if current_user -%>
