@@ -70,6 +70,9 @@ GEM
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
     libv8 (3.3.10.4)
+    lograge (0.0.6)
+      actionpack
+      activesupport
     mail (2.3.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -163,6 +166,7 @@ DEPENDENCIES
   devise
   jquery-rails
   kaminari
+  lograge
   mocha
   mongoid (~> 2.3)
   null_logger
