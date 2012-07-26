@@ -5,9 +5,20 @@ namespace :db do
     puts "Creating Users:"
     emails = IO.readlines(args[:file]).each {|x| x.strip! }
     emails.each do |x|
- 		u = User.create!(:email => x, :name => x, :authentication_token => (Digest::SHA1.hexdigest([Time.now, rand].join)) )
+    	name = x
+    	first_part_of_email = $1 if x =~ /^(\w+)\..+@/
+    	if first_part_of_email.nil?
+    		name = x
+    	else 
+    		name = first_part_of_email.capitalize
+		end
+
+		u = User.where(email: x).first  
+		unless u 
+			u = User.create!(:email => x, :name => name, :authentication_token => (Digest::SHA1.hexdigest([Time.now, rand].join)) )
+		end
   		u.send_reset_password_instructions
-  		puts "sent instructions to #{x}"
+  		puts "Sent email to #{x}"
     end
     puts "Users Created! Whoop!"
   end
