@@ -1,4 +1,5 @@
 <div class='header'>
+	<a class="question" href="#">Flag this mapping</a>
 	<h1>
 		<%= link_to "Explore", root_path %> 
 		the <a class="home" href="http://www.direct.gov.uk">Directgov</a>
@@ -7,6 +8,14 @@
 	</h1>
 </div>
 
+<div class="comment">
+	<%= form_tag do %>
+	<div class="radio"><%= radio_button_tag :comment, 'wrong-page' %> This maps to the wrong page </div>
+	<div class="radio"><%= radio_button_tag :comment, 'better-page', true %> This mapping looks correct, but it could map to a better page </div>
+	<button id="submit-comment">Send</button>
+	<% end %>
+</div>
+<p id='result'></p>
 <div class="panes">
 	<div id="old" class="pane">
 		<div class="bar">
