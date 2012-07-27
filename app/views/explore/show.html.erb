@@ -1,5 +1,4 @@
 <div class='header'>
-	<a class="question" href="#">Flag this mapping</a>
 	<h1>
 		<%= link_to "Explore", root_path %> 
 		the <a class="home" href="http://www.direct.gov.uk">Directgov</a>
@@ -7,15 +6,6 @@
 		Mappings
 	</h1>
 </div>
-
-<div class="comment">
-	<p>Please tell us if this mapping is inaccurate or inappropriate, or if there's something missing on the page.</p>
-	<%= form_tag do %>
-    <%= text_area_tag :comment %>
-    <%= submit_tag 'Send comment' %>
-	<% end %>
-</div>
-<p id='result'></p>
 
 <div class="panes">
 	<div id="old" class="pane">
