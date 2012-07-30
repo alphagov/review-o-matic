@@ -3,6 +3,8 @@ namespace :db do
   desc "Finds or creates user accounts and emails all users in provided list with login instructions."
   task :create_users, [:file] => :environment do |t, args| 
     puts "Creating Users:"
+    
+		unsuccessful_attempts = []
     File.readlines(args[:file]).each do | email |
     	email.chomp!
     	name = email
@@ -21,10 +23,17 @@ namespace :db do
 				end
 			end
 
-			u.send_reset_password_instructions
-  		puts "Sent email to #{email}"
+      begin
+        u.send_reset_password_instructions
+        puts "Sent email to #{email}"
+      rescue
+        unsuccessful_attempts.push(email)
+      end
+
     end
-    puts "Users Created! Whoop!"
+    puts "Script completed successfully."
+    puts "Users not created:"
+    unsuccessful_attempts.each { |failure| puts failure }
   end
 
 end
