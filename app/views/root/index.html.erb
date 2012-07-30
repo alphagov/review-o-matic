@@ -2,5 +2,8 @@
   <h1><%= current_user.name %></h1>
 
   <p>The review process is now closed. Thanks for your help.</p>
+  
+  <p>If you would like access to the side-by-side browser, you can request a new access token <%=link_to 'here', root_url(:host => Plek.current.find('explore-reviewomatic').sub(/https?:\/\//,'')) %>.</p>
+
   <div class="clear"></div>
 </section>
