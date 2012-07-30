@@ -26,9 +26,6 @@ end
 
 class ActiveSupport::TestCase
 
-  # MigratoratorApi::Mapping.stubs(:find_by_id).returns(MockMigratorator.new)
-  # MigratoratorApi::Mapping.stubs(:find_random_mapping).returns(MockMigratorator.new)
-
   MIGRATORATOR_ENDPOINT = 'http://migratorator.test.gov.uk'
 
   def migratorator_has_mapping(mapping)
