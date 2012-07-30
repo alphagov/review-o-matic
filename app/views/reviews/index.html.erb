@@ -7,10 +7,10 @@
          Position
         </td>
         <td>
-          Rating
+          Old Url 
         </td>
         <td>
-         Reviews
+         Comments
         </td>
         <td>
           Section
@@ -37,10 +37,10 @@
           <%= count += 1 %>
         </td>
         <td>
-           <%= mapping.score %> / 100
+          <%= @migratorator_mappings[mapping.mapping_id]['old_url'] unless @migratorator_mappings[mapping.mapping_id].nil? %>          
         </td>
         <td>
-           <%= mapping.reviews.count %>
+          <%= mapping.reviews.each {|review| review.comment} %>
         </td>
         <td>
            <%= mapping.section %>
