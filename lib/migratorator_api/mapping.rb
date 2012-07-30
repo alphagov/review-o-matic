@@ -23,6 +23,10 @@ class MigratoratorApi
       parse_multiple_mappings_from_response MigratoratorApi.client.get("/mappings.json?tags=#{tags}&page=#{page}")
     end
 
+    def self.find_by_ids(ids)
+      JSON.parse(MigratoratorApi.client.get("/mappings/by_id_array.json?id_array=#{ids}").body) 
+    end
+
     def self.count_all_mappings
       mappings = JSON.parse(MigratoratorApi.client.get("/mappings.json").body)
       mappings["pages"]["total_entries"]
