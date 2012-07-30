@@ -152,22 +152,51 @@
 				window.open(url, '_top_');
 				return false;
 			});
+
+			/*
+			 *  open/close comment box
+			 */
+			var $question = $('a.question');
+			var question_text = $question.text();
+			var toggle_comment = function () {
+				$('.comment').slideToggle('slow');
+				$question.text(
+				    $question.text().match(/^Cancel/) ? question_text : 'Cancel'
+				);
+			};
+
+			$question.click(toggle_comment);
+
+			var $result = $('#result');
+			$result.slideToggle(0);
+
+			var show_result_briefly = function (text) {
+				$result
+					.text(text)
+					.slideToggle();
+
+				setTimeout(
+					function() {
+						$result.slideToggle();
+					},
+					3000
+				);
+			};
 		}
 
 		/*
 		 *  POST comment
 		 */
-		$('.comment input').click(function(event) {
+		$('#submit-comment').click(function(event) {
 			event.preventDefault();
 			var $form = $(this).parent('form');
 			var form_path = $form.attr('action');
-			var $commentTextarea = $(this).parent().find('textarea');
 			var token = $('input[name=authenticity_token]', $form).attr('value');
 			$.ajax({
 				type: "POST",
 				url: form_path,
 				data: {
-					comment: $commentTextarea.val(),
+					comment: $("input[name=comment]:checked").val(),
 					mapping: {
 						mapping_id: $('#new_url').data('mapping-id')
 					},
