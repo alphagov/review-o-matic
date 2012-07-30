@@ -40,7 +40,9 @@
           <%= @migratorator_mappings[mapping.mapping_id]['old_url'] unless @migratorator_mappings[mapping.mapping_id].nil? %>          
         </td>
         <td>
-          <%= mapping.reviews.each {|review| review.comment} %>
+          <% mapping.reviews.each do |review| %>
+            <%= review.comment %>
+          <% end %>
         </td>
         <td>
            <%= mapping.section %>
