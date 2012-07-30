@@ -9,7 +9,10 @@ To login to Review-O-Matic with this user, go to the path:
 
 http://reviewomatic.dev.gov.uk/__/sign_in?access_token=password
 
-To create actual users, copy a list of their emails to somewhere on the production box (e.g. /etc/reviewomatic/departmental_users.txt) and then run the rake task
+To create actual users:
+
+Copy a list of their emails to somewhere on the production box (e.g. /etc/reviewomatic/departmental_users.txt) and then run the rake task
+
 	$ bundle exec rake db:create_users[/path/to/your/file/of/users]
 
 In preview and production you need to prefix this with RAILS_ENV=production (NB. production for both).
