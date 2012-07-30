@@ -213,4 +213,6 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+  # Fix for http/https bug in preview
+  config.navigational_formats = [:"*/*", :html]
 end
