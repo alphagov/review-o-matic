@@ -42,7 +42,6 @@ class CreateUsersRakeTest < ActiveSupport::TestCase
       @test_user.stubs(:send_reset_password_instructions)
       @rake[@task_name].invoke(@file_name)
     end
-  
 
     should "capitalise the name if it is parsed from the email address" do
       File.stubs(:readlines).returns( ["testing.email@email.com"] )
@@ -61,14 +60,11 @@ class CreateUsersRakeTest < ActiveSupport::TestCase
     should "recognise that a user already exists even if their email address is in a different case" do
       existing_user = User.create!(:email => "testuser.lowercase@digital.cabinet-office.gov.uk", :name => "Test User")
       File.stubs(:readlines).returns( ["Testuser.Lowercase@digital.cabinet-office.gov.uk"] )
-            
-
       User.expects(:first).returns(existing_user)
       existing_user.expects(:send_reset_password_instructions)
       @rake[@task_name].invoke(@file_name)
     end
   
   end
-
 
 end
