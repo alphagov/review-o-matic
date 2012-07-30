@@ -4,6 +4,9 @@ class ReviewsController < ApplicationController
 
   def index
     @mappings = Mapping.order_by(:score.asc, :reviews_count.desc).page params[:page]
+    mapping_ids = []
+    @mappings.each {|mapping| mapping_ids << mapping.mapping_id.to_s }
+    @migratorator_mappings = MigratoratorApi::Mapping.find_by_ids(mapping_ids.join(','))
   end
 
   # Custom create route which requires an :id parameter for explorer view
@@ -22,7 +25,6 @@ class ReviewsController < ApplicationController
     @review.save
     respond_with(@review)
   end
-
 
   def section
     @reviews = Review.order_by(:mapping_id.desc).page params[:page]
