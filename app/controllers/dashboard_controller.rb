@@ -37,5 +37,16 @@ class DashboardController < ApplicationController
       end
     end
   end
+ 
+  def missing_mappings
+    respond_to do |format|
+      format.html do |x|
+
+      end
+      format.js do |x|
+        @missing_mappings = MissingMapping.desc(:old_url)
+      end
+    end
+  end
 
 end
