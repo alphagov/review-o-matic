@@ -7,7 +7,6 @@ class User
   devise :token_authenticatable, :rememberable, :recoverable, :trackable
 
   field :email, :type => String
-  field :score, :type => Integer, :default => 0
   field :name, :type => String
   field :authentication_token,  :type => String
 
@@ -26,15 +25,6 @@ class User
   validates_uniqueness_of :authentication_token
 
   before_save :ensure_authentication_token
-  before_save :set_score
-
-  def set_score
-    self.score = self.reviews.count
-  end
-
-  def set_score!
-    set_score and save!
-  end
 
   def gds_user?
      if self.email.match(/@digital.cabinet-office.gov.uk/)

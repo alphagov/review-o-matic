@@ -15,9 +15,24 @@ class UserTest < ActiveSupport::TestCase
     assert_equal false, @user_1.gds_user?
   end
 
-  should "be invalid if the authentication token is already taken" do
-    @user_2 = User.new(:name => "Darth", :email => "darth@thedeathstar.com", :authentication_token => "password")
+  should "be invalid if name is not present" do
+    @user_2 = User.find_or_create_by(:email => "testo@digital.cabinet-office.gov.uk", :authentication_token => 'password_2')
     assert_equal false, @user_2.valid?
+  end
+
+  should "be invalid if email is not present" do
+    @user_3 = User.find_or_create_by(:name => "Bob", :authentication_token => 'password_3')
+    assert_equal false, @user_3.valid?
+  end
+
+  should "be invalid if email is not unique" do
+    @user_4 = User.find_or_create_by(:name => "Ian", :email => "ian.wood@digital.cabinet-office.gov.uk", :authentication_token => 'password_4')
+    assert_equal false, @user_4.valid?
+  end
+
+  should "be invalid if the authentication token is not unique" do
+    @user_5 = User.new(:name => "Darth", :email => "darth@thedeathstar.com", :authentication_token => "password")
+    assert_equal false, @user_5.valid?
   end
 
 end
