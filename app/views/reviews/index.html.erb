@@ -1,6 +1,10 @@
 <style>
+  #reviews, #reviews li, dt, dd {
+    margin: 0;
+    padding: 0;
+  }
   #reviews dd.distribution {
-    border:                 1px solid black;
+    border: 1px solid black;
   }
   #reviews dd.distribution span {
     display:                block;
@@ -28,19 +32,36 @@
     clear: left;
     float: left;
     padding-right: 2px;
+    font-weight: bold;
+    min-width: 5em;
+  }
+  .urls dd {
+    margin: 0;
+    font-family: monospace;
+    font-size: 0.9em;
+    padding-top: 0.2em;
+    min-height: 2em;
   }
   .review-tally, .show-reviews {
-    margin-right: -200px;
+    margin-right: -180px;
     float: right;
     clear: right;
+    width: 180px;
+  }
+  .review-tally dd {
   }
   li {
     list-style:none;
   }
   .user-reviews {
     clear: both;
+    margin: 0 20px;
+    padding: 0;
   }
-</style> 
+  #reviews .user-reviews li {
+    border: none;
+  }
+</style>
 
 <div class="container">
   <h2>Mappings in need of attention</h2>
@@ -68,13 +89,11 @@
             <dt>Reviews</dt>
             <dd><%= mapping.reviews_tally[:wrong_page] %> wrong</dd>
             <dd><%= mapping.reviews_tally[:better_page] %> better</dd>
-            <% if mapping.reviews.count > 0 %>
-              <dd class='distribution'>
-                <span style="width: <%= (mapping.reviews_tally[:wrong_page].to_f / mapping.reviews.count.to_f) * 100 %>%"></span>
-              </dd>
-            <% end %>
+            <dd class='distribution'>
+              <span style="width: <%= (mapping.reviews_tally[:wrong_page].to_f / mapping.reviews.count.to_f) * 100 %>%"></span>
+            </dd>
           </dl>
-          <%= button_tag 'Reviews', class: 'show-reviews' if mapping.reviews.count > 0 %>
+          <button class='show-reviews'>Show reviews</button>
           <ul class='user-reviews'>
             <% mapping.reviews.each do |review| %>
               <li>
