@@ -5,33 +5,15 @@ class Review
 
   field :user_id, :type => String
   field :mapping_id, :type => String
-  field :result, :type => String
   field :comment, :type => String
-  field :comment_actioned, :type => Boolean, :default => false
-
-  RESULTS = [
-    nil,
-    'positive',
-    'neutral',
-    'negative'
-  ]
 
   validates :user_id, :mapping_id, :presence => true
-  validates :result, :inclusion => { :in => RESULTS }
+
+  validate :unique_mapping_and_user_validator, :on  => :create
 
   before_create :ensure_mapping_exists, :if => proc { self.mapping.blank? }
 
-  after_save :set_user_score
-  after_save :set_mapping_score
   after_save :set_mapping_reviews_count
-
-  def set_user_score
-    self.user.set_score!
-  end
-
-  def set_mapping_score
-    mapping.set_score!
-  end
 
   def set_mapping_reviews_count
     mapping.set_reviews_count!
@@ -39,6 +21,12 @@ class Review
 
   def ensure_mapping_exists
     self.mapping = Mapping.find_or_create_by(:mapping_id => self.mapping_id)
+  end
+
+  def unique_mapping_and_user_validator
+    if Review.first(conditions: {mapping_id: self.mapping_id, user_id: self.user_id})
+      errors.add(:base, "This user has already submitted a review for this mapping.")
+    end
   end
 
 end

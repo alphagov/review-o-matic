@@ -1,11 +1,10 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
-
-require 'rails/test_help'
 require 'shoulda'
 require 'mocha'
 require 'database_cleaner'
 require 'webmock/test_unit'
+require 'rails/test_help'
 
 WebMock.disable_net_connect!(:allow_localhost => true)
 

@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  mapping_id: testo
-  score: 0
-
-two:
-  mapping_id: testo_2
-  score: 100

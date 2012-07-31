@@ -18,11 +18,6 @@ Reviewomatic::Application.routes.draw do
 
   end
 
-  get 'dashboard' => 'dashboard#index', :as => :dashboard
-  get 'dashboard/mosaic' => 'dashboard#mosaic', :as => :mosaic
-  get 'browse/:id' => 'browse#show', :as => :browse_mapping
-  get 'browse' => 'browse#index', :as => :browse
-
   match 'reviews' => redirect('/__/reviews')
   match '/sign_in' => redirect('/')
   match '/sign_out' => redirect('/')
