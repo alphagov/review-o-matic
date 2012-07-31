@@ -13,6 +13,7 @@
 
 @closed_tags.each do |mapping_from_api|
   mapping = Mapping.create!(:mapping_id => mapping_from_api.id)
-  mapping.reviews.create!(:user_id => @user_1.id, :mapping_id => mapping.mapping_id, :result => "positive")
-  mapping.reviews.create!(:user_id => @user_2.id, :mapping_id => mapping.mapping_id, :result => "negative")
 end
+
+mapping = MigratoratorApi::Mapping.find_by_old_url('http://www.direct.gov.uk/en/index.htm')
+Mapping.create!(:mapping_id => mapping.id )
