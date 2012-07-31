@@ -1,0 +1,5 @@
+$('.missing_mappings_table').empty();
+
+<% @missing_mappings.each do |missing_mapping| %>
+  $('.missing_mappings_table').append('<tr><td><%=missing_mapping.old_url %></td></tr>');
+<% end %>
