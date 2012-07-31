@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 source 'https://gems.gemfury.com/vo6ZrmjBQu5szyywDszE/'
 
 gem 'rails', '3.1.3'
-gem "mongoid", "~> 2.3"
+gem "mongoid", "~> 2.4.12"
 gem "bson_ext", "~> 1.5"
 
 gem 'aws-ses', require: 'aws/ses'
