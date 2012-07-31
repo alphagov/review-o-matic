@@ -1,5 +1,4 @@
 <style>
-
   #reviews dd.distribution {
     border:                 1px solid black;
   }
@@ -30,11 +29,18 @@
     float: left;
     padding-right: 2px;
   }
-  .review-tally {
+  .review-tally, .show-reviews {
     margin-right: -200px;
     float: right;
+    clear: right;
   }
-</style>
+  li {
+    list-style:none;
+  }
+  .user-reviews {
+    clear: both;
+  }
+</style> 
 
 <div class="container">
   <h2>Mappings in need of attention</h2>
@@ -68,11 +74,30 @@
               </dd>
             <% end %>
           </dl>
+          <%= button_tag 'Reviews', class: 'show-reviews' if mapping.reviews.count > 0 %>
+          <ul class='user-reviews'>
+            <% mapping.reviews.each do |review| %>
+              <li>
+                <em><%= review.user.name %></em>
+                <q><%= review.comment %></q>
+              </li>
+            <% end %>
+          </ul>
         </li>
       <% end %>
     <% end %>
   </ol>
   
+  
+  <script>
+    $('.user-reviews').hide();
+    
+    //show reviews
+    $('.show-reviews').click(function(ev){
+      var btn = ev.target;
+      $('.user-reviews', $(btn).parent() ).slideToggle();
+    });
+  </script>
   
   <% if false %>
   <table class="review_table" border="0">

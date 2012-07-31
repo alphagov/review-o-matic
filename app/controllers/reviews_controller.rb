@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   respond_to :json
 
   def index
-    @mappings = Mapping.order_by(:reviews_count.desc).page params[:page]
+    @mappings = Mapping.where(:reviews_count > 0).order_by(:reviews_count.desc).page params[:page]
     mapping_ids = []
     @mappings.each {|mapping| mapping_ids << mapping.mapping_id.to_s }
     @migratorator_mappings = MigratoratorApi::Mapping.find_by_ids(mapping_ids.join(','))
