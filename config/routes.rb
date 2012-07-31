@@ -13,11 +13,13 @@ Reviewomatic::Application.routes.draw do
     get 'reviews/section' => 'reviews#section', :as => :reviews_section
 
     get 'explore' => 'explore#show', :as => :explore
+    get 'dashboard/missing_mappings' => 'dashboard#missing_mappings', :as => :missing_mappings
 
     root :to => 'explore#index'
 
   end
 
+  match 'dashboard/missing_mappings' => redirect('/__/dashboard/missing_mappings')
   match 'reviews' => redirect('/__/reviews')
   match '/sign_in' => redirect('/')
   match '/sign_out' => redirect('/')
