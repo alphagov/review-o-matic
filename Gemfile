@@ -6,6 +6,7 @@ gem "mongoid", "~> 2.4.12"
 gem "bson_ext", "~> 1.5"
 
 gem 'aws-ses', require: 'aws/ses'
+gem 'exception_notification'
 
 group :assets do
   gem 'sass-rails',   '3.1.4'
