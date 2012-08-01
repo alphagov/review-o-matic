@@ -1,5 +1,80 @@
+<style>
+
+  #reviews dd.distribution {
+    border:                 1px solid black;
+  }
+  #reviews dd.distribution span {
+    display:                block;
+    width:                  100%;
+    background:             black;
+    height:                 1em;
+  }
+  #reviews li {
+    border: 1px solid black;
+    padding: 5px;
+    padding-right: 200px;
+  }
+  #reviews li:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  #reviews li {
+    _zoom: 1; /* containing hack for IE */
+  }
+  .urls {
+    float: left;
+  }
+  .urls dt {
+    clear: left;
+    float: left;
+    padding-right: 2px;
+  }
+  .review-tally {
+    margin-right: -200px;
+    float: right;
+  }
+</style>
+
 <div class="container">
   <h2>Mappings in need of attention</h2>
+  <ol id='reviews'>
+    <% @mappings.each do |mapping| %>
+      <% if @migratorator_mappings[mapping.mapping_id] %>
+        <li>
+          <dl class='urls'>
+            <dt>Old URL</dt>
+            <dd><%= @migratorator_mappings[mapping.mapping_id]['old_url'] %></dd>
+            <% unless @migratorator_mappings[mapping.mapping_id]['new_url'].blank? %>
+              <dt>New URL</dt>
+              <dd><%= @migratorator_mappings[mapping.mapping_id]['new_url']  %></dd>
+              <dt>Section</dt>
+              <dd><%= mapping.section %></dd>
+            <% else %>
+              <% if @migratorator_mappings[mapping.mapping_id]['status'] == 410 %>
+                <dt>Gone</dt>
+              <% else %>
+                <dt>No mapping</dt>
+              <% end %>
+            <% end %>
+          </dl>
+          <dl class='review-tally'>  
+            <dt>Reviews</dt>
+            <dd><%= mapping.reviews_tally[:wrong_page] %> wrong</dd>
+            <dd><%= mapping.reviews_tally[:better_page] %> better</dd>
+            <% if mapping.reviews.count > 0 %>
+              <dd class='distribution'>
+                <span style="width: <%= (mapping.reviews_tally[:wrong_page].to_f / mapping.reviews.count.to_f) * 100 %>%"></span>
+              </dd>
+            <% end %>
+          </dl>
+        </li>
+      <% end %>
+    <% end %>
+  </ol>
+  
+  
+  <% if false %>
   <table class="review_table" border="0">
     <thead>
       <tr>
@@ -57,5 +132,7 @@
 
     </tbody>
   </table>
+  <% end %>
+
   <%= paginate @mappings %>
 </div>

@@ -12,6 +12,13 @@ class Mapping
 
   validates :mapping_id, :presence => true
 
+  def reviews_tally
+    return {
+      :wrong_page  => self.reviews.where(comment: 'wrong-page').count,
+      :better_page => self.reviews.where(comment: 'better-page').count,
+    }
+  end
+
   def set_section
     mapping = MigratoratorApi::Mapping.find_by_id(self.mapping_id)
 
