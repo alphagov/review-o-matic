@@ -8,9 +8,11 @@ class DashboardController < ApplicationController
       format.html do |x|
 
       end
-      format.js do |x|
+      format.json do |x|
         @missing_mappings = MissingMapping.desc(:old_url)
+        render :json => @missing_mappings 
       end
+
     end
   end
 
