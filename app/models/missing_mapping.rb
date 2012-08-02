@@ -20,7 +20,7 @@ class MissingMapping
     mappings_no_longer_missing = MigratoratorApi::Mapping.find_by_old_urls(MissingMapping.missing_mappings_joined)
     old_urls = []
     mappings_no_longer_missing.each_key { |key| old_urls << key }
-    MissingMapping.any_in( old_url: old_urls ).destroy
+    MissingMapping.any_in( old_url: old_urls ).delete_all
   end
 
   def self.missing_mappings_joined
