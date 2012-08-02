@@ -16,4 +16,16 @@ class MissingMapping
     end
   end
 
+  def self.purge_mappings_which_are_no_longer_missing!
+    mappings_no_longer_missing = MigratoratorApi::Mapping.find_by_old_urls(MissingMapping.missing_mappings_joined)
+    old_urls = []
+    mappings_no_longer_missing.each_key { |key| old_urls << key }
+    MissingMapping.any_in( old_url: old_urls ).destroy
+  end
+
+  def self.missing_mappings_joined
+    mapping_urls = []
+    all.each { | mapping |  mapping_urls << mapping.old_url }
+    mapping_urls.join(',')
+  end
 end

@@ -27,6 +27,10 @@ class MigratoratorApi
       JSON.parse(MigratoratorApi.client.get("/mappings/by_id_array.json?id_array=#{ids}").body) 
     end
 
+    def self.find_by_old_urls(urls)
+      JSON.parse(MigratoratorApi.client.get("/mappings/by_old_url_array.json?old_url_array=#{urls}").body) 
+    end
+
     def self.count_all_mappings
       mappings = JSON.parse(MigratoratorApi.client.get("/mappings.json").body)
       mappings["pages"]["total_entries"]
