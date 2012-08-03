@@ -50,4 +50,21 @@ class MissingMappingTest < ActiveSupport::TestCase
     assert MissingMapping.first(conditions: {old_url: 'test_3'})
   end
 
+
+  should "purge multiple missing mappings that have subsequently been updated in the migratorator" do
+    MissingMapping.create!(:old_url => 'test_1')
+    MissingMapping.create!(:old_url => 'test_2')
+    MissingMapping.create!(:old_url => 'test_3')
+    MissingMapping.create!(:old_url => 'test_4')
+    @results_from_migratorator_api = {"test_1" => {}, "test_2" => {}, "test_3" => {}}
+    MigratoratorApi::Mapping.stubs(:find_by_old_urls).returns(@results_from_migratorator_api)
+    MissingMapping.purge_mappings_which_are_no_longer_missing!
+    @mappings = MissingMapping.all
+    assert_equal 1, @mappings.count
+    assert_nil MissingMapping.first(conditions: {old_url: 'test_1'})
+    assert_nil MissingMapping.first(conditions: {old_url: 'test_2'})
+    assert_nil MissingMapping.first(conditions: {old_url: 'test_3'})
+    assert MissingMapping.first(conditions: {old_url: 'test_4'})
+  end
+
 end
