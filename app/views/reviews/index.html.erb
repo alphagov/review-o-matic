@@ -1,5 +1,124 @@
+<style>
+  #reviews, #reviews li, dt, dd {
+    margin: 0;
+    padding: 0;
+  }
+  #reviews dd.distribution {
+    border: 1px solid black;
+  }
+  #reviews dd.distribution span {
+    display:                block;
+    width:                  100%;
+    background:             black;
+    height:                 1em;
+  }
+  #reviews li {
+    border-top: 1px dotted grey;
+    margin-top: 1em; 
+    padding: 5px;
+    padding-right: 200px;
+  }
+  #reviews li:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  #reviews li {
+    _zoom: 1; /* containing hack for IE */
+  }
+  .urls {
+    float: left;
+  }
+  .urls dt {
+    clear: left;
+    float: left;
+    padding-right: 2px;
+    font-weight: bold;
+    min-width: 5em;
+  }
+  .urls dd {
+    margin: 0;
+    font-family: monospace;
+    font-size: 0.9em;
+    padding-top: 0.2em;
+    min-height: 2em;
+  }
+  .review-tally, .show-reviews {
+    margin-right: -180px;
+    float: right;
+    clear: right;
+    width: 180px;
+  }
+  li {
+    list-style:none;
+  }
+  .user-reviews {
+    clear: both;
+    margin: 0 20px;
+    padding: 0;
+  }
+  #reviews .user-reviews li {
+    border: none;
+  }
+</style>
+
 <div class="container">
   <h2>Mappings in need of attention</h2>
+  <ol id='reviews'>
+    <% @mappings.each do |mapping| %>
+      <% if @migratorator_mappings[mapping.mapping_id] %>
+        <li>
+          <dl class='urls'>
+            <dt>Old URL</dt>
+            <dd><%= @migratorator_mappings[mapping.mapping_id]['old_url'] %></dd>
+            <% unless @migratorator_mappings[mapping.mapping_id]['new_url'].blank? %>
+              <dt>New URL</dt>
+              <dd><%= @migratorator_mappings[mapping.mapping_id]['new_url']  %></dd>
+              <dt>Section</dt>
+              <dd><%= mapping.section %></dd>
+            <% else %>
+              <% if @migratorator_mappings[mapping.mapping_id]['status'] == 410 %>
+                <dt>Gone</dt>
+              <% else %>
+                <dt>No mapping</dt>
+              <% end %>
+            <% end %>
+          </dl>
+          <dl class='review-tally'>  
+            <dt>Reviews (<%=  mapping.reviews_count %>)</dt>
+            <dd><%= mapping.reviews_tally[:wrong_page] %> wrong</dd>
+            <dd><%= mapping.reviews_tally[:better_page] %> better</dd>
+            <dd class='distribution'>
+              <span style="width: <%= (mapping.reviews_tally[:wrong_page].to_f / mapping.reviews.count.to_f) * 100.0 %>%"></span>
+            </dd>
+          </dl>
+          <button class='show-reviews'>Show <%= pluralize( mapping.reviews_count, 'Review') %></button>
+          <ul class='user-reviews'>
+            <% mapping.reviews.each do |review| %>
+              <li>
+                <em><%= review.user.name %></em>
+                <q><%= review.comment %></q>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    <% end %>
+  </ol>
+  
+  
+  <script>
+    // hide the reviews box
+    $('.user-reviews').hide();
+    
+    //show reviews
+    $('.show-reviews').click(function(ev){
+      var btn = ev.target;
+      $('.user-reviews', $(btn).parent() ).slideToggle();
+    });
+  </script>
+  
+  <% if false %>
   <table class="review_table" border="0">
     <thead>
       <tr>
@@ -57,5 +176,7 @@
 
     </tbody>
   </table>
+  <% end %>
+
   <%= paginate @mappings %>
 </div>
