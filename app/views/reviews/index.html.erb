@@ -48,8 +48,6 @@
     clear: right;
     width: 180px;
   }
-  .review-tally dd {
-  }
   li {
     list-style:none;
   }
@@ -86,14 +84,14 @@
             <% end %>
           </dl>
           <dl class='review-tally'>  
-            <dt>Reviews</dt>
+            <dt>Reviews (<%=  mapping.reviews_count %> | <%= mapping.reviews.count %>)</dt>
             <dd><%= mapping.reviews_tally[:wrong_page] %> wrong</dd>
             <dd><%= mapping.reviews_tally[:better_page] %> better</dd>
             <dd class='distribution'>
-              <span style="width: <%= (mapping.reviews_tally[:wrong_page].to_f / mapping.reviews.count.to_f) * 100 %>%"></span>
+              <span style="width: <%= (mapping.reviews_tally[:wrong_page].to_f / mapping.reviews.count.to_f) * 100.0 %>%"></span>
             </dd>
           </dl>
-          <button class='show-reviews'>Show reviews</button>
+          <button class='show-reviews'>Show Reviews (<%=  mapping.reviews_count %>)</button>
           <ul class='user-reviews'>
             <% mapping.reviews.each do |review| %>
               <li>
@@ -109,6 +107,7 @@
   
   
   <script>
+    // hide the reviews box
     $('.user-reviews').hide();
     
     //show reviews
