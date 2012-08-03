@@ -118,65 +118,6 @@
     });
   </script>
   
-  <% if false %>
-  <table class="review_table" border="0">
-    <thead>
-      <tr>
-        <td>
-         Position
-        </td>
-        <td>
-          Old Url 
-        </td>
-        <td>
-         Comments
-        </td>
-        <td>
-          Section
-        </td>
-        <td>
-          Edit in Migratorator
-        </td>
-        <td>
-          Review in Review-O-Matic
-        </td>
-      </tr>
-    </thead>
-    <tbody>
-    <%
-      if params[:page] == nil
-        count = 0
-      else
-        count = 0 + (params[:page].to_i - 1 ) * Kaminari.config.default_per_page
-      end
-    %>
-    <% @mappings.each do |mapping| %>
-      <tr>
-        <td>
-          <%= count += 1 %>
-        </td>
-        <td>
-          <%= @migratorator_mappings[mapping.mapping_id]['old_url'] unless @migratorator_mappings[mapping.mapping_id].nil? %>          
-        </td>
-        <td>
-          <% mapping.reviews.each do |review| %>
-            <%= review.comment %>
-          <% end %>
-        </td>
-        <td>
-           <%= mapping.section %>
-        </td>
-        <td>
-          <%= link_to "Edit", edit_migratorator_mapping_url(mapping.mapping_id),  :target => '_blank'%>
-        </td>
-        <td>
-        </td>
-      </tr>
-    <% end %>
-
-    </tbody>
-  </table>
-  <% end %>
 
   <%= paginate @mappings %>
 </div>
