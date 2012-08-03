@@ -13,7 +13,8 @@
     height:                 1em;
   }
   #reviews li {
-    border: 1px solid black;
+    border-top: 1px dotted grey;
+    margin-top: 1em; 
     padding: 5px;
     padding-right: 200px;
   }
@@ -84,14 +85,14 @@
             <% end %>
           </dl>
           <dl class='review-tally'>  
-            <dt>Reviews (<%=  mapping.reviews_count %> | <%= mapping.reviews.count %>)</dt>
+            <dt>Reviews (<%=  mapping.reviews_count %>)</dt>
             <dd><%= mapping.reviews_tally[:wrong_page] %> wrong</dd>
             <dd><%= mapping.reviews_tally[:better_page] %> better</dd>
             <dd class='distribution'>
               <span style="width: <%= (mapping.reviews_tally[:wrong_page].to_f / mapping.reviews.count.to_f) * 100.0 %>%"></span>
             </dd>
           </dl>
-          <button class='show-reviews'>Show Reviews (<%=  mapping.reviews_count %>)</button>
+          <button class='show-reviews'>Show <%= pluralize( mapping.reviews_count, 'Review') %></button>
           <ul class='user-reviews'>
             <% mapping.reviews.each do |review| %>
               <li>
