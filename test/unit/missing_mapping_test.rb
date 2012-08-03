@@ -35,39 +35,19 @@ class MissingMappingTest < ActiveSupport::TestCase
   end
 
   should "purge missing mappings that have subsequently been updated in the migratorator" do
-    @missing_mapping_1 = MissingMapping.create!(:old_url => 'test_1')
-    @missing_mapping_2 = MissingMapping.create!(:old_url => 'test_2')
-    @missing_mapping_3 = MissingMapping.create!(:old_url => 'test_3')
-
+    MissingMapping.create!(:old_url => 'test_1')
+    MissingMapping.create!(:old_url => 'test_2')
+    MissingMapping.create!(:old_url => 'test_3')
     stub_request(:get, "http://migratorator.test.gov.uk/api/mappings/by_old_url_array.json?old_url_array=test_1,test_2,test_3").
     with(:headers => {'Accept'=>'*/*', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'}).
     to_return(:status => 200, :body => '{ "test_2":{} }', :headers => {})
-
     MissingMapping.purge_mappings_which_are_no_longer_missing!
+    @mappings = MissingMapping.all
 
-    assert @missing_mapping_1
-    assert @missing_mapping_3
-
-    assert_nil @missing_mapping_2, "Missing mapping 2 should have been deleted"
+    assert_equal 2, @mappings.count
+    assert MissingMapping.first(conditions: {old_url: 'test_1'})
+    assert_nil MissingMapping.first(conditions: {old_url: 'test_2'})
+    assert MissingMapping.first(conditions: {old_url: 'test_3'})
   end
-
-  # should "purge multiple missing mappings that have subsequently been updated in the migratorator" do
-  #   @missing_mapping_1 = MissingMapping.create!(:old_url => 'test_1')
-  #   @missing_mapping_2 = MissingMapping.create!(:old_url => 'test_2')
-  #   @missing_mapping_3 = MissingMapping.create!(:old_url => 'test_3')
-  #   @missing_mapping_4 = MissingMapping.create!(:old_url => 'test_4')
-
-  #   # @results_from_migratorator_api = {"test_1" => {}, "test_2" => {}, "test_3" => {}}
-
-  #   # MigratoratorApi::Mapping.stubs(:find_by_old_urls).returns(@results_from_migratorator_api)
-
-  #   MissingMapping.purge_mappings_which_are_no_longer_missing!
-
-  #   assert_nil @missing_mapping_1, "Missing mapping 1 should have been deleted"
-  #   assert_nil @missing_mapping_2, "Missing mapping 2 should have been deleted"
-  #   assert_nil @missing_mapping_3, "Missing mapping 3 should have been deleted"
-
-  #   assert @missing_mapping_4, "Missing mapping 4 should still be present"
-  # end
 
 end
