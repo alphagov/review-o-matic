@@ -8,8 +8,8 @@ Reviewomatic::Application.routes.draw do
       get 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
     end
 
-    resources :reviews, :only => [:update, :index]
-    post 'reviews/:id' => 'reviews#create'
+    resources :reviews, :only => [:index]
+    post 'reviews/:id' => 'reviews#create', :as => :review
     get 'reviews/section' => 'reviews#section', :as => :reviews_section
 
     get 'explore' => 'explore#show', :as => :explore

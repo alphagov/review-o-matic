@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
 
   # Custom create route which requires an :id parameter for explorer view
   def create
-    @mapping = Mapping.first(conditions: {mapping_id: params[:id]})
+    @mapping = Mapping.find_or_create_by(conditions: {mapping_id: params[:id]})
     @review = Review.find_or_initialize_by(:mapping_id =>  @mapping.id, :user_id => current_user.id)
     @review.comment = params[:comment]
     @review.save
