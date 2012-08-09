@@ -1,7 +1,115 @@
 (function ($) {
 
-	var ROOT = "http://www.direct.gov.uk";
-	var HOME = "/en/index.htm";
+  // Get custom proxy header in order to set ROOT variable
+  // Get custom proxy_home_path header in order to set HOME variable
+	var HOME;
+  var ROOT;
+  var getUrl = $.ajax({
+    type: "GET",
+    url: '',
+    success: function () {
+      ROOT = 'http://' + getUrl.getResponseHeader('proxy');
+      HOME = getUrl.getResponseHeader('proxy_home_path');
+
+      $(document).ready(function() {
+        if ($('#old').length) {
+          set_iframe_heights();
+          $(window).resize(set_iframe_heights);
+        
+          /*
+           *  poll for old_url to change
+           *  - onLoad of iframe slow and flaky
+           */
+          poll_timer = setInterval(check_old_url, poll_interval);
+
+          /*
+           *  load inital page
+           */
+          load_old_url(get_browser_location() || HOME);
+
+          $('a.home').click( function (ev) {
+            load_old_url(HOME);
+            ev.preventDefault();
+            ev.stopPropagation();
+            return false;
+          });
+
+          /*
+           *  open URL in input bar (in a new window for now)
+           */
+          $('.bar button').click (function () {
+            var url = $(this).next('input').val()
+            if (url.substr(0, 4) != "http") {
+              url = ROOT + url;
+            }
+            window.open(url, '_top_');
+            return false;
+          });
+
+          /*
+           *  open/close comment box
+           */
+          var $question = $('a.question');
+          var question_text = $question.text();
+          var toggle_comment = function () {
+            $('.comment').slideToggle('slow');
+            $question.text(
+                $question.text().match(/^Cancel/) ? question_text : 'Cancel'
+            );
+          };
+
+          $question.click(toggle_comment);
+
+          var $result = $('#result');
+          $result.slideToggle(0);
+
+          var show_result_briefly = function (text) {
+            $result
+              .text(text)
+              .slideToggle();
+
+            setTimeout(
+              function() {
+                $result.slideToggle();
+              },
+              3000
+            );
+          };
+        }
+
+        /*
+         *  POST comment
+         */
+        $('#submit-comment').click(function(event) {
+          event.preventDefault();
+          var $form = $(this).parent('form');
+          var form_path = $form.attr('action');
+          var token = $('input[name=authenticity_token]', $form).attr('value');
+          $.ajax({
+            type: "POST",
+            url: form_path,
+            data: {
+              comment: $("input[name=comment]:checked").val(),
+              mapping: {
+                mapping_id: $('#new_url').data('mapping-id')
+              },
+              authenticity_token: token
+            }, 
+            success: function(data) {
+              toggle_comment();
+              show_result_briefly('Thank you for your help!');
+              },
+            error: function(data) {
+              alert("Unable to send the comments. Please try again later.");
+            },
+            beforeSend: function(data) {
+            }
+          });
+        });
+      });
+
+    }
+  });
 
 	var poll_interval = 1000;
 	var poll_timer;
@@ -118,101 +226,5 @@
 		);
 	}
 
-	$(document).ready(function() {
-		if ($('#old').length) {
-			set_iframe_heights();
-			$(window).resize(set_iframe_heights);
-		
-			/*
-			 *  poll for old_url to change
-			 *  - onLoad of iframe slow and flaky
-			 */
-			poll_timer = setInterval(check_old_url, poll_interval);
-
-			/*
-			 *  load inital page
-			 */
-			load_old_url(get_browser_location() || HOME);
-
-			$('a.home').click( function (ev) {
-				load_old_url(HOME);
-				ev.preventDefault();
-				ev.stopPropagation();
-				return false;
-			});
-
-			/*
-			 *  open URL in input bar (in a new window for now)
-			 */
-			$('.bar button').click (function () {
-				var url = $(this).next('input').val()
-				if (url.substr(0, 4) != "http") {
-					url = ROOT + url;
-				}
-				window.open(url, '_top_');
-				return false;
-			});
-
-			/*
-			 *  open/close comment box
-			 */
-			var $question = $('a.question');
-			var question_text = $question.text();
-			var toggle_comment = function () {
-				$('.comment').slideToggle('slow');
-				$question.text(
-				    $question.text().match(/^Cancel/) ? question_text : 'Cancel'
-				);
-			};
-
-			$question.click(toggle_comment);
-
-			var $result = $('#result');
-			$result.slideToggle(0);
-
-			var show_result_briefly = function (text) {
-				$result
-					.text(text)
-					.slideToggle();
-
-				setTimeout(
-					function() {
-						$result.slideToggle();
-					},
-					3000
-				);
-			};
-		}
-
-		/*
-		 *  POST comment
-		 */
-		$('#submit-comment').click(function(event) {
-			event.preventDefault();
-			var $form = $(this).parent('form');
-			var form_path = $form.attr('action');
-			var token = $('input[name=authenticity_token]', $form).attr('value');
-			$.ajax({
-				type: "POST",
-				url: form_path,
-				data: {
-					comment: $("input[name=comment]:checked").val(),
-					mapping: {
-						mapping_id: $('#new_url').data('mapping-id')
-					},
-					authenticity_token: token
-				}, 
-				success: function(data) {
-					toggle_comment();
-					show_result_briefly('Thank you for your help!');
-    			},
-				error: function(data) {
-					alert("Unable to send the comments. Please try again later.");
-				},
-				beforeSend: function(data) {
-				}
-			});
-		});
-	});
 
 }(jQuery));
