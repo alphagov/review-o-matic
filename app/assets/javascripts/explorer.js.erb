@@ -137,14 +137,37 @@
 	/*
 	 *  load new_url in RHS for given old_url
 	 */
-	function load_new_url(old_url) {
-		$.getJSON('/__/explore.json?old_url=' + escape(old_url), function (mapping) {
-			var url = select_new_url(mapping);
-			$('#new_url').val(url);
-			$('#new_url').data('mapping-id', mapping.id);
-			$('#new iframe').attr('src', url);
-			$('.comment form').attr('action', '/__/reviews/' + mapping.id);
-		});
+	function load_new_url(old_root, old_url) {
+    var clean_old_root = old_root.replace('http://', '');
+    console.log(clean_old_root);
+    console.log(old_url);
+
+    var getMapping = $.ajax({
+      type: "GET",
+      url: '/__api' + old_url,
+      //headers: {
+      //  Accept : "text/plain; charset=utf-8",
+      //  "Content-Type": "text/plain; charset=utf-8",
+      //  Host : clean_old_root
+      //},
+      success: function () {
+        console.log('HUZZAH!');
+        //ROOT = 'http://' + getMapping.getResponseHeader('proxy');
+        //HOME = getMapping.getResponseHeader('proxy_home_path');
+      }
+    });
+
+
+    //$('#new iframe').attr('src', 'http://dummy.preview.alphagov.co.uk' + old_url);
+
+		//$.getJSON('/__/explore.json?old_url=' + escape(old_root + old_url), function (mapping) {
+		//	var url = select_new_url(mapping);
+		//	$('#new_url').val(url);
+		//	$('#new_url').data('mapping-id', mapping.id);
+		//	$('#new iframe').attr('src', url);
+		//	$('.comment form').attr('action', '/__/reviews/' + mapping.id);
+		//});
+
 	}
 
 	/*
@@ -154,7 +177,7 @@
 		$('#old_url').val(url);
 		$('#old iframe').attr('src', url);
 		set_browser_location(url);
-		load_new_url(ROOT + url);
+		load_new_url(ROOT,url);
 		last_url = url;
 	}
 
