@@ -138,36 +138,11 @@
 	 *  load new_url in RHS for given old_url
 	 */
 	function load_new_url(old_root, old_url) {
-    var clean_old_root = old_root.replace('http://', '');
-    console.log(clean_old_root);
-    console.log(old_url);
-
-    var getMapping = $.ajax({
-      type: "GET",
-      url: '/__api' + old_url,
-      //headers: {
-      //  Accept : "text/plain; charset=utf-8",
-      //  "Content-Type": "text/plain; charset=utf-8",
-      //  Host : clean_old_root
-      //},
-      success: function () {
-        console.log('HUZZAH!');
-        //ROOT = 'http://' + getMapping.getResponseHeader('proxy');
-        //HOME = getMapping.getResponseHeader('proxy_home_path');
-      }
-    });
-
-
-    //$('#new iframe').attr('src', 'http://dummy.preview.alphagov.co.uk' + old_url);
-
-		//$.getJSON('/__/explore.json?old_url=' + escape(old_root + old_url), function (mapping) {
-		//	var url = select_new_url(mapping);
-		//	$('#new_url').val(url);
-		//	$('#new_url').data('mapping-id', mapping.id);
-		//	$('#new iframe').attr('src', url);
-		//	$('.comment form').attr('action', '/__/reviews/' + mapping.id);
-		//});
-
+    //TODO Wire up comments from Review-O-Matic
+		//$('#new_url').data('mapping-id', mapping.id);
+		//$('.comment form').attr('action', '/__/reviews/' + mapping.id);
+		$('#new_url').val(old_url);
+    $('#new iframe').attr('src', '/__api' + old_url);
 	}
 
 	/*
