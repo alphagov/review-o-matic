@@ -138,9 +138,12 @@
 	 *  load new_url in RHS for given old_url
 	 */
 	function load_new_url(old_root, old_url) {
-    //TODO Wire up comments from Review-O-Matic
-		//$('#new_url').data('mapping-id', mapping.id);
-		//$('.comment form').attr('action', '/__/reviews/' + mapping.id);
+		$.getJSON('/__/explore.json?old_url=' + escape(old_root + old_url), function (mapping) {
+			var url = select_new_url(mapping);
+			$('#new_url').data('mapping-id', mapping.id);
+			$('.comment form').attr('action', '/__/reviews/' + mapping.id);
+		});
+
 		$('#new_url').val(old_url);
     $('#new iframe').attr('src', '/__api' + old_url);
 	}
