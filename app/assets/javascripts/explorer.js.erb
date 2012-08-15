@@ -8,8 +8,9 @@
     type: "GET",
     url: '',
     success: function () {
-      ROOT = 'http://' + getUrl.getResponseHeader('proxy');
-      HOME = getUrl.getResponseHeader('proxy_home_path');
+      ROOT = 'http://' + getUrl.getResponseHeader('X-Explore-Upstream');
+      //HOME = getUrl.getResponseHeader('proxy_home_path');
+      HOME = '/en/index.htm' //should be passed in by the vhost
 
       $(document).ready(function() {
         if ($('#old').length) {
