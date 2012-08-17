@@ -2,12 +2,8 @@ namespace :db do
 
   desc "Fixes mapping.mapping_id in batches. Expects to be passed a whitespace separated list of invalid mapping ids and a whitespace separated list of correct mapping ids. These lists are converted to arrays. The two arrays must match in number. NOTE! To pass args using Bundle exec you must escape square brackets like so: bundle exec rake db:fix_mapping_ids\['old_id_1 old_id_2','new_id_1 new_id_2'\]"
   task :fix_mapping_ids, [:incorrect_mapping_ids, :mapping_ids] => :environment do |t, args|
-    puts args[:incorrect_mapping_ids]
-    puts args[:mapping_ids]
     incorrect_mapping_ids = args[:incorrect_mapping_ids].split(' ') 
     mapping_ids = args[:mapping_ids].split(' ')
-    puts incorrect_mapping_ids
-    puts mapping_ids
     if incorrect_mapping_ids.count == mapping_ids.count
       puts "Processing mappings..."
       incorrect_mapping_ids.each do |id|
