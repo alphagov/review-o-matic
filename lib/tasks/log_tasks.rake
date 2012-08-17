@@ -69,8 +69,21 @@ namespace :log do
     File.open("#{Rails.root}/db/reviewed_mappings_output.txt", "w") do |file|
       file.puts output
     end
+  end
 
-
+  desc "Output a list of reviews that refer to mappings that do not exist in Migratorator"
+  task :list_invalid_reviews => :environment do
+    reviews = Review.all
+    invalid_reviews = []
+    reviews.each do |review|
+      if !MigratoratorApi::Mapping.find_by_id(review.mapping.mapping_id)
+        invalid_reviews << review    
+      end
+    end
+    invalid_reviews.each do |review|
+      puts "User: #{review.user.email} Mapping_ID: #{review.mapping.mapping_id}"
+    end 
+    puts "#{invalid_reviews.count} invalid reviews."
   end
 
 end
