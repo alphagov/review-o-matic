@@ -1,6 +1,6 @@
 namespace :db do
 
-  desc "Finds or creates user accounts and emails all users in provided list with login instructions."
+  desc "Finds or creates user accounts and emails all users in provided list with login instructions. NOTE! To pass args using Bundle exec you must escape square brackets."
   task :create_users, [:file] => :environment do |t, args| 
     puts "Creating Users:"
     
