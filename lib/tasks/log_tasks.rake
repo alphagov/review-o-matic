@@ -61,7 +61,7 @@ namespace :log do
       # To see the actual mapping ids and count...
       #puts "#{key} COUNT: #{value.count}"
       value.each do |x|
-        output << "#{key} #{x}"
+        output << x
       end
     end
     puts "Record Count: #{counter}"
