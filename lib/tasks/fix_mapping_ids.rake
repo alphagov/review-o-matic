@@ -10,8 +10,8 @@ namespace :db do
         begin
           mapping = Mapping.first(conditions: {mapping_id: id})
           puts "Old id: #{id}"
-          mapping.mapping_id = args[:mapping_ids][args[:incorrect_mapping_ids].index(id)]
-          puts "New id: #{mapping_ids[incorrect_mapping_ids.index(id)]}"
+          mapping.mapping_id = mapping_ids[incorrect_mapping_ids.index(id)]
+          puts "New id: #{mapping.mapping_id}"
           mapping.save!
         rescue
           puts "A mapping with the id #{id} was not found or could not be saved."
