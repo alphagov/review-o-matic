@@ -1,9 +1,3 @@
-/* To switch between the two possible sources of mappings (migratorator and redirector),
-  there are three places where lines need commenting in and out. 
-  1. There are some lines that need commenting in or out directly before 
-      the document.ready 
-  2. There are some closing braces after it. 
-  3. There is a line that needs commeting in and one out in the load_new_url function */ 
 (function ($) {
 
   var ROOT; 
@@ -14,19 +8,8 @@
   var warned = false;
   var last_url = '';
 
-  /* If migratorator, uncomment below two lines and comment out the
-  lines before the document.ready and the closing } }); after document.ready */
   ROOT = "http://www.direct.gov.uk";
   HOME = "/en/index.htm";
-
-  /* if redirector, uncomment lines below and the closing } }); after the 
-    document.ready and comment out lines above */
-  // var getUrl = $.ajax({
-  //   type: "GET",
-  //   url: '',
-  //   success: function () {
-  //     ROOT = 'http://' + getUrl.getResponseHeader('X-Explore-Upstream');
-  //     HOME = getUrl.getResponseHeader('X-Explore-Upstream-Home-Path');
 
   $(document).ready(function() {
     if ($('#old').length) {
@@ -34,8 +17,7 @@
       $(window).resize(set_iframe_heights);
     
       /*
-       *  poll for old_url to change
-       *  - onLoad of iframe slow and flaky
+       *  poll for both iframe URLs to change
        */
       poll_timer = setInterval(check_old_url, poll_interval);
 
@@ -125,43 +107,20 @@
     });
   });
 
-/* These need to be uncommented for redirector */
-//   }
-// });
-
-  /*
-   *  select new page for a mapping
-   */
-
-  function select_new_url(mapping) {
-    if (mapping) {
-      if (mapping.new_url) {
-        return mapping.new_url;
-      }
-      if (mapping.status == 410) {
-        return "/__/410.html";
-      }
-      if (mapping.awaiting_content) {
-        return "/__/awaiting_content.html";
-      }
-    }
-    return "/__/no_mapping.html";
-  }
-
   /*
    *  load new_url in RHS for given old_url
    */
   
-  //The only difference between migratorator and redirector is how the RHS iframe is set
   function load_new_url(old_url) {
-    /* This line is required if the mapping source is the redirector */
-    //$('#new iframe').attr('src', '/__api' + old_url);
     $.getJSON('/__/explore.json?old_url=' + escape(ROOT + old_url), function (mapping) {
-      var url = select_new_url(mapping);
-      $('#new_url').val(url);
-      $('#new_url').data('mapping-id', mapping.id);
-      /* This line is required if the mapping source is the migratorator */
+
+      // We don't use the migratorator API to decide where to send the RHS, we
+      // just send it to the redirector.
+      var url = 'http://www-direct-gov-uk.redirector.preview.alphagov.co.uk' + old_url;
       $('#new iframe').attr('src', url);
+
+      // But we still need the return value of the API call to set up the
+      // comments form.
       $('.comment form').attr('action', '/__/reviews/' + mapping.id);
     });
   }
