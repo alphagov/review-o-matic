@@ -24,3 +24,6 @@ public/javascripts/all.js
 public/assets/
 mkmf.log
 *.swp
+
+# Ignore user.bison
+users.bson
