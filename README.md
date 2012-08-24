@@ -33,3 +33,5 @@ NOTE:
 
 The application currently does not include additional assets for compilation as standard. In order to compile these assets they will have to be added to the array in config/production.rb
 
+===
+
