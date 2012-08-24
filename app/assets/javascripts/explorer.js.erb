@@ -1,15 +1,20 @@
 (function ($) {
 
   var ROOT; 
-  var HOME;
 
   var poll_interval = 1000;
   var poll_timer;
   var warned = false;
   var last_url = '';
 
-  ROOT = "http://www.direct.gov.uk";
-  HOME = "/en/index.htm";
+  var roots = {
+    'dg': 'http://www.direct.gov.uk',
+    'bl': 'http://www.businesslink.gov.uk'
+  }
+
+  var host_first_part = window.location.hostname.split('.')[0];
+
+  ROOT = roots[host_first_part];
 
   $(document).ready(function() {
     if ($('#old').length) {
@@ -24,10 +29,10 @@
       /*
        *  load inital page
        */
-      load_old_url(get_browser_location() || HOME);
+      load_old_url(get_browser_location() || '/');
 
       $('a.home').click( function (ev) {
-        load_old_url(HOME);
+        load_old_url('/');
         ev.preventDefault();
         ev.stopPropagation();
         return false;
