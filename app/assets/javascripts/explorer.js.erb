@@ -8,12 +8,12 @@
   var last_url = '';
 
   var roots = {
-    'dg': 'http://www.direct.gov.uk',
-    'bl': 'http://www.businesslink.gov.uk'
+    'explore-dg': 'http://www.direct.gov.uk',
+    'explore-bl': 'http://www.businesslink.gov.uk'
   }
 
   var host_first_part = window.location.hostname.split('.')[0];
-
+  
   ROOT = roots[host_first_part];
 
   $(document).ready(function() {
