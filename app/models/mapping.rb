@@ -1,6 +1,7 @@
 class Mapping
 
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   before_create :set_section
 
