@@ -1,5 +1,8 @@
 class Review
+  
   include Mongoid::Document
+  include Mongoid::Timestamps
+
   belongs_to :mapping, :foreign_key => "mapping_id"
   belongs_to :user
 
