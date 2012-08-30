@@ -1,6 +1,7 @@
 class MissingMapping
 
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   field :old_url, :type => String
 
