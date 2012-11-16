@@ -1,8 +1,6 @@
-## Review-O-Matic notes:
+## Review-O-Matic
 
-This branch is to design the reviews view.
-
-### stuff from the old README
+Web page and tools to assist migration of a website. In conjuction with the Migratorator (https://github.com/alphagov/migratorator) it shows the old URL and new URL in a side-by-side browser view and enables reviewing of the mappings (Looks Good/I'm not sure/Seems Wrong).
 
 To create a user for development run: 
 
@@ -17,7 +15,7 @@ http://reviewomatic.dev.gov.uk/__/sign_in?access_token=password
 
 To create actual users:
 
-Copy a list of their emails to somewhere on the production box (e.g. /etc/reviewomatic/departmental_users.txt) and then run the rake task
+Copy a list of their emails to somewhere on the production box and then run the rake task
 
 ```sh
 	$ bundle exec rake db:create_users[/path/to/your/file/of/users]
